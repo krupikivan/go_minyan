@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![screenshot](https://lh3.googleusercontent.com/-cAnHk6TKmWJu_Qr9AzepTk7OBANNDp5NkbKYS9EjEuSf4CXv2D3Ghs4mNl0Ycku2nE=w1920-h937-rw)
 
 # Go minyan
 
