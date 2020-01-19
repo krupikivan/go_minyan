@@ -1,16 +1,20 @@
-# go_minyan
+# Go minyan
 
 Making easy to find minyan
 
-## Getting Started
+## About the project
 
-This project is a starting point for a Flutter application.
+This app make easy to find minyan around the world, for now it is available in Argentina.
 
-A few resources to get you started if this is your first Flutter project:
+Go Minyan have the following functions:
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+- Search nearby
+- Push notification
+- User access
+- Real time data
+- Self administration
+- Request new Minyan
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+For help contact me: kfarsoft@gmail.com
+
+Available on Google Play
