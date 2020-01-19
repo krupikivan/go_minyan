@@ -19,6 +19,6 @@ Go Minyan have the following functions:
 
 For help contact me: kfarsoft@gmail.com
 
-###Available on Google Play
+### Available on Google Play
 
 https://play.google.com/store/apps/details?id=com.kfarsoft.go_minyan
