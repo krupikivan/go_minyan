@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/img/features.png" width="350" title="feature">
+  <img src="assets/img/features.png" width="650" title="feature">
 </p>
 
 # Go minyan
