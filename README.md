@@ -1,4 +1,6 @@
-![screenshot](https://lh3.googleusercontent.com/-cAnHk6TKmWJu_Qr9AzepTk7OBANNDp5NkbKYS9EjEuSf4CXv2D3Ghs4mNl0Ycku2nE=w1920-h937-rw)
+<p align="center">
+  <img src="assets/img/features.png" width="350" title="feature">
+</p>
 
 # Go minyan
 
