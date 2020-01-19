@@ -69,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailSent" : MessageLookupByLibrary.simpleMessage("Hemos recibido su mensaje, pronto lo estaremos contactando."),
     "emailValid" : MessageLookupByLibrary.simpleMessage("Ingrese un email valido"),
     "english" : MessageLookupByLibrary.simpleMessage("Ingles"),
+    "errorAddress" : MessageLookupByLibrary.simpleMessage("Especifique direccion"),
     "errorDialog" : MessageLookupByLibrary.simpleMessage("Error"),
     "errorFormName" : MessageLookupByLibrary.simpleMessage("Por favor ingrese solamente caracteres alfabeticos."),
     "formError" : MessageLookupByLibrary.simpleMessage("El formulario ingresado no es correcto, por favor revise y vuelva a enviarlo."),

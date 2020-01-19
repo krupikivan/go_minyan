@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_minyan/administration/admin_times_screen.dart';
 import 'package:go_minyan/administration/google_map_inline.dart';
@@ -234,8 +235,8 @@ class _AdminScreenState extends State<AdminScreen>{
           ),
           IconButton(
             onPressed: () {
-              FocusScope.of(context).requestFocus(new FocusNode());
-              _getLatLong();
+                FocusScope.of(context).requestFocus(new FocusNode());
+                _getLatLong();
             }, icon: Icon(Icons.my_location, color: darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor),
           ),
         ],
@@ -292,12 +293,21 @@ class _AdminScreenState extends State<AdminScreen>{
   }
 
   ///Actualizo en el stream el resultado de mi posicion por geolocalizacion
-  void _getLatLong(){
-    Geolocator().placemarkFromAddress(_addressController.text).then((result){
-        _userDataEditable.latitude = result[0].position.latitude;
-        _userDataEditable.longitude = result[0].position.longitude;
-        blocUserData.changeUserData(_userDataEditable);
-    });
+  _getLatLong(){
+      Geolocator().placemarkFromAddress(_addressController.text).then((result){
+          _userDataEditable.latitude = result[0].position.latitude;
+          _userDataEditable.longitude = result[0].position.longitude;
+          blocUserData.changeUserData(_userDataEditable);
+      }).catchError((error) => _showToast(Translations().errorAddress));
+  }
+
+  _showToast(String msg){
+    Fluttertoast.showToast(
+        msg: msg,
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.BOTTOM,
+        timeInSecForIos: 1
+    );
   }
 
   Widget _buttons(){
@@ -345,6 +355,9 @@ class _AdminScreenState extends State<AdminScreen>{
 
   void _submitData(){
     blocUserData.changeProgress(true);
+//    blocUserData.getUserData.listen((data) {
+//      print(data.longitude);
+//    });
     blocUserData.submit(Provider.of<AppModel>(context)).then((value) {
       showInSnackBar(Translations.of(context).saveMsg);
       blocUserData.changeProgress(false);

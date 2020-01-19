@@ -504,6 +504,11 @@ class Translations {
       'Telefono de contacto: ',
       name: 'lblContact',
     );
+  }  String get errorAddress {
+    return Intl.message(
+      'Especifique direccion',
+      name: 'errorAddress',
+    );
   }
   String get lblAddress {
     return Intl.message(

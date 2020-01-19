@@ -390,6 +390,11 @@
     "type": "text",
     "placeholders": {}
   },
+    "errorAddress": "לספק כתובת חוקית",
+    "@errorAddress": {
+      "type": "text",
+      "placeholders": {}
+    },
   "lblAddress": " :כתובת",
   "@lblAddress": {
     "type": "text",

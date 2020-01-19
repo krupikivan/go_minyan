@@ -69,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailSent" : MessageLookupByLibrary.simpleMessage("קיבלנו את ההודעה שלך, בקרוב ניצור איתך קשר"),
     "emailValid" : MessageLookupByLibrary.simpleMessage("הכנס אימייל תקף"),
     "english" : MessageLookupByLibrary.simpleMessage("אנגלית"),
+    "errorAddress" : MessageLookupByLibrary.simpleMessage("לספק כתובת חוקית"),
     "errorDialog" : MessageLookupByLibrary.simpleMessage("שגיאה"),
     "errorFormName" : MessageLookupByLibrary.simpleMessage("אנא הזן רק תווים אלפביתיים"),
     "formError" : MessageLookupByLibrary.simpleMessage("הטופס שהוזן אינו נכון, אנא בדוק ושלח מחדש"),

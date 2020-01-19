@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-01-05T17:28:30.375966",
+  "@@last_modified": "2020-01-19T19:38:49.188935",
   "minianFinder": "Buscador de minian",
   "@minianFinder": {
     "type": "text",
@@ -76,10 +76,10 @@
     "placeholders": {}
   },
   "aboutGoMinyan": "Sobre Go Minyan",
-      "@aboutGoMinyan": {
-        "type": "text",
-        "placeholders": {}
-      },
+  "@aboutGoMinyan": {
+    "type": "text",
+    "placeholders": {}
+  },
   "copyright": "© 2019, GoMinyan",
   "@copyright": {
     "type": "text",
@@ -382,6 +382,11 @@
   },
   "lblContact": "Telefono de contacto: ",
   "@lblContact": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorAddress": "Especifique direccion",
+  "@errorAddress": {
     "type": "text",
     "placeholders": {}
   },

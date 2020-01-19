@@ -69,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "emailSent" : MessageLookupByLibrary.simpleMessage("Thanks! Your request has been sent successfully."),
     "emailValid" : MessageLookupByLibrary.simpleMessage("An email address must contain a single @"),
     "english" : MessageLookupByLibrary.simpleMessage("English"),
+    "errorAddress" : MessageLookupByLibrary.simpleMessage("Provide valid address"),
     "errorDialog" : MessageLookupByLibrary.simpleMessage("Error"),
     "errorFormName" : MessageLookupByLibrary.simpleMessage("Please enter only alphabetical characters."),
     "formError" : MessageLookupByLibrary.simpleMessage("Please fill the form before send."),
