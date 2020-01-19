@@ -1,0 +1,608 @@
+{
+  "@@last_modified": "2020-01-05T17:28:30.375966",
+  "minianFinder": "Buscador de minian",
+  "@minianFinder": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "minianTitle": "Minian",
+  "@minianTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newMinyan": "Nuevo",
+  "@newMinyan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "Info",
+  "@about": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "menuTitle": "Inicio",
+  "@menuTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "changePassword": "Cambiar contraseña",
+  "@changePassword": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "welcome": "Bienvenido",
+  "@welcome": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "goMinyan": "Go Minyan",
+  "@goMinyan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginItem": "Cuenta",
+  "@loginItem": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "Configuracion",
+  "@settings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutTitle": "Informacion",
+  "@aboutTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appTitle": "Go Minyan App",
+  "@appTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appDesc": "Una app creada sin fines de lucro con el objetivo de proveer al usuario la facilidad de encontrar el lugar indicado a la hora indicada para rezar. Que sea para refua shlema de todos los enfermos de AM ISRAEL.",
+  "@appDesc": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailMe": "Enviar un email",
+  "@emailMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "donateMe": "Contribuir a este proyecto",
+  "@donateMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutGoMinyan": "Sobre Go Minyan",
+      "@aboutGoMinyan": {
+        "type": "text",
+        "placeholders": {}
+      },
+  "copyright": "© 2019, GoMinyan",
+  "@copyright": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newMinianTitle": "Pedir nuevo minian",
+  "@newMinianTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "submit": "Enviar",
+  "@submit": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "name": "Nombre",
+  "@name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nameValid": "Ingrese un nombre",
+  "@nameValid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "instValid": "Ingrese un nombre de institucion",
+  "@instValid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "phoneValid": "Ingrese un telefono de contacto",
+  "@phoneValid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailValid": "Ingrese un email valido",
+  "@emailValid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "formError": "El formulario ingresado no es correcto, por favor revise y vuelva a enviarlo.",
+  "@formError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorFormName": "Por favor ingrese solamente caracteres alfabeticos.",
+  "@errorFormName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "passNotMatch": "Contraseñas no coinciden",
+  "@passNotMatch": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailSent": "Hemos recibido su mensaje, pronto lo estaremos contactando.",
+  "@emailSent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailNotSent": "Hubo un error al enviar. Revise su conexion y vuelva a intentarlo.",
+  "@emailNotSent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "mapLoading": "Cargando mapa...",
+  "@mapLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchTitle": "Buscar",
+  "@searchTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchResults": "Resultados",
+  "@searchResults": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNearMe": "Filtrar distancia",
+  "@btnNearMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnMapView": "Cambiar vista",
+  "@btnMapView": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNow": "Proximo minian",
+  "@btnNow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "detailTitle": "Informacion tefilot",
+  "@detailTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "callButton": "Llamar",
+  "@callButton": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dataLoading": "Cargando datos...",
+  "@dataLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notification": "Notificaciones",
+  "@notification": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "minutesBefore": "min antes",
+  "@minutesBefore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notificationReminder": "Recordatorio de notificacion",
+  "@notificationReminder": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "map": "Mapa",
+  "@map": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "updateMapData": "Actualizar datos del mapa",
+  "@updateMapData": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "update": "Actualizar",
+  "@update": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "updating": "Actualizando",
+  "@updating": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nusachTitle": "Nusach",
+  "@nusachTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnLogin": "Entrar",
+  "@btnLogin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailHint": "Email",
+  "@emailHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "passHint": "Contraseña",
+  "@passHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newPass": "Nueva Contraseña",
+  "@newPass": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "repeatPassHint": "Repetir Contraseña",
+  "@repeatPassHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidMail": "Email invalido",
+  "@invalidMail": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidPass": "Contraseña debe contener 8 caracteres alfanumericos",
+  "@invalidPass": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginTitle": "Administradores",
+  "@loginTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginLoading": "Iniciando...",
+  "@loginLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginFailure": "Acceso incorrecto",
+  "@loginFailure": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerTitle": "Registrar Usuario",
+  "@registerTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnClear": "Borrar",
+  "@btnClear": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnRegister": "Registrar Usuario",
+  "@btnRegister": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorDialog": "Error",
+  "@errorDialog": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerSuccess": "Registro Exitoso",
+  "@registerSuccess": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerLoading": "Registrando...",
+  "@registerLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "successDialogTitle": "Exitoso",
+  "@successDialogTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "successDialogContent": "Se han cargado los datos",
+  "@successDialogContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnDialog": "Volver",
+  "@btnDialog": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sunday": "Domingo",
+  "@sunday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "monday": "Lunes",
+  "@monday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tuesday": "Martes",
+  "@tuesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wednesday": "Miercoles",
+  "@wednesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "thursday": "Jueves",
+  "@thursday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "friday": "Viernes",
+  "@friday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "day": "Dia",
+  "@day": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "adminPageTitle": "Administracion",
+  "@adminPageTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logOut": "Cerrar sesion",
+  "@logOut": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnEditorTimes": "Editar horarios",
+  "@btnEditorTimes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblName": "Nombre Institucional: ",
+  "@lblName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblContact": "Telefono de contacto: ",
+  "@lblContact": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblAddress": "Direccion: ",
+  "@lblAddress": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnSave": "Guardar",
+  "@btnSave": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNusach": "Seleccionar Nusach",
+  "@btnNusach": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnRestore": "Restaurar",
+  "@btnRestore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblEmailRestoreSent": "Se envio un mail para restaurar contraseña",
+  "@lblEmailRestoreSent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "restoreMsg": "Datos restaurados.",
+  "@restoreMsg": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "saveMsg": "Datos guardaados.",
+  "@saveMsg": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "connectionError": "No hay conexion a internet",
+  "@connectionError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailNotExist": "No existe el email ingreaado",
+  "@emailNotExist": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "prayTimeTitle": "Horarios tefilot",
+  "@prayTimeTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblDescriptionPray": "Horarios que actualmente se muestra en aplicacion ",
+  "@lblDescriptionPray": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnAdd": "Agregar",
+  "@btnAdd": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnAccept": "Aceptar",
+  "@btnAccept": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNew": "Nuevo",
+  "@btnNew": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shabatTitle": "Shabat",
+  "@shabatTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shajaritTitle": "Shajarit",
+  "@shajaritTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "minjaTitle": "Minja",
+  "@minjaTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "arvitTitle": "Arvit",
+  "@arvitTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblNoData": "Sin datos",
+  "@lblNoData": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hintDDLabel": "Elige",
+  "@hintDDLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "adminDialogContentError": "Debe seleccionar horario y dia",
+  "@adminDialogContentError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "popupTitle": "Nuevo horario",
+  "@popupTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnPopupTime": "Seleccionar hora",
+  "@btnPopupTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblSelectedTime": "Hora seleccionada: ",
+  "@lblSelectedTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "splashText": "Cargando...",
+  "@splashText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "english": "Ingles",
+  "@english": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "spanish": "Español",
+  "@spanish": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "Idioma",
+  "@language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "languageContent": "Seleccione el idioma preferido",
+  "@languageContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "displayTitle": "Vista de configuracion",
+  "@displayTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "darkMode": "Modo oscuro",
+  "@darkMode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "contentNotFindNearBy": "No se encontraron minianim a menos de ",
+  "@contentNotFindNearBy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "contentNotFindNow": "No se encontraron minianim ahora.",
+  "@contentNotFindNow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "contentFindNearBy": "Cantidad encontrada: ",
+  "@contentFindNearBy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogNearByTitle": "Ingrese el valor en metros",
+  "@dialogNearByTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogNearByHint": "Ingrese metros",
+  "@dialogNearByHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnBack": "Volver",
+  "@btnBack": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnForgot": "Olvide la contraseña",
+  "@btnForgot": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnReset": "Restaurar",
+  "@btnReset": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblForgot": "Restaurar contraseña",
+  "@lblForgot": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searching": "Buscando",
+  "@searching": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "ok": "Ok",
+  "@ok": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "pushTitle": "Proximo evento",
+  "@pushTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "remember": "Recordatorio",
+  "@remember": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

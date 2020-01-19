@@ -1,0 +1,613 @@
+{
+  "@@last_modified": "2019-09-15T12:48:56.571501",
+  "minianFinder": "מאתר מיני",
+  "@minianFinder": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "minianTitle": "מניין",
+  "@minianTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "newMinyan": "חדש",
+  "@newMinyan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "about": "מוֹדִיעין",
+  "@about": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "menuTitle": "דף הבית",
+  "@menuTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+      "changePassword": "שנה סיסמא",
+      "@changePassword": {
+        "type": "text",
+        "placeholders": {}
+      },
+  "welcome": "ברוך הבא",
+  "@welcome": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "goMinyan": "Go Minyan",
+  "@goMinyan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginItem": "חשבון",
+  "@loginItem": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "הגדרה",
+  "@settings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutTitle": "על אודות",
+  "@aboutTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appTitle": "Go Minyan App",
+  "@appTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "appDesc": "אפליקציה שנוצרה ללא מטרות רווח על מנת לספק למשתמשים את הקלות למצוא את המקום הנכון בזמן הנכון להתפלל. שיהיה לשליפא רפואה של כל האנשים החולים בעם ישראל",
+  "@appDesc": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailMe": "שלח אימייל",
+  "@emailMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "donateMe": "תרום לפרויקט זה",
+  "@donateMe": {
+   "type": "text",
+     "placeholders": {}
+  },
+  "aboutGoMinyan": " Go Minyan על אודות",
+  "@aboutGoMinyan": {
+    "type": "text",
+    "placeholders": {}
+  },
+    "copyright": "© 2019, GoMinyan",
+    "@copyright": {
+      "type": "text",
+      "placeholders": {}
+    },
+  "newMinianTitle": "בקש מיניאן חדש",
+  "@newMinianTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "submit": "שלח",
+  "@submit": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "name": "שם",
+  "@name": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "nameValid": "הכנס שם",
+  "@nameValid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "instValid": "הזן שם מוסדי",
+  "@instValid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "phoneValid": "הזן טלפון",
+  "@phoneValid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailValid": "הכנס אימייל תקף",
+  "@emailValid": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "formError": "הטופס שהוזן אינו נכון, אנא בדוק ושלח מחדש",
+  "@formError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorFormName": "אנא הזן רק תווים אלפביתיים",
+  "@errorFormName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "passNotMatch": "הסיסמה אינה תואמת",
+  "@passNotMatch": {
+  "type": "text",
+  "placeholders": {}
+  },
+  "emailSent": "קיבלנו את ההודעה שלך, בקרוב ניצור איתך קשר",
+  "@emailSent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailNotSent": "אירעה שגיאה בשליחה. בדוק את החיבור שלך ונסה שוב",
+  "@emailNotSent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "mapLoading": "...טוען מפה",
+  "@mapLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchTitle": "חיפוש",
+  "@searchTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchResults": "תוצאות",
+  "@searchResults": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNearMe": "מרחק סינון",
+  "@btnNearMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnMapView": "שינוי תצוגה",
+  "@btnMapView": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNow": "המניין הבא",
+  "@btnNow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "detailTitle": "להתפלל מידע",
+  "@detailTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "callButton": "להתקשר",
+  "@callButton": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dataLoading": "...טוען נתונים",
+  "@dataLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notification": "הודעה",
+  "@notification": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "minutesBefore": "דקות לפני",
+  "@minutesBefore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notificationReminder": "תזכורת הודעה",
+  "@notificationReminder": {
+    "type": "text",
+    "placeholders": {}
+  },
+        "map": "מפה",
+        "@map": {
+          "type": "text",
+          "placeholders": {}
+        },
+        "updateMapData": "עדכן את כל מפת הנתונים",
+        "@updateMapData": {
+          "type": "text",
+          "placeholders": {}
+        },
+        "update": "עדכון",
+        "@update": {
+          "type": "text",
+          "placeholders": {}
+        },
+          "updating": "עדכון",
+          "@updating": {
+            "type": "text",
+            "placeholders": {}
+          },
+  "nusachTitle": "נוסח",
+  "@nusachTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnLogin": "התחברות",
+  "@btnLogin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailHint": "אימייל",
+  "@emailHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "passHint": "סיסמה",
+  "@passHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+      "newPass": "סיסמה חדשה",
+      "@newPass": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "repeatPassHint": "חזור על הסיסמה",
+      "@repeatPassHint": {
+        "type": "text",
+        "placeholders": {}
+      },
+  "invalidMail": "אימייל שגוי",
+  "@invalidMail": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidPass": "הסיסמה חייבת לכלול 8 תווים אלפאנומריים",
+  "@invalidPass": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginTitle": "מנהלים",
+  "@loginTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginLoading": "...מחובר",
+  "@loginLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginFailure": "גישה שגויה",
+  "@loginFailure": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerTitle": "הרשמה למשתמש",
+  "@registerTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "createDataUser": "ליצור נתונים",
+  "@createDataUser": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnClear": "ברור",
+  "@btnClear": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnRegister": "הירשם",
+  "@btnRegister": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorDialog": "שגיאה",
+  "@errorDialog": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerSuccess": "הצלחה בהרשמה",
+  "@registerSuccess": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerLoading": "...נרשמת",
+  "@registerLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "successDialogTitle": "הצלחה",
+  "@successDialogTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "successDialogContent": "נתונים נשמרים",
+  "@successDialogContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnDialog": "חזור",
+  "@btnDialog": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "sunday": "יום ראשון",
+  "@sunday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "monday": "יום שני",
+  "@monday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "tuesday": "יום שלישי",
+  "@tuesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "wednesday": "יום רביעי",
+  "@wednesday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "thursday": "יום חמישי",
+  "@thursday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "friday": "יום שישי",
+  "@friday": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "day": "יום",
+  "@day": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "adminPageTitle": "ניהול",
+  "@adminPageTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logOut": "להתנתק",
+  "@logOut": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnEditorTimes": "עריכת זמן",
+  "@btnEditorTimes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblName": " :שם מוסדי",
+  "@lblName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblContact": " :מספר טלפון",
+  "@lblContact": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblAddress": " :כתובת",
+  "@lblAddress": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnSave": "לשמור",
+  "@btnSave": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNusach": "נוסאק נוסח",
+  "@btnNusach": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnRestore": "לשחזר",
+  "@btnRestore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblEmailRestoreSent": "קישור לאיפוס סיסמה נשלח לדואל שלך",
+  "@lblEmailRestoreSent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "restoreMsg": "נתונים משוחזרים",
+  "@restoreMsg": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "saveMsg": ".נתונים נשמרים",
+  "@saveMsg": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "connectionError": "אין חיבור אינטרנט",
+  "@connectionError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailNotExist": "אימייל לא קיים",
+  "@emailNotExist": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "prayTimeTitle": "זמני תפילה",
+  "@prayTimeTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblDescriptionPray": "זמנים מוצגים למעשה באפליקציה ",
+  "@lblDescriptionPray": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnAdd": "הוסף",
+  "@btnAdd": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnAccept": "לקבל",
+  "@btnAccept": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNew": "חדש",
+  "@btnNew": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shabatTitle": "שבת",
+  "@shabatTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "shajaritTitle": "שחרית",
+  "@shajaritTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "minjaTitle": "מנחה",
+  "@minjaTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "arvitTitle": "ערבית",
+  "@arvitTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblNoData": "ללא נתונים",
+  "@lblNoData": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hintDDLabel": "בחר",
+  "@hintDDLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "adminDialogContentError": "עליך לבחור זמן ושעה",
+  "@adminDialogContentError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "popupTitle": "זמן חדש",
+  "@popupTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnPopupTime": " :שעה שנבחרה",
+  "@btnPopupTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblSelectedTime": " :הזמן שנבחר",
+  "@lblSelectedTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "splashText": "...טוען",
+  "@splashText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "english": "אנגלית",
+  "@english": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "spanish": "ספרדית",
+  "@spanish": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "שפה",
+  "@language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "languageContent": "בחר שפה מועדפת",
+  "@languageContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "displayTitle": "הגדרת תצוגה",
+  "@displayTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "darkMode": "מצב חשוך",
+  "@darkMode": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "contentNotFindNearBy": "לא מצאנו מניין פחות מ",
+  "@contentNotFindNearBy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "contentNotFindNow": "לא מצאנו מניין עכשיו",
+  "@contentNotFindNow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "contentFindNearBy": " :מוצאים מניין",
+  "@contentFindNearBy": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogNearByTitle": "ספק ערך במטרים",
+  "@dialogNearByTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dialogNearByHint": "ספק ערך במטרים",
+  "@dialogNearByHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnBack": "חזור",
+  "@btnBack": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnForgot": "שכחת את הסיסמא",
+  "@btnForgot": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnReset": "לשחזר",
+  "@btnReset": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblForgot": "שחזר סיסמא",
+  "@lblForgot": {
+    "type": "text",
+    "placeholders": {}
+  },
+ "searching": "מחפש",
+ "@searching": {
+   "type": "text",
+   "placeholders": {}
+ },
+  "ok": "לקבל",
+  "@ok": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "pushTitle": "האירוע הבא",
+  "@pushTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "remember": "תזכורת",
+  "@remember": {
+    "type": "text",
+    "placeholders": {}
+  }
+}

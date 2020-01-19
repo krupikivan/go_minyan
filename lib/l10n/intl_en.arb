@@ -1,0 +1,613 @@
+{
+  "@@last_modified": "2019-08-29T18:23:27.415735",
+  "minianFinder": "Search for minyan",
+  "@minianFinder": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "minianTitle": "Minyan",
+  "@minianTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+    "newMinyan": "New",
+    "@newMinyan": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "about": "About",
+    "@about": {
+      "type": "text",
+      "placeholders": {}
+    },
+  "menuTitle": "Menu",
+  "@menuTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+    "changePassword": "Change password",
+    "@changePassword": {
+      "type": "text",
+      "placeholders": {}
+    },
+  "welcome": "Welcome",
+  "@welcome": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "goMinyan": "Go Minyan",
+  "@goMinyan": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginItem": "Account",
+  "@loginItem": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "settings": "Settings",
+  "@settings": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "aboutTitle": "About",
+    "@aboutTitle": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "appTitle": "Go Minyan App",
+    "@appTitle": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "appDesc": "A non profit app making ease finding the perfect minyan at the perfect time to pray. Make it for blessing those in need of healing with refuah shleimah.",
+    "@appDesc": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "emailMe": "Send me an email",
+    "@emailMe": {
+      "type": "text",
+      "placeholders": {}
+    },
+      "donateMe": "Donate to this proyect",
+      "@donateMe": {
+        "type": "text",
+        "placeholders": {}
+      },
+    "aboutGoMinyan": "About Go Minyan",
+    "@aboutGoMinyan": {
+      "type": "text",
+      "placeholders": {}
+    },
+      "copyright": "© 2019, GoMinyan",
+      "@copyright": {
+        "type": "text",
+        "placeholders": {}
+      },
+  "newMinianTitle": "Submit new Minyan",
+    "@newMinianTitle": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "submit": "Send",
+    "@submit": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "name": "Name",
+    "@name": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "nameValid": "Please enter a value",
+    "@nameValid": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "instValid": "Please enter a value",
+    "@instValid": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "phoneValid": "Please enter a value",
+    "@phoneValid": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "emailValid": "An email address must contain a single @",
+    "@emailValid": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "formError": "Please fill the form before send.",
+    "@formError": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "errorFormName": "Please enter only alphabetical characters.",
+    "@errorFormName": {
+      "type": "text",
+      "placeholders": {}
+    },
+      "passNotMatch": "Password not match",
+      "@passNotMatch": {
+        "type": "text",
+        "placeholders": {}
+      },
+    "emailSent": "Thanks! Your request has been sent successfully.",
+    "@emailSent": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "emailNotSent": "There was an error, check you connection!",
+    "@emailNotSent": {
+      "type": "text",
+      "placeholders": {}
+    },
+  "mapLoading": "Loading map...",
+  "@mapLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchTitle": "Search",
+  "@searchTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "searchResults": "Results",
+  "@searchResults": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNearMe": "Minyan nearby",
+  "@btnNearMe": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnMapView": "Change view",
+  "@btnMapView": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNow": "Next minyan now",
+  "@btnNow": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "detailTitle": "Daily Schedule",
+  "@detailTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "callButton": "Call",
+  "@callButton": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "dataLoading": "Loading data...",
+  "@dataLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "notification": "Notification",
+  "@notification": {
+    "type": "text",
+    "placeholders": {}
+  },
+    "minutesBefore": "min before",
+    "@minutesBefore": {
+      "type": "text",
+      "placeholders": {}
+    },
+   "notificationReminder": "Notification reminder",
+    "@notificationReminder": {
+      "type": "text",
+      "placeholders": {}
+    },
+      "map": "Map",
+      "@map": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "updateMapData": "Update all data map",
+      "@updateMapData": {
+        "type": "text",
+        "placeholders": {}
+      },
+      "update": "Update",
+      "@update": {
+        "type": "text",
+        "placeholders": {}
+      },
+        "updating": "Updating",
+        "@updating": {
+          "type": "text",
+          "placeholders": {}
+        },
+        "nusachTitle": "Nusach",
+        "@nusachTitle": {
+          "type": "text",
+          "placeholders": {}
+        },
+  "btnLogin": "Login",
+  "@btnLogin": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailHint": "Email",
+  "@emailHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "passHint": "Password",
+  "@passHint": {
+    "type": "text",
+    "placeholders": {}
+  },
+    "newPass": "New Password",
+    "@newPass": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "repeatPassHint": "Repeat Password",
+    "@repeatPassHint": {
+      "type": "text",
+      "placeholders": {}
+    },
+  "invalidMail": "Invalid Email",
+  "@invalidMail": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidPass": "Password must contain 8 alphanumeric characters",
+  "@invalidPass": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginTitle": "Administrator",
+  "@loginTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginLoading": "Logging...",
+  "@loginLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "loginFailure": "Login failure",
+  "@loginFailure": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerTitle": "Register user",
+  "@registerTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "createDataUser": "Create data table",
+  "@createDataUser": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnClear": "Clear",
+  "@btnClear": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnRegister": "Register",
+  "@btnRegister": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "errorDialog": "Error",
+  "@errorDialog": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerSuccess": "Register success",
+  "@registerSuccess": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "registerLoading": "Registering...",
+  "@registerLoading": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "successDialogTitle": "Success",
+  "@successDialogTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "successDialogContent": "Record Inserted Successfully",
+  "@successDialogContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnDialog": "Back",
+  "@btnDialog": {
+    "type": "text",
+    "placeholders": {}
+  },
+   "sunday": "Sunday",
+    "@sunday": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "monday": "Monday",
+    "@monday": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "tuesday": "Tuesday",
+    "@tuesday": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "wednesday": "Wednesday",
+    "@wednesday": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "thursday": "Thursday",
+    "@thursday": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "friday": "Friday",
+    "@friday": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "day": "Day",
+    "@day": {
+      "type": "text",
+      "placeholders": {}
+    },
+  "adminPageTitle": "Administration",
+  "@adminPageTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "logOut": "Log out",
+  "@logOut": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnEditorTimes": "Schedule editor",
+  "@btnEditorTimes": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblName": "Institutional name: ",
+  "@lblName": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblContact": "Contact number: ",
+  "@lblContact": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblAddress": "Address: ",
+  "@lblAddress": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnSave": "Save",
+  "@btnSave": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnNusach": "Select Nusach",
+  "@btnNusach": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnRestore": "Restore",
+  "@btnRestore": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblEmailRestoreSent": "A password reset link has been sent to yor email",
+  "@lblEmailRestoreSent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "restoreMsg": "Data restored.",
+    "@restoreMsg": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "saveMsg": "Data saved.",
+    "@saveMsg": {
+      "type": "text",
+      "placeholders": {}
+    },
+  "connectionError": "No internet connection",
+  "@connectionError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailNotExist": "Email not exist",
+  "@emailNotExist": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "prayTimeTitle": "Schedule prayer",
+  "@prayTimeTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblDescriptionPray": "Schedules currently displayed in application",
+  "@lblDescriptionPray": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnAdd": "Add",
+  "@btnAdd": {
+    "type": "text",
+    "placeholders": {}
+  },
+    "btnAccept": "Accept",
+    "@btnAccept": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "btnNew": "New",
+    "@btnNew": {
+      "type": "text",
+      "placeholders": {}
+    },
+    "shabatTitle": "Shabbat",
+    "@shabatTitle": {
+      "type": "text",
+      "placeholders": {}
+    },
+  "shajaritTitle": "Shacharit",
+  "@shajaritTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "minjaTitle": "Mincha",
+  "@minjaTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "arvitTitle": "Maariv",
+  "@arvitTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblNoData": "No data",
+  "@lblNoData": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "hintDDLabel": "Choose",
+  "@hintDDLabel": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "adminDialogContentError": "You must select a schedule and a day",
+  "@adminDialogContentError": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "popupTitle": "New schedule",
+  "@popupTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "btnPopupTime": "Select",
+  "@btnPopupTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "lblSelectedTime": "Time selected: ",
+  "@lblSelectedTime": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "splashText": "Loading...",
+  "@splashText": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "english": "English",
+  "@english": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "spanish": "Spanish",
+  "@spanish": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "language": "Language",
+  "@language": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "languageContent": "Preferred language",
+  "@languageContent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "displayTitle": "Display Settings",
+  "@displayTitle": {
+    "type": "text",
+    "placeholders": {}
+  },
+    "darkMode": "Dark mode",
+    "@darkMode": {
+      "type": "text",
+      "placeholders": {}
+    },
+     "contentNotFindNearBy": "We could not find minyan less than ",
+     "@contentNotFindNearBy": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "contentNotFindNow": "We could not find minyan now.",
+     "@contentNotFindNow": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "contentFindNearBy": "Minyan found: ",
+     "@contentFindNearBy": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "dialogNearByTitle": "Provide value in meters",
+     "@dialogNearByTitle": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "dialogNearByHint": "Meters",
+     "@dialogNearByHint": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "btnBack": "Back",
+     "@btnBack": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "btnForgot": "Forgot password",
+     "@btnForgot": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "btnReset": "Restore",
+     "@btnReset": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "lblForgot": "Restore password",
+     "@lblForgot": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "searching": "Searching",
+     "@searching": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "ok": "Ok",
+     "@ok": {
+       "type": "text",
+       "placeholders": {}
+     },
+     "pushTitle": "Incoming event",
+     "@pushTitle": {
+        "type": "text",
+        "placeholders": {}
+     },
+     "remember": "Reminder",
+     "@remember": {
+        "type": "text",
+        "placeholders": {}
+     }
+}
