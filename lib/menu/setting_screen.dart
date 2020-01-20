@@ -4,6 +4,7 @@ import 'package:go_minyan/style/bloc/theme_changer_bloc.dart';
 import 'package:go_minyan/translation.dart';
 import 'package:go_minyan/style/theme.dart' as Theme;
 import 'package:go_minyan/model/model.dart';
+import 'package:go_minyan/utils/utils.dart';
 import 'package:go_minyan/widget/dropdown_setting.dart';
 import 'package:go_minyan/widget/widget.dart';
 import 'package:provider/provider.dart';
@@ -81,18 +82,9 @@ class SettingScreen extends StatelessWidget {
 
   restoreDataMap(context){
     Provider.of<AppModel>(context).removeForUpdate();
-    _showToast(Translations.of(context).updating, 10);
+    ShowToast().show(Translations.of(context).updating, 10);
   }
 
-  _showToast(String msg, time){
-    Fluttertoast.showToast(
-        msg: msg,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIos: time,
-        backgroundColor: Theme.Colors.secondaryColor
-    );
-  }
 
 
 }

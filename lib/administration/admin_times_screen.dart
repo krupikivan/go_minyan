@@ -34,11 +34,16 @@ class AdminTimesScreen extends StatelessWidget {
         backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
         title: Text(Translations.of(context).prayTimeTitle),
       ),
-      body: Stack(
-        children: <Widget>[
-          _buildBody(context),
-          _btnNewTimes(context),
-        ],
+      body: LayoutBuilder(
+        builder: (context, constrain) {
+          var size = constrain.maxWidth;
+          return Stack(
+            children: <Widget>[
+              _buildBody(context),
+              _btnNewTimes(context, size),
+            ],
+          );
+        }
       ),
     );
   }
@@ -56,14 +61,14 @@ class AdminTimesScreen extends StatelessWidget {
     );
   }
 
-  Widget _btnNewTimes(context){
+  Widget _btnNewTimes(context, size){
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Align(
         alignment: Alignment.bottomRight,
         child: FloatingActionButton.extended(
           heroTag: 'btnAdd',
-          onPressed: (){_showAddTimePopup(context);},
+          onPressed: (){_showAddTimePopup(context, size);},
           materialTapTargetSize: MaterialTapTargetSize.padded,
           backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
           label: TextModel(text: Translations.of(context).btnNew, color: Theme.Colors.secondaryColor,),
@@ -220,7 +225,7 @@ class AdminTimesScreen extends StatelessWidget {
     );
   }
 
-   _showAddTimePopup(BuildContext context) {
+   _showAddTimePopup(BuildContext context, size) {
      blocTimePicker.addTime(null);
      _timeOfDay = null;
     Alert(
@@ -233,10 +238,7 @@ class AdminTimesScreen extends StatelessWidget {
         ),
         content: Container(
                 width: double.maxFinite,
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height / 2.2,
+                height: size < 400 ? MediaQuery.of(context).size.height / 2.2 : MediaQuery.of(context).size.height / 3,
                 child: ListView(
                   scrollDirection: Axis.vertical,
                   children: <Widget>[
@@ -245,7 +247,7 @@ class AdminTimesScreen extends StatelessWidget {
                         builder: (context, snapshot) {
                           _dropDay = snapshot.data;
                           ///0- domingo 1-lunes, 2-martes, 3-miercoles, 4-jueves, 5-viernes, 6-sabado
-                          return DropModelWidget(context: context);
+                          return Align(alignment: Alignment.center,child: DropModelWidget(context: context));
                         }
                     ),
                     StreamBuilder<int>(
@@ -275,12 +277,12 @@ class AdminTimesScreen extends StatelessWidget {
           DialogButton(
             color: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
             onPressed: () {
-              if(_timeOfDay == null || _dropDay == null){_showToast(Translations.of(context).adminDialogContentError);}
+              if(_timeOfDay == null || _dropDay == null){ShowToast().show(Translations().adminDialogContentError, 10);}
               else{
                 ///Del time picker lo metemos en Firestore como DateTime, firestore lo guarda como TimesTamp
 //                blocTimes.saveNewTime(AppModel.of(context).userData.documentId, blocAddNew.getStringDay(_dropDay), blocAddNew.getPrayFromInt(_radioPray), _getDateTime(), AppModel.of(context));
                 blocTimes.saveNewTime(Provider.of<AppModel>(context).userData.documentId, convertData.getWeekDayToString(_dropDay), convertData.getPrayFromInt(_radioPray), convertData.getDateTime(_timeOfDay), Provider.of<AppModel>(context));
-                _showToast(Translations.of(context).saveMsg);
+                ShowToast().show(Translations().saveMsg, 10);
                 blocTimePicker.addTime(null);
                 _timeOfDay = null;
               }
@@ -303,12 +305,4 @@ class AdminTimesScreen extends StatelessWidget {
     }
   }
 
-  _showToast(String msg){
-    Fluttertoast.showToast(
-        msg: msg,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIos: 1
-    );
-  }
 }

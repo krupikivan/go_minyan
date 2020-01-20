@@ -19,60 +19,65 @@ class AboutScreen extends StatelessWidget {
         backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Column(
-          children: <Widget>[
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: TextModel(text: Translations.of(context).appTitle, size: 30, fontWeight: FontWeight.w300,),
-            ),
-            Text("Version 1.0.0"),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
-            ),
-            Row(
+      body: LayoutBuilder(
+        builder: (context, constrain) {
+          var size = constrain.maxWidth;
+          return Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Column(
               children: <Widget>[
-                Icon(Icons.copyright),
-                Expanded(
-                    child: Text(Translations.of(context).aboutGoMinyan)),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextModel(text: Translations.of(context).appTitle, size: 30, fontWeight: FontWeight.w300,),
+                ),
+                Text("Version 3.2.0"),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
+                ),
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.copyright),
+                    Expanded(
+                        child: Text(Translations.of(context).aboutGoMinyan)),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
+                ),
+                Divider(
+                  height: 20.0,
+                  color: Colors.grey,
+                ),
+                Container(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  alignment: Alignment.topLeft,
+                  child: TextModel(text: Translations.of(context).aboutGoMinyan, size: 18, fontWeight: FontWeight.bold,),
+                ),
+                Container(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextModel(text: Translations.of(context).appDesc),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    FlatButton.icon(onPressed: _emailMe, icon: Icon(Icons.mail, size: 30), label: TextModel(text: Translations.of(context).emailMe, size: 18))
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    FlatButton.icon(onPressed: () =>_showMercadoPago(context, size), icon: Icon(Icons.star, size: 30), label: TextModel(text: Translations.of(context).donateMe, size: 18))
+                  ],
+                )
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 10.0, top: 10.0),
-            ),
-            Divider(
-              height: 20.0,
-              color: Colors.grey,
-            ),
-            Container(
-              padding: const EdgeInsets.only(left: 8.0),
-              alignment: Alignment.topLeft,
-              child: TextModel(text: Translations.of(context).aboutGoMinyan, size: 18, fontWeight: FontWeight.bold,),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8.0),
-              child: TextModel(text: Translations.of(context).appDesc),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                FlatButton.icon(onPressed: _emailMe, icon: Icon(Icons.mail, size: 30), label: TextModel(text: Translations.of(context).emailMe, size: 18))
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                FlatButton.icon(onPressed: () =>_showMercadoPago(context), icon: Icon(Icons.star, size: 30), label: TextModel(text: Translations.of(context).donateMe, size: 18))
-              ],
-            )
-          ],
-        ),
+          );
+        }
       ),
     );
   }
 
-  _showMercadoPago(BuildContext context) {
+  _showMercadoPago(BuildContext context, size) {
     bool darkmode = Provider.of<AppModel>(context).darkmode;
     Alert(
         context: context,
@@ -81,12 +86,9 @@ class AboutScreen extends StatelessWidget {
         style: AlertStyle(
           titleStyle: TextStyle(color: darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor,),
         ),
-        content: LayoutBuilder(
-          builder: (context, constrain) {
-            var max = constrain.maxWidth;
-            return Container(
+        content: Container(
               width: MediaQuery.of(context).size.width / 1.5,
-              height: max < 400 ? MediaQuery.of(context).size.height / 3 : MediaQuery.of(context).size.width / 5,
+              height: size < 400 ? MediaQuery.of(context).size.height / 3 : MediaQuery.of(context).size.width / 2,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -148,9 +150,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            );
-          }
-        ),
+            ),
         buttons: [
         ]).show();
   }

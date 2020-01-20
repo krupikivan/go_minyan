@@ -28,7 +28,7 @@ class SearchResults extends StatelessWidget {
           else{
             return Container(
 //              height: snapshot.data.documents.length == 1 || snapshot.data.documents.length == 2 ? 100 : 300,
-              height: snapshot.data.length == 1 || snapshot.data.length == 2 ? 100 : 300,
+              height: snapshot.data.length >= 0 || snapshot.data.length <= 2 ? 100 : 300,
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               margin: EdgeInsets.only(
@@ -44,7 +44,7 @@ class SearchResults extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 40),
-                    child: ListView.builder(
+                    child: snapshot.data.length != 0 ? ListView.builder(
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
 //                      itemCount: snapshot.data.documents.length,
@@ -69,7 +69,7 @@ class SearchResults extends StatelessWidget {
                           return ListTile(title: TextModel(text: Translations.of(context).lblNoData, size: 16, color: darkmode ? Theme.Colors.secondaryColor :Theme.Colors.blackColor));
                         }
                       },
-                    ),
+                    ) : ListTile(title: TextModel(text: Translations.of(context).lblNoData, size: 16, color: darkmode ? Theme.Colors.secondaryColor :Theme.Colors.blackColor)),
                   ),
                 ],
               ),

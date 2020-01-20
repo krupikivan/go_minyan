@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,6 +12,7 @@ import 'package:go_minyan/translation.dart';
 import 'package:go_minyan/user_repository.dart';
 import 'package:go_minyan/authentication_bloc/bloc.dart';
 import 'package:go_minyan/login/login.dart';
+import 'package:go_minyan/utils/utils.dart';
 import 'package:go_minyan/widget/widget.dart';
 import 'package:provider/provider.dart';
 
@@ -37,6 +41,11 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
 
   final TextEditingController loginEmailController = TextEditingController();
   final TextEditingController loginPasswordController = TextEditingController();
+
+  ///Internet connection
+  Connectivity connectivity;
+  var _connectionStatus;
+  StreamSubscription<ConnectivityResult> suscription;
 
   bool _darkmode;
 
@@ -78,6 +87,13 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    ///Internet connection
+    connectivity = new Connectivity();
+    suscription = connectivity.onConnectivityChanged.listen((ConnectivityResult result){
+      _connectionStatus = result.toString();
+      print(_connectionStatus);
+    });
   }
 
   @override
@@ -370,6 +386,7 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
 
   @override
   void dispose() {
+    suscription.cancel();
     loginEmailController.dispose();
     loginPasswordController.dispose();
     super.dispose();
@@ -395,11 +412,15 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
 
 
   void _onFormSubmitted() {
-    _loginBloc.dispatch(
-      LoginWithCredentialsPressed(
-        email: loginEmailController.text,
-        password: loginPasswordController.text,
-      ),
-    );
+    if(_connectionStatus == 'ConnectivityResult.none'){
+      ShowToast().show(Translations().connectionError, 10);
+    }else{
+      _loginBloc.dispatch(
+        LoginWithCredentialsPressed(
+          email: loginEmailController.text,
+          password: loginPasswordController.text,
+        ),
+      );
+    }
   }
 }

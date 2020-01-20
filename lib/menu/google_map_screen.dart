@@ -1,11 +1,11 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_minyan/menu/bloc/google_map_bloc.dart';
 import 'package:go_minyan/menu/bloc/marker_details_bloc.dart';
 import 'package:go_minyan/model/model.dart';
 import 'package:go_minyan/style/theme.dart' as Theme;
 import 'package:geolocator/geolocator.dart';
+import 'package:go_minyan/utils/utils.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:go_minyan/translation.dart';
 import 'package:go_minyan/widget/widget.dart';
@@ -147,7 +147,7 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
 
   //Get minyan now
   _onNowPressed() async{
-    _showToast(Translations.of(context).searching, 10);
+    ShowToast().show(Translations().searching, 10);
     String title = await blocMap.getNow(markIdList, markers, _scaffoldKey.currentContext);
     Future.delayed(Duration(seconds: 2));
     return showDialog(
@@ -231,16 +231,6 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
           ? MapType.satellite
           : MapType.normal;
     });
-  }
-
-  _showToast(String msg, time){
-    Fluttertoast.showToast(
-        msg: msg,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIos: time,
-      backgroundColor: Theme.Colors.secondaryColor
-    );
   }
 
   //Input filter meters

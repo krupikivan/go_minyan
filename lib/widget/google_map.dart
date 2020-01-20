@@ -9,8 +9,9 @@ import 'package:go_minyan/translation.dart';
 import 'package:go_minyan/widget/widget.dart';
 import 'package:go_minyan/style/theme.dart' as Theme;
 import 'package:provider/provider.dart';
+import 'package:connectivity/connectivity.dart';
 
-class GoogleMapWidget extends StatelessWidget {
+class GoogleMapWidget extends StatefulWidget {
 
   final BuildContext context;
   final Completer<GoogleMapController> controller;
@@ -19,6 +20,37 @@ class GoogleMapWidget extends StatelessWidget {
   final Map<MarkerId, Marker> markers;
   final List<MarkerId> markIdList;
   GoogleMapWidget({Key key, this.context, this.controller, this.currentMapType, this.myIcon, this.markers, this.markIdList}) : super(key: key);
+
+  @override
+  _GoogleMapWidgetState createState() => _GoogleMapWidgetState();
+
+  static final CameraPosition _center = CameraPosition(
+    target: LatLng(-34.604342,-58.3836157),
+    zoom: 12,
+  );
+}
+
+class _GoogleMapWidgetState extends State<GoogleMapWidget> {
+
+  Connectivity connectivity;
+  var _connectionStatus;
+  StreamSubscription<ConnectivityResult> suscription;
+
+
+  @override
+  void initState() {
+    super.initState();
+    connectivity = new Connectivity();
+    suscription = connectivity.onConnectivityChanged.listen((ConnectivityResult result){
+      _connectionStatus = result.toString();
+    });
+  }
+
+  @override
+  void dispose() {
+    suscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,15 +76,15 @@ class GoogleMapWidget extends StatelessWidget {
                   }
                   else {
                     //Reseteamos los marker sino se van sumando cada vez que se actualiza el estado
-                    markIdList.clear();
+                    widget.markIdList.clear();
 //                    for (int i = 0; i < snapshot.data.documents.length; i++) {
                     for (int i = 0; i < snapshot.data.length; i++) {
                       final MarkerId docID = MarkerId(
 //                          snapshot.data.documents[i].documentID);
                           snapshot.data[i].documentID);
-                      markIdList.add(docID);
+                      widget.markIdList.add(docID);
                       final Marker marker = Marker(
-                        icon: myIcon,
+                        icon: widget.myIcon,
 //                        infoWindow: InfoWindow(title: snapshot.data.documents[i].data[FS.title]),
                         infoWindow: InfoWindow(title: snapshot.data[i].title),
                         markerId: docID,
@@ -73,9 +105,9 @@ class GoogleMapWidget extends StatelessWidget {
                               builder: (context) => MarkerDetailScreen(documentId: snapshot.data[i].documentID,)));
                         },
                       );
-                      markers[docID] = marker;
+                      widget.markers[docID] = marker;
                     }
-                    blocMap.addMarkers(markers);
+                    blocMap.addMarkers(widget.markers);
                     return _googleMap();
                   }
                 }
@@ -89,35 +121,36 @@ class GoogleMapWidget extends StatelessWidget {
         stream: blocMap.getMarkes,
         builder: (context, snapshot) {
           if(!snapshot.hasData){return Center(child: Text(Translations.of(context).mapLoading));}
-          else {
-            if(snapshot.data.length == 0){
-              //If no internet connection
-              return Center(child: TextModel(text: Translations.of(context).connectionError, size: 20, color: Theme.Colors.blackColor,));
-            }
-            return GoogleMap(
-              rotateGesturesEnabled: true,
-              scrollGesturesEnabled: true,
-              tiltGesturesEnabled: false,
-              compassEnabled: true,
-              mapType: currentMapType,
-              initialCameraPosition: _center,
-              onMapCreated: _onMapCreated,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: false,
-              markers: Set<Marker>.of(snapshot.data.values),
-            );
+          else if(_connectionStatus == 'ConnectivityResult.none'){
+            return _errorMsg();
+          }
+          else{
+            return _mapWidget(snapshot);
           }
         }
     );
   }
 
-  static final CameraPosition _center = CameraPosition(
-    target: LatLng(-34.604342,-58.3836157),
-    zoom: 12,
-  );
-
-  void _onMapCreated(GoogleMapController controller) {
-    this.controller.complete(controller);
+  Widget _errorMsg(){
+   return Center(child: TextModel(text: Translations.of(widget.context).connectionError, size: 20, color: Theme.Colors.blackColor,));
   }
 
+  Widget _mapWidget(snapshot){
+    return GoogleMap(
+      rotateGesturesEnabled: true,
+      scrollGesturesEnabled: true,
+      tiltGesturesEnabled: false,
+      compassEnabled: true,
+      mapType: widget.currentMapType,
+      initialCameraPosition: GoogleMapWidget._center,
+      onMapCreated: _onMapCreated,
+      myLocationEnabled: true,
+      myLocationButtonEnabled: false,
+      markers: Set<Marker>.of(snapshot.data.values),
+    );
+  }
+
+  void _onMapCreated(GoogleMapController controller) {
+    this.widget.controller.complete(controller);
+  }
 }

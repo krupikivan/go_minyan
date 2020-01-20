@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -32,6 +35,11 @@ class _AdminScreenState extends State<AdminScreen>{
 
   List<Items> choices;
 
+  ///Internet connection
+  Connectivity connectivity;
+  var _connectionStatus;
+  StreamSubscription<ConnectivityResult> suscription;
+
   ///Variable que controla si se presiono el buscador de ubicacion o no
   TextEditingController _titleController, _addressController, _contactController;
 
@@ -52,6 +60,7 @@ class _AdminScreenState extends State<AdminScreen>{
     _titleController.dispose();
     _addressController.dispose();
     _contactController.dispose();
+    suscription.cancel();
   }
 
   @override
@@ -60,6 +69,10 @@ class _AdminScreenState extends State<AdminScreen>{
     _titleController = TextEditingController();
     _addressController = TextEditingController();
     _contactController = TextEditingController();
+    connectivity = new Connectivity();
+    suscription = connectivity.onConnectivityChanged.listen((ConnectivityResult result){
+      _connectionStatus = result.toString();
+    });
   }
 
   @override
@@ -298,16 +311,7 @@ class _AdminScreenState extends State<AdminScreen>{
           _userDataEditable.latitude = result[0].position.latitude;
           _userDataEditable.longitude = result[0].position.longitude;
           blocUserData.changeUserData(_userDataEditable);
-      }).catchError((error) => _showToast(Translations().errorAddress));
-  }
-
-  _showToast(String msg){
-    Fluttertoast.showToast(
-        msg: msg,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIos: 1
-    );
+      }).catchError((error) => ShowToast().show(Translations().errorAddress, 5));
   }
 
   Widget _buttons(){
@@ -323,7 +327,7 @@ class _AdminScreenState extends State<AdminScreen>{
             Padding(
               padding: EdgeInsets.only(left: 16.0, right: 16.0),
               child: RaisedButton(
-                onPressed: () => _submitData(),
+                onPressed: () => _connectionStatus == 'ConnectivityResult.none' ? ShowToast().show(Translations().connectionError, 5) : _submitData(),
                 color: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
                 textColor: Theme.Colors.secondaryColor,
                 child: TextModel(text: Translations.of(context).btnSave, size: 15,),
