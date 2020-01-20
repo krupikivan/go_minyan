@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_minyan/style/bloc/theme_changer_bloc.dart';
 import 'package:go_minyan/translation.dart';
 import 'package:go_minyan/style/theme.dart' as Theme;

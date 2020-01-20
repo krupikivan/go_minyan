@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_minyan/administration_bloc/bloc.dart';
 import 'package:go_minyan/model/model.dart';
 import 'package:go_minyan/style/theme.dart' as Theme;

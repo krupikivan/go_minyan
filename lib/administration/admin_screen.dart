@@ -1,9 +1,7 @@
 import 'dart:async';
-
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_minyan/administration/admin_times_screen.dart';
 import 'package:go_minyan/administration/google_map_inline.dart';
