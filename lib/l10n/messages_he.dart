@@ -105,7 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "name" : MessageLookupByLibrary.simpleMessage("שם"),
     "nameValid" : MessageLookupByLibrary.simpleMessage("הכנס שם"),
     "newMinianTitle" : MessageLookupByLibrary.simpleMessage("בקש מיניאן חדש"),
-    "newMinyan" : MessageLookupByLibrary.simpleMessage("חדש"),
+    "newMinyan" : MessageLookupByLibrary.simpleMessage("מניין חדש"),
     "newPass" : MessageLookupByLibrary.simpleMessage("סיסמה חדשה"),
     "notification" : MessageLookupByLibrary.simpleMessage("הודעה"),
     "notificationReminder" : MessageLookupByLibrary.simpleMessage("תזכורת הודעה"),

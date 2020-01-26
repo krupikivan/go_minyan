@@ -105,7 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "name" : MessageLookupByLibrary.simpleMessage("Nombre"),
     "nameValid" : MessageLookupByLibrary.simpleMessage("Ingrese un nombre"),
     "newMinianTitle" : MessageLookupByLibrary.simpleMessage("Pedir nuevo minian"),
-    "newMinyan" : MessageLookupByLibrary.simpleMessage("Nuevo"),
+    "newMinyan" : MessageLookupByLibrary.simpleMessage("Nuevo Minian"),
     "newPass" : MessageLookupByLibrary.simpleMessage("Nueva Contraseña"),
     "notification" : MessageLookupByLibrary.simpleMessage("Notificaciones"),
     "notificationReminder" : MessageLookupByLibrary.simpleMessage("Recordatorio de notificacion"),

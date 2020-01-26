@@ -36,7 +36,7 @@ class Translations {
   }
   String get newMinyan {
     return Intl.message(
-      'Nuevo',
+      'Nuevo Minian',
       name: 'newMinyan',
     );
   }

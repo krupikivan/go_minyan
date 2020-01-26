@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-01-19T19:38:49.188935",
+  "@@last_modified": "2020-01-25T23:55:02.649564",
   "minianFinder": "Buscador de minian",
   "@minianFinder": {
     "type": "text",
@@ -10,7 +10,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "newMinyan": "Nuevo",
+  "newMinyan": "Nuevo Minian",
   "@newMinyan": {
     "type": "text",
     "placeholders": {}

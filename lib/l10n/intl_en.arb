@@ -10,7 +10,7 @@
     "type": "text",
     "placeholders": {}
   },
-    "newMinyan": "New",
+    "newMinyan": "New minyan",
     "@newMinyan": {
       "type": "text",
       "placeholders": {}
