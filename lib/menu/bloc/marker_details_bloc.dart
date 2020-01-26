@@ -62,7 +62,7 @@ class MarkerBloc {
         appModel.saveMarkersData(jsonString, listMarker);
         //add to bloc stream
         addMarkerList(appModel.markersList);
-      });
+      }).catchError((onError) => addMarkerList([]));
     else {
       //Nunca entra porque no solamente ejecuta este metodo cuando se inicia la primera vez.
       //Mientras la aplicacion este en background este metdo no se actualiza solamente cuando se cierra por completo

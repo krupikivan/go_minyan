@@ -74,6 +74,9 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
                   if (!snapshot.hasData) {
                     return Center(child: TextModel(text: Translations.of(context).mapLoading, color: model.darkmode ? Theme.Colors.secondaryColor : Theme.Colors.blackColor,));
                   }
+                  else if(snapshot.data.length == 0){
+                    return Center(child: TextModel(text: Translations.of(context).errorDialog, color: model.darkmode ? Theme.Colors.secondaryColor : Theme.Colors.blackColor,));
+                  }
                   else {
                     //Reseteamos los marker sino se van sumando cada vez que se actualiza el estado
                     widget.markIdList.clear();

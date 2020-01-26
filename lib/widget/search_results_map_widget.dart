@@ -28,7 +28,7 @@ class SearchResults extends StatelessWidget {
           else{
             return Container(
 //              height: snapshot.data.documents.length == 1 || snapshot.data.documents.length == 2 ? 100 : 300,
-              height: snapshot.data.length >= 0 || snapshot.data.length <= 2 ? 100 : 300,
+              height: snapshot.data.length >= 0 && snapshot.data.length < 2 ? 100 : snapshot.data.length >= 2 && snapshot.data.length < 4 ? 250 : 400,
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(horizontal: 30.0),
               margin: EdgeInsets.only(
@@ -66,7 +66,8 @@ class SearchResults extends StatelessWidget {
                           );
                         }
                         else{
-                          return ListTile(title: TextModel(text: Translations.of(context).lblNoData, size: 16, color: darkmode ? Theme.Colors.secondaryColor :Theme.Colors.blackColor));
+//                          return ListTile(title: TextModel(text: Translations.of(context).lblNoData, size: 16, color: darkmode ? Theme.Colors.secondaryColor :Theme.Colors.blackColor));
+                          return Container();
                         }
                       },
                     ) : ListTile(title: TextModel(text: Translations.of(context).lblNoData, size: 16, color: darkmode ? Theme.Colors.secondaryColor :Theme.Colors.blackColor)),
