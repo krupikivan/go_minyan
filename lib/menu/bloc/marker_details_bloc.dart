@@ -40,17 +40,21 @@ class MarkerBloc {
       _repository.getAllMarkers().then((snapshot){
         List<MarkerData> listMarker = List();
         for(var i=0; i<snapshot.documents.length; i++){
-          DocumentSnapshot doc = snapshot.documents[i];
-          MarkerData marker = new MarkerData();
-          marker.title = doc.data[FS.title];
-          marker.address = doc.data[FS.address];
-          marker.contact = doc.data[FS.contact];
-          marker.latitude = doc.data[FS.location].latitude;
-          marker.longitude = doc.data[FS.location].longitude;
-          marker.userUID = doc.data[FS.userUID];
-          marker.documentID = doc.documentID;
-          marker.nusach = doc.data[FS.nusach];
-          listMarker.add(marker);
+            DocumentSnapshot doc = snapshot.documents[i];
+            ///Esto soluciona cuando hay markers recien creados y no tiene ubicacion fija
+            ///por lo que generaba un error al mostrar en el mapa
+          if(doc.data[FS.location].latitude != 0 && doc.data[FS.location].longitude != 0){
+            MarkerData marker = new MarkerData();
+            marker.title = doc.data[FS.title];
+            marker.address = doc.data[FS.address];
+            marker.contact = doc.data[FS.contact];
+            marker.latitude = doc.data[FS.location].latitude;
+            marker.longitude = doc.data[FS.location].longitude;
+            marker.userUID = doc.data[FS.userUID];
+            marker.documentID = doc.documentID;
+            marker.nusach = doc.data[FS.nusach];
+            listMarker.add(marker);
+          }else{}
         }
         //Create json string from marker list
         String jsonString = json.encode(listadoMarkerToJson(listMarker));
