@@ -168,7 +168,7 @@ class CustomAppBar extends StatefulWidget with PreferredSizeWidget{
   @override
   _CustomAppBarState createState() => _CustomAppBarState(max);
   @override
-  Size get preferredSize => Size(double.infinity, max < 400 ? 320 : 370);
+  Size get preferredSize => Size(double.infinity, max < 400 ? 280 : 330);
 }
 
 class _CustomAppBarState extends State<CustomAppBar> {
@@ -194,20 +194,23 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       }
                       else
                         return Container(
-                          padding: EdgeInsets.only(top: 15),
+                          padding: EdgeInsets.only(bottom: 20, right: 15, left: 5, top: 5),
                           decoration: BoxDecoration(
                               color: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
                               boxShadow: [
                                 BoxShadow(
-                                    color: Colors.red,
+                                    color: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
                                     blurRadius: 20,
                                     offset: Offset(0, 0)
                                 )
                               ]
                           ),
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   IconButton(
                                     icon: Icon(
@@ -216,33 +219,45 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                       Navigator.of(context).pop();
                                     },
                                   ),
+                                  Expanded(
+                                    flex: 4,
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          _getText(snapshot.data.title, 20),
+                                          _getText(snapshot.data.address, 15),
+                                        ],
+                                      )),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Image.asset(
+                                      Images.starImg,
+                                      color: Theme.Colors.secondaryColor,
+                                      height: max < 400 ? 60 : 80,
+                                      width: max < 400 ? 70 : 90,
+                                    ),
+                                  ),
                                 ],
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Column(
-                                      children: <Widget>[
-                                        Image.asset(
-                                          Images.starImg,
-                                          color: Theme.Colors.secondaryColor,
-                                          height: max < 400 ? 80 : 100,
-                                          width: max < 400 ? 90 : 110,
-                                        ),
-                                        SizedBox(height: 16),
-                                        _getText(snapshot.data.title, 22),
-                                        SizedBox(height: 10),
-                                        Container(
-                                          width: 150,
-//                                        child: _getText(snapshot.data[FS.address], 15)),
-                                            child: _getText(snapshot.data.address, 15)),
-                                      ],
-                                    ),
+                                  Column(
+                                    children: <Widget>[
+                                      GestureDetector(
+                                          onTap: () => _showNusach(max),
+                                          child: _buttonModel(Translations.of(context).nusachTitle)),
+                                      GestureDetector(
+                                        onTap: () {
+                                          var number = snapshot.data.contact;
+                                          launch("tel:$number");
+                                        },
+                                        child: _buttonModel(Translations.of(context).callButton),
+                                      ),
+                                    ],
                                   ),
                                   Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       _getText(Translations
                                           .of(context)
@@ -253,31 +268,16 @@ class _CustomAppBarState extends State<CustomAppBar> {
                                         onChanged: (value) {
                                           model.onSwitchChanged(value, widget.documentId);
                                           setState((){});
-                                          },
+                                        },
                                       ),
                                       FlatButton.icon(
                                           onPressed: () => openMap(snapshot.data.latitude, snapshot.data.longitude),
                                           icon: Icon(Icons.map, size: 30, color: Theme.Colors.secondaryColor),
-                                        label: TextModel(text: Translations().map, color: Theme.Colors.secondaryColor,)),
+                                          label: TextModel(text: Translations().map, color: Theme.Colors.secondaryColor,)),
                                     ],
                                   ),
                                 ],
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                children: <Widget>[
-                                  GestureDetector(
-                                      onTap: () => _showNusach(max),
-                                      child: _buttonModel(Translations.of(context).nusachTitle)),
-                                  GestureDetector(
-                                    onTap: () {
-                                      var number = snapshot.data.contact;
-                                      launch("tel:$number");
-                                    },
-                                    child: _buttonModel(Translations.of(context).callButton),
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         );
@@ -340,25 +340,38 @@ class _CustomAppBarState extends State<CustomAppBar> {
 //        stream: blocMarker.documentSelected,
         stream: blocMarker.markerSelected,
         builder: (context, snapshot) {
-          return ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: snapshot.data.nusach.length,
-              itemBuilder: (BuildContext context, int index){
-                return Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: _getText(snapshot.data.nusach[index], 20),
-                );
-              }
-          );
+          if(!snapshot.hasData){
+            return Container();
+          }else{
+            return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data.nusach.length,
+                itemBuilder: (BuildContext context, int index){
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: _getText(snapshot.data.nusach[index], 20),
+                  );
+                }
+            );
+          }
         }
     );
   }
 
   Widget _getText(String text, double size){
-    return TextModel(text: text,
-            color: Theme.Colors.whiteColor,
-            size: size,
-            fontWeight: FontWeight.normal);
+//    return TextModel(text: text,
+//            color: Theme.Colors.whiteColor,
+//            size: size,
+//            fontWeight: FontWeight.normal);
+    return Text(
+      text,
+      maxLines: 2,
+      style:
+      TextStyle(
+          fontSize: size,
+          fontFamily: Theme.Fonts.primaryFont,
+          color: Theme.Colors.whiteColor),
+    );
   }
 }
 

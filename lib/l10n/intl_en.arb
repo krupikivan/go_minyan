@@ -405,7 +405,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "btnNusach": "Select Nusach",
+  "btnNusach": "Nusach",
   "@btnNusach": {
     "type": "text",
     "placeholders": {}

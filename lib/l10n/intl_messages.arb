@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-01-25T23:55:02.649564",
+  "@@last_modified": "2020-01-26T23:37:27.777959",
   "minianFinder": "Buscador de minian",
   "@minianFinder": {
     "type": "text",
@@ -400,7 +400,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "btnNusach": "Seleccionar Nusach",
+  "btnNusach": "Nusach",
   "@btnNusach": {
     "type": "text",
     "placeholders": {}

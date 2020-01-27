@@ -41,7 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "btnNearMe" : MessageLookupByLibrary.simpleMessage("Filtrar distancia"),
     "btnNew" : MessageLookupByLibrary.simpleMessage("Nuevo"),
     "btnNow" : MessageLookupByLibrary.simpleMessage("Proximo minian"),
-    "btnNusach" : MessageLookupByLibrary.simpleMessage("Seleccionar Nusach"),
+    "btnNusach" : MessageLookupByLibrary.simpleMessage("Nusach"),
     "btnPopupTime" : MessageLookupByLibrary.simpleMessage("Seleccionar hora"),
     "btnRegister" : MessageLookupByLibrary.simpleMessage("Registrar Usuario"),
     "btnReset" : MessageLookupByLibrary.simpleMessage("Restaurar"),

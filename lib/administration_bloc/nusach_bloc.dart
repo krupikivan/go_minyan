@@ -34,7 +34,11 @@ class NusachBloc {
     else
       //Get it from shared prefs
       appModel.setNusachList(_nusachList);
-      addNusach(appModel.nusachList);
+    _nusach.listen((list) {
+      if(list.length == 0){
+        addNusach(appModel.nusachList);
+      }
+    });
   }
 
   void dispose() async {

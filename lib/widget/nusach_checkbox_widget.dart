@@ -26,16 +26,16 @@ class _NusachCheckWidgetState extends State<NusachCheckWidget> {
     @override
   Widget build(BuildContext context) {
       widget.darkmode = Provider.of<AppModel>(context).darkmode;
-      return Padding(
-        padding: EdgeInsets.only(left: 16.0, right: 16.0),
-        child: FlatButton(
-          onPressed: () {
-            _chooseNusach();
-          },
-          color: widget.darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
-          textColor: Theme.Colors.secondaryColor,
-          child: Text(Translations.of(context).btnNusach),
+      return RaisedButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
         ),
+        onPressed: () {
+          _chooseNusach();
+        },
+        color: widget.darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+        textColor: Theme.Colors.secondaryColor,
+        child: Text(Translations.of(context).btnNusach),
       );
     }
 

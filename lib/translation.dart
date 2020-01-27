@@ -524,7 +524,7 @@ class Translations {
   }
   String get btnNusach {
     return Intl.message(
-      'Seleccionar Nusach',
+      'Nusach',
       name: 'btnNusach',
     );
   }

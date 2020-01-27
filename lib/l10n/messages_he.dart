@@ -41,7 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "btnNearMe" : MessageLookupByLibrary.simpleMessage("מרחק סינון"),
     "btnNew" : MessageLookupByLibrary.simpleMessage("חדש"),
     "btnNow" : MessageLookupByLibrary.simpleMessage("המניין הבא"),
-    "btnNusach" : MessageLookupByLibrary.simpleMessage("נוסאק נוסח"),
+    "btnNusach" : MessageLookupByLibrary.simpleMessage("נוסח"),
     "btnPopupTime" : MessageLookupByLibrary.simpleMessage(" :שעה שנבחרה"),
     "btnRegister" : MessageLookupByLibrary.simpleMessage("הירשם"),
     "btnReset" : MessageLookupByLibrary.simpleMessage("לשחזר"),

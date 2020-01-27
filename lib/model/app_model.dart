@@ -138,8 +138,10 @@ class AppModel with ChangeNotifier {
   }
 
   setNusachList(List<String> list){
-    _nusachList = list;
-    instance.setStringList('nusachList', list);
+      if(_nusachList.isEmpty){
+        _nusachList = list;
+        instance.setStringList('nusachList', list);
+      }
   }
 
 ///---------------------------nusach-list-Firebase------------------------------------

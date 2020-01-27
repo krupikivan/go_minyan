@@ -28,12 +28,12 @@ class SearchResults extends StatelessWidget {
           else{
             return Container(
 //              height: snapshot.data.documents.length == 1 || snapshot.data.documents.length == 2 ? 100 : 300,
-              height: snapshot.data.length >= 0 && snapshot.data.length < 2 ? 100 : snapshot.data.length >= 2 && snapshot.data.length < 4 ? 250 : 400,
+              height: snapshot.data.length >= 0 && snapshot.data.length < 2 ? 100 : snapshot.data.length >= 2 && snapshot.data.length < 4 ? 250 : 300,
               width: MediaQuery.of(context).size.width,
-              padding: EdgeInsets.symmetric(horizontal: 30.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.0),
               margin: EdgeInsets.only(
                 left: 16,
-                top: 120,
+                top: 100,
                 right: 50,
               ),
               child: Stack(

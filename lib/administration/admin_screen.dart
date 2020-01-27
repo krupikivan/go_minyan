@@ -147,145 +147,125 @@ class _AdminScreenState extends State<AdminScreen>{
   }
 
   Widget _buildForm(UserData data, max) {
-    return ListView(
-      physics: NeverScrollableScrollPhysics(),
-      children: <Widget>[
-        _userDataField(max),
-        SizedBox(
-          height: max < 400 ? 1 : 10,
-        ),
-        _titleField(data),
-        SizedBox(
-          height: max < 400 ? 1 : 10,
-        ),
-        _addressField(data),
-        SizedBox(
-          height: max < 400 ? 1 : 10,
-        ),
-        _contactField(data),
-        SizedBox(
-          height: max < 400 ? 1 : 10,
-        ),
-        NusachCheckWidget(darkmode: darkmode, size: max,),
-        SizedBox(
-          height: max < 400 ? 1 : 10,
-        ),
-        _buttons(),
-        SizedBox(
-          height: max < 400 ? 1 : 10,
-        ),
-        _googleMapInline(max),
-      ],
-    );
-  }
-
-  Widget _userDataField(max){
     return Padding(
-      padding: EdgeInsets.only(right: 16.0),
-      child: Column(
+      padding: EdgeInsets.only(left: 16.0, right: 16.0),
+      child: ListView(
+        physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
-          ListTile(
-            title: TextModel(text: widget.username, size: max < 400 ? 15 : 20),
-            leading: Icon(Icons.account_circle,size: max < 400 ? 25 : 36),
+          _userDataField(max),
+          _titleField(data),
+          SizedBox(
+            height: max < 400 ? 1 : 10,
           ),
+          _addressField(data),
+          SizedBox(
+            height: max < 400 ? 1 : 10,
+          ),
+          _contactField(data),
+          SizedBox(
+            height: max < 400 ? 1 : 10,
+          ),
+          _buttons(max),
+          SizedBox(
+            height: max < 400 ? 1 : 10,
+          ),
+          _googleMapInline(max),
         ],
       ),
     );
   }
 
-  Widget _titleField(UserData data){
-    return Padding(
-      padding: EdgeInsets.only(left: 16.0, right: 16.0),
-      child: TextField(
-            textCapitalization: TextCapitalization.sentences,
-            keyboardType: TextInputType.text,
-            cursorColor: Theme.Colors.primaryColor,
-            onChanged: (value){
-             _userDataEditable.title = value;
-              },
-            controller: _titleController,
-            decoration: InputDecoration(
-              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.Colors.primaryColor)),
-              labelText: Translations.of(context).lblName,
-              labelStyle: TextStyle(color: Theme.Colors.primaryColor),
-              suffixIcon: IconButton(
-                onPressed: () {
-                  _titleController.clear();
-                }, icon: Icon(Icons.clear, color: darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor),
-              ),
-            ),
-          ),
+  Widget _userDataField(max){
+    return ListTile(
+      title: TextModel(text: widget.username, size: max < 400 ? 15 : 20),
+      leading: Icon(Icons.account_circle,size: max < 400 ? 25 : 36),
     );
   }
 
+  Widget _titleField(UserData data){
+    return TextField(
+          textCapitalization: TextCapitalization.sentences,
+          keyboardType: TextInputType.text,
+          cursorColor: Theme.Colors.primaryColor,
+          onChanged: (value){
+           _userDataEditable.title = value;
+            },
+          controller: _titleController,
+          decoration: InputDecoration(
+            focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.Colors.primaryColor)),
+            labelText: Translations.of(context).lblName,
+            labelStyle: TextStyle(color: Theme.Colors.primaryColor),
+            suffixIcon: IconButton(
+              onPressed: () {
+                _titleController.clear();
+              }, icon: Icon(Icons.clear, color: darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor),
+            ),
+          ),
+        );
+  }
+
   Widget _addressField(UserData data){
-    return Padding(
-      padding: EdgeInsets.only(left: 16.0, right: 16.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: TextField(
-                  textCapitalization: TextCapitalization.sentences,
-                  keyboardType: TextInputType.text,
-                  cursorColor: Theme.Colors.primaryColor,
-                  onChanged: (value){
-                    _userDataEditable.address = value;
-                  },
-                  controller: _addressController,
-                  decoration: InputDecoration(labelText: Translations.of(context).lblAddress,
-                    focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.Colors.primaryColor)),
-                    labelStyle: TextStyle(color: Theme.Colors.primaryColor),
+    return Row(
+      children: <Widget>[
+        Expanded(
+          child: TextField(
+                textCapitalization: TextCapitalization.sentences,
+                keyboardType: TextInputType.text,
+                cursorColor: Theme.Colors.primaryColor,
+                onChanged: (value){
+                  _userDataEditable.address = value;
+                },
+                controller: _addressController,
+                decoration: InputDecoration(labelText: Translations.of(context).lblAddress,
+                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.Colors.primaryColor)),
+                  labelStyle: TextStyle(color: Theme.Colors.primaryColor),
 //                    suffixIcon: IconButton(
 //                      onPressed: () {
 //                        FocusScope.of(context).requestFocus(new FocusNode());
 //                        _getLatLong();
 //                      }, icon: Icon(Icons.my_location, color: darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor),
 //                    ),
-                  ),
                 ),
-          ),
-          IconButton(
-            onPressed: () {
-                FocusScope.of(context).requestFocus(new FocusNode());
-                _getLatLong();
-            }, icon: Icon(Icons.my_location, color: darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor),
-          ),
-        ],
-      ),
+              ),
+        ),
+        IconButton(
+          onPressed: () {
+              FocusScope.of(context).requestFocus(new FocusNode());
+              _getLatLong();
+          }, icon: Icon(Icons.my_location, color: darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor),
+        ),
+      ],
     );
   }
 
   Widget _contactField(UserData data){
-        return Padding(
-          padding: EdgeInsets.only(left: 16.0, right: 16.0),
-          child: TextField(
-                cursorColor: Theme.Colors.primaryColor,
-                onChanged: (value){
-                  _userDataEditable.contact = value;
-                },
-                controller: _contactController,
-                inputFormatters: <TextInputFormatter>[
-                  WhitelistingTextInputFormatter.digitsOnly
-                ],
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(
-                  focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.Colors.primaryColor)),
-                  labelStyle: TextStyle(color: Theme.Colors.primaryColor),
-                  labelText: Translations.of(context).lblContact,
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      _contactController.clear();
-                    }, icon: Icon(Icons.clear, color: darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor),
-                  ),
+        return TextField(
+              cursorColor: Theme.Colors.primaryColor,
+              onChanged: (value){
+                _userDataEditable.contact = value;
+              },
+              controller: _contactController,
+              inputFormatters: <TextInputFormatter>[
+                WhitelistingTextInputFormatter.digitsOnly
+              ],
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Theme.Colors.primaryColor)),
+                labelStyle: TextStyle(color: Theme.Colors.primaryColor),
+                labelText: Translations.of(context).lblContact,
+                suffixIcon: IconButton(
+                  onPressed: () {
+                    _contactController.clear();
+                  }, icon: Icon(Icons.clear, color: darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor),
                 ),
               ),
-        );
+            );
   }
 
   Widget _googleMapInline(max){
-    return SizedBox(
-      width: 150,
-      height: 250,
+    return LimitedBox(
+      maxWidth: 150,
+      maxHeight: 250,
       child: StreamBuilder<UserData>(
           stream: blocUserData.getUserData,
           builder: (context, snapshot) {
@@ -312,7 +292,7 @@ class _AdminScreenState extends State<AdminScreen>{
       }).catchError((error) => ShowToast().show(Translations().errorAddress, 5));
   }
 
-  Widget _buttons(){
+  Widget _buttons(max){
     return StreamBuilder<bool>(
       stream: blocUserData.showProgress,
       builder: (context, snapshot) {
@@ -320,24 +300,29 @@ class _AdminScreenState extends State<AdminScreen>{
         if(snapshot.data) return Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Theme.Colors.primaryColor)));
         else
         return Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: 16.0, right: 16.0),
+            Flexible(
+              flex: 1,
+//              padding: EdgeInsets.only(left: 16.0, right: 16.0),
               child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 onPressed: () => _connectionStatus == 'ConnectivityResult.none' ? ShowToast().show(Translations().connectionError, 5) : _submitData(),
                 color: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
                 textColor: Theme.Colors.secondaryColor,
                 child: TextModel(text: Translations.of(context).btnSave, size: 15,),
               ),
             ),
-            SizedBox(
-              width: 20.0,
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 16.0, right: 16.0),
+            Flexible(
+              flex: 1,
+//              padding: EdgeInsets.only(left: 16.0, right: 16.0),
               ///Restore Button
               child: RaisedButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 onPressed: () {
                   setState(() {
                     _restoreData = true;
@@ -349,6 +334,9 @@ class _AdminScreenState extends State<AdminScreen>{
                 child: Text(Translations.of(context).btnRestore),
               ),
             ),
+            Flexible(
+              flex: 1,
+                child: NusachCheckWidget(darkmode: darkmode, size: max,)),
           ],
         );
       }
