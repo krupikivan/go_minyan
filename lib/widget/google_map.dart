@@ -25,7 +25,7 @@ class GoogleMapWidget extends StatefulWidget {
   _GoogleMapWidgetState createState() => _GoogleMapWidgetState();
 
   static final CameraPosition _center = CameraPosition(
-    target: LatLng(-34.604342,-58.3836157),
+    target: LatLng(-34.584084,-58.4326866),
     zoom: 12,
   );
 }

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -27,8 +28,8 @@ class GoogleMapBloc{
 
   BuildContext screenContext;
 
-  List<MarkerNow> listNow = List();
-  MarkerNow markerNow = new MarkerNow();
+  List<MarkerNow> listNow;
+  MarkerNow markerNow;
 
   //Get minyan now
   final _nowMark = BehaviorSubject<List<MarkerNow>>();
@@ -54,9 +55,10 @@ class GoogleMapBloc{
     }
   }
 
+  ///TODO esto no esta funcionanco
   getNow(List<MarkerId> markIdList, Map<MarkerId, Marker> markers, context) async{
+    listNow = List();
     screenContext = context;
-    listNow.clear();
     try{
       await requestLocationPermission();
       Position _myPos = await _getUserLocation();
@@ -68,6 +70,7 @@ class GoogleMapBloc{
         await Geolocator().distanceBetween(_myPos.latitude, _myPos.longitude, markers[markIdList[i]].position.latitude, markers[markIdList[i]].position.longitude)
             .then((calDist) {
               //Chequeo si el marker esta a menos de 500 metros
+          ///TODO traer la cantidad de metros desde shared prefs
           if((calDist / 1000) < (500 * 0.001)) {
             _createMarkerNow(markIdList[i].value, markers[markIdList[i]], data);
           }
@@ -79,7 +82,6 @@ class GoogleMapBloc{
         addNowMarkers(listNow);
       }
       else{
-        listNow.clear();
         addNowMarkers(listNow);
         tfilaName = '';
       }
@@ -89,11 +91,13 @@ class GoogleMapBloc{
     }
   }
 
+  //Id del marker, los datos y el data son los horarios
    _createMarkerNow(String id, Marker mark, data) async{
     try{
       //Obtengo el horario formato string
       final time = _getNowTime(data.documents);
       if(time != null && time != ''){
+        markerNow = new MarkerNow();
         markerNow.id = id;
         markerNow.title = mark.infoWindow.title;
         markerNow.latitude = mark.position.latitude;
@@ -132,18 +136,28 @@ class GoogleMapBloc{
 
   //Metodo que controla la diferencia de horario y se fija cual es el proximo minian, sino encuentra devuelve vacio al streambuilder
   _addTimeList(List doc){
-    for(var time in doc){
-      final timeServer = DateTime.fromMillisecondsSinceEpoch(time.millisecondsSinceEpoch);
-
-      var serverParsed = NotificationLogic().getParsedTime(time, 1);
-      var nowParsed = NotificationLogic().getParsedTime(time, 2);
-
-      //Controlo que la diferencia sea de 30 minutos
-      if(nowParsed.difference(serverParsed).inMinutes < 30 && nowParsed.difference(serverParsed).inMinutes > -30){
-        return DateFormat('hh:mm').format(timeServer);
+    Timestamp time;
+    //Compara el listado me trae el tiempo mas corto
+    for(var i=0; i<doc.length; i++){
+      for(var j=1; j<doc.length+1; j++){
+        if(i+1 == doc.length){ //Si el vector tiene un objeto corta aca
+          time = doc[i];
+        }else{
+          if(doc[j].millisecondsSinceEpoch < doc[i].millisecondsSinceEpoch)
+            time = doc[j];
+        }
       }
-      return '';
     }
+        final timeServer = DateTime.fromMillisecondsSinceEpoch(time.millisecondsSinceEpoch);
+
+        var serverParsed = NotificationLogic().getParsedTime(time, 1);
+        var nowParsed = NotificationLogic().getParsedTime(time, 2);
+
+        //Controlo que la diferencia sea de 30 minutos
+        if(nowParsed.difference(serverParsed).inMinutes < 0 && nowParsed.difference(serverParsed).inMinutes > -30){
+          return DateFormat('HH:mm').format(timeServer);
+        }
+        return '';
   }
 
   _getUserLocation() async{

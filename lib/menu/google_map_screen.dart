@@ -65,6 +65,7 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+    ///TODO ir a la ubicacion si es posible
     //Agrego en bloc los markers - se escuchan en google_map.dart
     //Hacerlo en app.dart llamando al shared prefs
 //    blocMarker.getAllMarkers();
@@ -72,7 +73,6 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
     darkmode = Provider.of<AppModel>(context).darkmode;
     //Controlamos si esta en hebreo
     var lang = Provider.of<AppModel>(context).isReverse;
-    print(lang);
     return Scaffold(
       key: _scaffoldKey,
       resizeToAvoidBottomPadding: false,
@@ -103,13 +103,15 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
       backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
       child: Icon(Icons.add, color: Theme.Colors.secondaryColor,),
       children: [
-        SpeedDialChild(
-          child: Icon(Icons.near_me, size: 36.0, color: Theme.Colors.secondaryColor),
-          backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
-          label: Translations.of(context).btnNearMe,
-          labelStyle: TextStyle(fontFamily: Theme.Fonts.primaryFont, color: Theme.Colors.blackColor),
-          onTap: _inputDialog,
-        ),
+        ///TODO revisar este metodo
+        ///hacer que aparezcan los mininim encontrados en pantalla
+//        SpeedDialChild(
+//          child: Icon(Icons.near_me, size: 36.0, color: Theme.Colors.secondaryColor),
+//          backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+//          label: Translations.of(context).btnNearMe,
+//          labelStyle: TextStyle(fontFamily: Theme.Fonts.primaryFont, color: Theme.Colors.blackColor),
+//          onTap: _inputDialog,
+//        ),
         SpeedDialChild(
           child: Icon(Icons.map, color: Theme.Colors.secondaryColor),
           backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
@@ -167,7 +169,7 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
             return AlertDialog(
               title: Text(title),
               content: Container(
-                height: snapshot.data.length == 1 ? 60 : 100,
+                height: snapshot.data.length == 1 ? 60 : snapshot.data.length == 2 ? 150 : 200,
                 width: MediaQuery
                     .of(context)
                     .size
