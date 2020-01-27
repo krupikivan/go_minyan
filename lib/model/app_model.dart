@@ -138,7 +138,7 @@ class AppModel with ChangeNotifier {
   }
 
   setNusachList(List<String> list){
-      if(_nusachList.isEmpty){
+      if(_nusachList == null){
         _nusachList = list;
         instance.setStringList('nusachList', list);
       }
