@@ -73,7 +73,6 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    ///TODO ir a la ubicacion si es posible
     //Agrego en bloc los markers - se escuchan en google_map.dart
     //Hacerlo en app.dart llamando al shared prefs
 //    blocMarker.getAllMarkers();
@@ -111,8 +110,6 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
       backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
       child: Icon(Icons.add, color: Theme.Colors.secondaryColor,),
       children: [
-        ///TODO revisar este metodo
-        ///hacer que aparezcan los mininim encontrados en pantalla
         SpeedDialChild(
           child: Icon(Icons.near_me, size: 36.0, color: Theme.Colors.secondaryColor),
           backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,

@@ -63,7 +63,6 @@ class GoogleMapBloc{
     }
   }
 
-  ///TODO esto no esta funcionanco
   getNow(List<MarkerId> markIdList, Map<MarkerId, Marker> markers, context) async{
     listNow = List();
     screenContext = context;
