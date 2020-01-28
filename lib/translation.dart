@@ -98,7 +98,7 @@ class Translations {
   }
   String get appDesc {
     return Intl.message(
-      'Una app creada sin fines de lucro con el objetivo de proveer al usuario la facilidad de encontrar el lugar indicado a la hora indicada para rezar. Que sea para refua shlema de todos los enfermos de AM ISRAEL.',
+      'Una aplicacion creada sin fines de lucro con el objetivo de brindar al yehudi la facilidad de encontrar minianim en el pais de una manera muy facil y en un solo lugar.',
       name: 'appDesc',
     );
   }

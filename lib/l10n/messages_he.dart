@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "aboutTitle" : MessageLookupByLibrary.simpleMessage("על אודות"),
     "adminDialogContentError" : MessageLookupByLibrary.simpleMessage("עליך לבחור זמן ושעה"),
     "adminPageTitle" : MessageLookupByLibrary.simpleMessage("ניהול"),
-    "appDesc" : MessageLookupByLibrary.simpleMessage("אפליקציה שנוצרה ללא מטרות רווח על מנת לספק למשתמשים את הקלות למצוא את המקום הנכון בזמן הנכון להתפלל. שיהיה לשליפא רפואה של כל האנשים החולים בעם ישראל"),
+    "appDesc" : MessageLookupByLibrary.simpleMessage("אפליקציה יצרה עמותה במטרה להעניק ליהודי את הקלות במציאת מינינים במדינה בצורה קלה מאוד ובמקום אחד."),
     "appTitle" : MessageLookupByLibrary.simpleMessage("Go Minyan App"),
     "arvitTitle" : MessageLookupByLibrary.simpleMessage("ערבית"),
     "btnAccept" : MessageLookupByLibrary.simpleMessage("לקבל"),

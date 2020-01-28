@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "aboutTitle" : MessageLookupByLibrary.simpleMessage("About"),
     "adminDialogContentError" : MessageLookupByLibrary.simpleMessage("You must select a schedule and a day"),
     "adminPageTitle" : MessageLookupByLibrary.simpleMessage("Administration"),
-    "appDesc" : MessageLookupByLibrary.simpleMessage("A non profit app making ease finding the perfect minyan at the perfect time to pray. Make it for blessing those in need of healing with refuah shleimah."),
+    "appDesc" : MessageLookupByLibrary.simpleMessage("A non profit app making ease finding minyan in the country."),
     "appTitle" : MessageLookupByLibrary.simpleMessage("Go Minyan App"),
     "arvitTitle" : MessageLookupByLibrary.simpleMessage("Maariv"),
     "btnAccept" : MessageLookupByLibrary.simpleMessage("Accept"),
