@@ -25,10 +25,10 @@ class GoogleMapWidget extends StatefulWidget {
   @override
   _GoogleMapWidgetState createState() => _GoogleMapWidgetState();
 
-  static final CameraPosition _center = CameraPosition(
-    target: LatLng(-34.584084,-58.4326866),
-    zoom: 12,
-  );
+//  static final CameraPosition _center = CameraPosition(
+//    target: LatLng(-34.584084,-58.4326866),
+//    zoom: 12,
+//  );
 }
 
 class _GoogleMapWidgetState extends State<GoogleMapWidget> {
