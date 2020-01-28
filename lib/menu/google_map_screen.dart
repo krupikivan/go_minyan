@@ -34,7 +34,7 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   bool darkmode;
-
+  static LatLng _initialPosition;
   MapType _currentMapType = MapType.normal;
 
 
@@ -52,6 +52,14 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
       setState(() {
         searchFilter = searchController.text;
       });
+    });
+    _getUserLocation();
+  }
+
+  _getUserLocation() async {
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    setState(() {
+      _initialPosition = LatLng(position.latitude, position.longitude);
     });
   }
 
@@ -84,7 +92,7 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
       ),
       body: Stack(
         children: <Widget>[
-          GoogleMapWidget(context: context, controller: _controller, currentMapType: _currentMapType, myIcon: myIcon, markers: markers, markIdList: markIdList),
+          GoogleMapWidget(context: context, controller: _controller, currentMapType: _currentMapType, myIcon: myIcon, markers: markers, markIdList: markIdList, initialPosition: _initialPosition,),
           _btnLocationMap(),
           SearchMap(searchController: searchController, darkmode: darkmode),
           SearchResults(controller: _controller, darkmode: darkmode, searchFilter: searchFilter, searchController: searchController),
@@ -105,13 +113,13 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
       children: [
         ///TODO revisar este metodo
         ///hacer que aparezcan los mininim encontrados en pantalla
-//        SpeedDialChild(
-//          child: Icon(Icons.near_me, size: 36.0, color: Theme.Colors.secondaryColor),
-//          backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
-//          label: Translations.of(context).btnNearMe,
-//          labelStyle: TextStyle(fontFamily: Theme.Fonts.primaryFont, color: Theme.Colors.blackColor),
-//          onTap: _inputDialog,
-//        ),
+        SpeedDialChild(
+          child: Icon(Icons.near_me, size: 36.0, color: Theme.Colors.secondaryColor),
+          backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+          label: Translations.of(context).btnNearMe,
+          labelStyle: TextStyle(fontFamily: Theme.Fonts.primaryFont, color: Theme.Colors.blackColor),
+          onTap: _inputDialog,
+        ),
         SpeedDialChild(
           child: Icon(Icons.map, color: Theme.Colors.secondaryColor),
           backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
@@ -248,6 +256,7 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
 
   //btnLocation
   _takeLocation() async{
+    ShowToast().show(Translations().searching, 10);
     if(await Geolocator().isLocationServiceEnabled()) {
       position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
       blocMap.goToLocation(position.latitude, position.longitude, _controller, 18);

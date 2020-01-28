@@ -4,3 +4,4 @@ export 'schedule.dart';
 export 'marker_now.dart';
 export 'marker.dart';
 export 'push_data.dart';
+export 'marker_distance.dart';

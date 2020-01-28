@@ -37,7 +37,15 @@ class GoogleMapBloc{
   Function(List<MarkerNow>) get addNowMarkers => _nowMark.sink.add;
 
 
-
+  //btnLocation
+  takeLocation(controller) async{
+    if(await Geolocator().isLocationServiceEnabled()) {
+      position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      goToLocation(position.latitude, position.longitude, controller, 18);
+    }else{
+      requestLocationPermission();
+    }
+  }
 
   Future<void> goToLocation(latitude, longitude, _controller, double zoom) async{
     try {

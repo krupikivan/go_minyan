@@ -19,7 +19,8 @@ class GoogleMapWidget extends StatefulWidget {
   final BitmapDescriptor myIcon;
   final Map<MarkerId, Marker> markers;
   final List<MarkerId> markIdList;
-  GoogleMapWidget({Key key, this.context, this.controller, this.currentMapType, this.myIcon, this.markers, this.markIdList}) : super(key: key);
+  final LatLng initialPosition;
+  GoogleMapWidget({Key key, this.context, this.controller, this.currentMapType, this.myIcon, this.markers, this.markIdList, this.initialPosition}) : super(key: key);
 
   @override
   _GoogleMapWidgetState createState() => _GoogleMapWidgetState();
@@ -36,7 +37,6 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
   var _connectionStatus;
   StreamSubscription<ConnectivityResult> suscription;
 
-
   @override
   void initState() {
     super.initState();
@@ -45,6 +45,8 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
       _connectionStatus = result.toString();
     });
   }
+
+
 
   @override
   void dispose() {
@@ -145,7 +147,10 @@ class _GoogleMapWidgetState extends State<GoogleMapWidget> {
       tiltGesturesEnabled: false,
       compassEnabled: true,
       mapType: widget.currentMapType,
-      initialCameraPosition: GoogleMapWidget._center,
+      initialCameraPosition: CameraPosition(
+        target: widget.initialPosition != null ? widget.initialPosition : LatLng(-34.584084,-58.4326866),
+        zoom: widget.initialPosition != null ? 14.4746 : 12,
+      ),//blocMap.takeLocation(widget.controller),//GoogleMapWidget._center,
       onMapCreated: _onMapCreated,
       myLocationEnabled: true,
       myLocationButtonEnabled: false,
