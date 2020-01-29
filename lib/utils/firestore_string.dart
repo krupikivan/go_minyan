@@ -8,6 +8,8 @@ class FS{
   static const String name = "name";
   static const String value = "value";
   static const String documentID = "documentID";
+  static const String email = "email";
+  static const String isAuthenticated = "isAuthenticated";
   static const String location = "location";
   static const String latitude = "latitude";
   static const String longitude = "longitude";

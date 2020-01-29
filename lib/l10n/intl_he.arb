@@ -135,7 +135,7 @@
   "type": "text",
   "placeholders": {}
   },
-  "emailSent": "קיבלנו את ההודעה שלך, בקרוב ניצור איתך קשר",
+  "emailSent": "תודה, חכה לאישור שלנו",
   "@emailSent": {
     "type": "text",
     "placeholders": {}
@@ -145,6 +145,11 @@
     "type": "text",
     "placeholders": {}
   },
+    "emailDuplicate": "המשתמש קיים",
+    "@emailDuplicate": {
+      "type": "text",
+      "placeholders": {}
+    },
   "mapLoading": "...טוען מפה",
   "@mapLoading": {
     "type": "text",
@@ -280,7 +285,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "registerTitle": "הרשמה למשתמש",
+  "registerTitle": "רשום מניין חדש",
   "@registerTitle": {
     "type": "text",
     "placeholders": {}

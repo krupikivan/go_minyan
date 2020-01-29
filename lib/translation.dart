@@ -190,7 +190,7 @@ class Translations {
   }
   String get emailSent {
     return Intl.message(
-      'Hemos recibido su mensaje, pronto lo estaremos contactando.',
+      'Recibido, espere confirmacion por email, Gracias.',
       name: 'emailSent',
     );
   }
@@ -198,6 +198,12 @@ class Translations {
     return Intl.message(
       'Hubo un error al enviar. Revise su conexion y vuelva a intentarlo.',
       name: 'emailNotSent',
+    );
+  }
+  String get emailDuplicate {
+    return Intl.message(
+      'El usuario ya esta registrado.',
+      name: 'emailDuplicate',
     );
   }
 ///new-minian--------------------------------
@@ -376,7 +382,7 @@ class Translations {
 ///register--------------------------------
   String get registerTitle {
     return Intl.message(
-      'Registrar Usuario',
+      'Registrar nuevo minian',
       name: 'registerTitle',
     );
   }
@@ -388,7 +394,7 @@ class Translations {
   }
   String get btnRegister {
     return Intl.message(
-      'Registrar Usuario',
+      'Registrar',
       name: 'btnRegister',
     );
   }

@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_minyan/administration/admin_screen.dart';
-import 'package:go_minyan/administration/change_pass_screen.dart';
 import 'package:go_minyan/administration_bloc/bloc.dart';
 import 'package:go_minyan/authentication_bloc/bloc.dart';
 import 'package:go_minyan/login/login.dart';
@@ -16,6 +14,8 @@ import 'package:go_minyan/user_repository.dart';
 import 'package:go_minyan/utils/utils.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+
+import 'administration/admin.dart';
 
 ///STEP 4
 
@@ -59,7 +59,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/minian': (context) => MinianScreen(),
-            '/minianForm': (context) => MinianForm(),
+            '/minianForm': (context) => RegisterScreen(userRepository: _userRepository),
             '/info': (context) => AboutScreen(),
             '/menu': (context) => MenuScreen(),
           },
@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
                 }
                 if (state is Authenticated) {
                   if(_isAdmin(state.userUID, userAdmin.data)){
-                    return RegisterScreen(userRepository: _userRepository);
+                    return RootScreen();
                   }else{
                     //Get data from shared preferences
                     appModel.getNusachList();

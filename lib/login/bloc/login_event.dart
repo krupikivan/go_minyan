@@ -40,13 +40,27 @@ class Submitted extends LoginEvent {
 class LoginWithCredentialsPressed extends LoginEvent {
   final String email;
   final String password;
+  final bool isAuth;
 
   //Get context from login form
-  LoginWithCredentialsPressed({@required this.email, @required this.password})
-      : super([email, password]);
+  LoginWithCredentialsPressed({@required this.email, @required this.password, @required this.isAuth, })
+      : super([email, password, isAuth]);
 
   @override
   String toString() {
     return 'LoginWithCredentialsPressed { email: $email, password: $password }';
+  }
+}
+
+class GetIsAuthenticated extends LoginEvent {
+  final String email;
+
+  //Get context from login form
+  GetIsAuthenticated({@required this.email, })
+      : super([email]);
+
+  @override
+  String toString() {
+    return 'GetIsAuthenticated { email: $email }';
   }
 }

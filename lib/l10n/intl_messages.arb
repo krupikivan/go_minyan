@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-01-28T17:54:37.106068",
+  "@@last_modified": "2020-01-29T15:46:14.694815",
   "minianFinder": "Buscador de minian",
   "@minianFinder": {
     "type": "text",
@@ -135,13 +135,18 @@
     "type": "text",
     "placeholders": {}
   },
-  "emailSent": "Hemos recibido su mensaje, pronto lo estaremos contactando.",
+  "emailSent": "Recibido, espere confirmacion por email, Gracias.",
   "@emailSent": {
     "type": "text",
     "placeholders": {}
   },
   "emailNotSent": "Hubo un error al enviar. Revise su conexion y vuelva a intentarlo.",
   "@emailNotSent": {
+    "type": "text",
+    "placeholders": {}
+  },
+  "emailDuplicate": "El usuario ya esta registrado.",
+  "@emailDuplicate": {
     "type": "text",
     "placeholders": {}
   },
@@ -280,7 +285,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "registerTitle": "Registrar Usuario",
+  "registerTitle": "Registrar nuevo minian",
   "@registerTitle": {
     "type": "text",
     "placeholders": {}
@@ -290,7 +295,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "btnRegister": "Registrar Usuario",
+  "btnRegister": "Registrar",
   "@btnRegister": {
     "type": "text",
     "placeholders": {}

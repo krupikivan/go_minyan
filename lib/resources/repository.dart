@@ -7,12 +7,21 @@ class Repository {
   Future<void> saveData(String documentId, String title, String address, String contact, double lat, double lon,  List nusach) =>
       _firestoreProvider.saveData(documentId, title, address, contact, lat, lon, nusach);
 
+  Future<void> authenticateUser(String documentId, value) =>
+      _firestoreProvider.authenticateUser(documentId, value);
+
   Future<void> saveNewTime(String documentID, String day, String pray, DateTime time, String dayDocumentId) =>
       _firestoreProvider.saveNewTime(documentID, day, pray, time, dayDocumentId);
 
   ///Device information - menu-screen
   Future<void> saveToken(String token) =>
       _firestoreProvider.saveToken(token);
+
+  Future<QuerySnapshot> isAuthenticated(String email) =>
+      _firestoreProvider.isAuthenticated(email);
+
+  Future<QuerySnapshot> userExist(String email) =>
+      _firestoreProvider.userExist(email);
 
   Future<void> deleteTime(String documentId, String day, String pray, Timestamp time, String dayDocumentId) =>
       _firestoreProvider.deleteTime(documentId, day, pray, time, dayDocumentId);
@@ -38,6 +47,10 @@ class Repository {
   //Get all Documents to show on Google Map
   Future<QuerySnapshot> getAllMarkers() =>
       _firestoreProvider.getAllMarkers();
+
+  //Get all Documents to show on Google Map
+  Future<QuerySnapshot> getMarkersAuth() =>
+      _firestoreProvider.getMarkersAuth();
 
   //Get all Documents to show on Google Map
   Future<QuerySnapshot> getMarkerDetails(String markID) =>

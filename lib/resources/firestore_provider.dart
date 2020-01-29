@@ -34,6 +34,19 @@ class FirestoreProvider {
         }
     );
   }
+  Future<void> authenticateUser(String documentId, value) async {
+    await _firestore.collection(FS.markers).document(documentId).updateData(
+        {FS.isAuthenticated: value}
+    );
+  }
+
+  Future<QuerySnapshot> isAuthenticated(String email) {
+    return _firestore.collection(FS.markers).where(FS.email, isEqualTo: email).getDocuments();
+  }
+
+  Future<QuerySnapshot> userExist(String email) {
+    return _firestore.collection(FS.markers).where(FS.email, isEqualTo: email).getDocuments();
+  }
 
   ///Agrego items en el arreglo
   ///Lo importante en este codigo, que primero obtengo los document que cumplan la condicion que sea del dia especifico
@@ -112,6 +125,11 @@ class FirestoreProvider {
   }
 
   Future<QuerySnapshot> getAllMarkers() {
+    return _firestore.collection(FS.markers).getDocuments();
+  }
+
+  //Traer los marker para el ROOT
+  Future<QuerySnapshot> getMarkersAuth() {
     return _firestore.collection(FS.markers).getDocuments();
   }
 

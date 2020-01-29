@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserRepository {
@@ -25,11 +26,25 @@ class UserRepository {
 
 
 
-  Future<void> signUp({String email, String password}) async {
+  Future<void> signUp({String email, String password, String title, String contact}) async {
     return await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
-    );
+    ).then((firebaseUser) async{
+
+      final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
+        functionName: 'addUser',
+      );
+//    dynamic resp = await callable.call();
+      await callable.call(<String, dynamic>{
+        'title': title,
+        'contact': contact,
+        'uid': firebaseUser.user.uid,
+      });
+
+      _firebaseAuth.signOut(); //Deslogue al usuario creado porque firebase lo loguea automaticamente
+
+    });
   }
   Future<void> sendPasswordResetEmail(String email) async{
     return _firebaseAuth.sendPasswordResetEmail(email: email);

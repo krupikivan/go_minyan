@@ -32,7 +32,9 @@ class MarkerData{
   double longitude;
   String title;
   String userUID;
+  String email;
   String documentID;
+  bool isAuthenticated;
 
   MarkerData({
     this.nusach,
@@ -42,7 +44,9 @@ class MarkerData{
     this.longitude,
     this.title,
     this.userUID,
+    this.email,
     this.documentID,
+    this.isAuthenticated,
   });
 
   factory MarkerData.fromJJson(Map<dynamic, dynamic> json) {
@@ -53,7 +57,9 @@ class MarkerData{
       longitude: json['longitude'] as double,
       title: json['title'],
       userUID: json['userUID'],
+      email: json['email'],
       documentID: json['documentID'],
+      isAuthenticated: json['isAuthenticated'] as bool,
       nusach: listadoNusachFromJson(json['nusach']),
     );
     return sch;
@@ -66,7 +72,9 @@ class MarkerData{
     'longitude': this.longitude,
     'title': this.title,
     'userUID': this.userUID,
+    'email': this.email,
     'documentID': this.documentID,
+    'isAuthenticated': this.isAuthenticated,
     'nusach': listNusach,
   };
 

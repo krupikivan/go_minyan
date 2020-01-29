@@ -6,6 +6,7 @@ class LoginState {
   final bool isPasswordValid;
   final bool isSubmitting;
   final bool isSuccess;
+  final bool isAuthenticated;
   final bool isFailure;
   final bool isPasswordReset;
 
@@ -18,6 +19,7 @@ class LoginState {
     @required this.isSuccess,
     @required this.isFailure,
     @required this.isPasswordReset,
+    @required this.isAuthenticated,
   });
 
   factory LoginState.empty() {
@@ -28,6 +30,7 @@ class LoginState {
       isSuccess: false,
       isFailure: false,
       isPasswordReset: false,
+      isAuthenticated: false,
     );
   }
 
@@ -39,6 +42,7 @@ class LoginState {
       isSuccess: false,
       isFailure: false,
       isPasswordReset: false,
+      isAuthenticated: true,
     );
   }
 
@@ -51,6 +55,7 @@ class LoginState {
       isSuccess: false,
       isFailure: true,
       isPasswordReset: false,
+      isAuthenticated: false,
     );
   }
 
@@ -62,6 +67,19 @@ class LoginState {
       isSuccess: true,
       isFailure: false,
       isPasswordReset: false,
+      isAuthenticated: true,
+    );
+  }
+
+  factory LoginState.authenticated() {
+    return LoginState(
+      isEmailValid: false,
+      isPasswordValid: false,
+      isSubmitting: false,
+      isSuccess: false,
+      isFailure: false,
+      isPasswordReset: false,
+      isAuthenticated: true,
     );
   }
 
@@ -74,6 +92,7 @@ class LoginState {
       isPasswordValid: isPasswordValid,
       isSubmitting: false,
       isSuccess: false,
+      isAuthenticated: false,
       isFailure: false,
     );
   }
@@ -84,6 +103,7 @@ class LoginState {
     bool isSubmitEnabled,
     bool isSubmitting,
     bool isSuccess,
+    bool isAuthenticated,
     bool isFailure,
   }) {
     return LoginState(
@@ -93,6 +113,7 @@ class LoginState {
       isSuccess: isSuccess ?? this.isSuccess,
       isFailure: isFailure ?? this.isFailure,
       isPasswordReset: isPasswordReset ?? this.isPasswordReset,
+      isAuthenticated: isAuthenticated ?? this.isAuthenticated,
     );
   }
 
@@ -105,6 +126,7 @@ class LoginState {
       isSuccess: $isSuccess,
       isFailure: $isFailure,
       isPasswordReset: $isPasswordReset,
+      isAuthenticated: $isAuthenticated,
     }''';
   }
 }

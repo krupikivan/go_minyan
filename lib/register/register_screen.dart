@@ -6,19 +6,17 @@ import 'package:go_minyan/user_repository.dart';
 import 'package:go_minyan/register/register.dart';
 import 'package:go_minyan/style/theme.dart' as Theme;
 import 'package:go_minyan/utils/utils.dart';
-import 'package:go_minyan/widget/widget.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
-  final UserRepository _userRepository;
+  final UserRepository userRepository;
 
-  RegisterScreen({@required UserRepository userRepository})
-      : assert(userRepository != null),
-        _userRepository = userRepository;
 
   ///POPUP menu
   static String menu;
   static String exit;
+
+  const RegisterScreen({Key key, this.userRepository}) : super(key: key);
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -29,26 +27,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    _fillPopupData();
+//    _fillPopupData();
     bool darkmode = Provider.of<AppModel>(context).darkmode;
     return Scaffold(
       appBar: AppBar(
         title: Text(Translations.of(context).registerTitle
         ),
-        actions: <Widget>[
-          PopupMenu(choices: choices, type: 'root'),
-//          IconButton(
-//            icon: Icon(Icons.exit_to_app),
-//            onPressed: () {
-//              BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedOut());
-//            },
-//          )
-        ],
         backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
       ),
       body: Center(
         child: BlocProvider<RegisterBloc>(
-          builder: (context) => RegisterBloc(userRepository: widget._userRepository),
+          builder: (context) => RegisterBloc(userRepository: widget.userRepository),
           child: Container(
               child: Stack(
                 children: <Widget>[
@@ -59,15 +48,5 @@ class _RegisterScreenState extends State<RegisterScreen> {
         ),
       ),
     );
-  }
-
-  ///Popup menu
-  _fillPopupData(){
-    RegisterScreen.menu = Translations.of(context).menuTitle;
-    RegisterScreen.exit = Translations.of(context).logOut;
-    choices = <Items>[
-      Items(Text(RegisterScreen.menu, style: TextStyle(fontFamily: Theme.Fonts.primaryFont)), Icon(Icons.menu)),
-      Items(Text(RegisterScreen.exit, style: TextStyle(fontFamily: Theme.Fonts.primaryFont)), Icon(Icons.exit_to_app)),
-    ];
   }
 }

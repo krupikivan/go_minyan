@@ -108,7 +108,7 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
               SnackBar(
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [Text(Translations.of(context).loginFailure), Icon(Icons.error)],
+                  children: [Text(Translations.of(context).loginFailure, style: TextStyle(color: Theme.Colors.secondaryColor),), Icon(Icons.error, color: Theme.Colors.secondaryColor,)],
                 ),
                 backgroundColor: Colors.red,
               ),
@@ -130,6 +130,15 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
               ),
             );
         }
+        if (state.isAuthenticated) {
+          _loginBloc.dispatch(
+            LoginWithCredentialsPressed(
+              email: loginEmailController.text,
+              password: loginPasswordController.text,
+              isAuth: true,
+            ),
+          );
+        }
         if (state.isSuccess) {
           BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedIn());
         }
@@ -140,14 +149,15 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
             builder: (context, constrain) {
               var max = constrain.maxWidth;
               return Padding(
-                padding: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width * 0.15, vertical: max < 400 ? 10 : 50),
-                child: ListView(
-                  physics: NeverScrollableScrollPhysics(),
+                padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.15, right: MediaQuery.of(context).size.width * 0.15, top:max < 400 ? 5 : 50, bottom: max < 400 ? 5 : 10),
+               child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+//                  physics: NeverScrollableScrollPhysics(),
                   children: <Widget>[
                     _buildImage(),
                     _buildAdminBar(max),
                     _buildForm(state, max),
-                    _buildLoginButton(state),
+                    _buildLoginButton(state, max),
                     _buildLastButtons(),
                   ],
                 ),
@@ -160,32 +170,38 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
   }
 
   Widget _buildImage(){
-    return Padding(
+    return Flexible(
+      flex: 2,
+      child: Padding(
       padding: EdgeInsets.only(bottom: 15),
-      child: Image(
-          fit: BoxFit.contain,
-          width: MediaQuery.of(context).size.width * 0.6,
-          height: MediaQuery.of(context).size.height * 0.25,
-          image: new AssetImage(Images.logoImg)
+        child: Image(
+            fit: BoxFit.contain,
+            width: MediaQuery.of(context).size.width * 0.6,
+            height: MediaQuery.of(context).size.height * 0.25,
+            image: new AssetImage(Images.logoImg)
+        ),
       ),
     );
   }
 
   Widget _buildAdminBar(max) {
-    return Container(
-      margin: EdgeInsets.only(bottom: 15),
-      height: max < 400 ? MediaQuery.of(context).size.height * 0.07 : MediaQuery.of(context).size.height * 0.04,
-      width: MediaQuery.of(context).size.width * 0.5,
-      decoration: BoxDecoration(
-        color: Theme.Colors.secondaryColor,
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: Align(
-          alignment: Alignment.center,
-          child: TextModel(
-            text: loginFormType == LoginFormType.login ? Translations.of(context).loginTitle : Translations.of(context).lblForgot, size: 14, color: _darkmode ? Theme.Colors.blackColor : Theme.Colors.primaryColor,
+    return Flexible(
+      flex: 2,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 10),
+        height: max < 400 ? MediaQuery.of(context).size.height * 0.04 : MediaQuery.of(context).size.height * 0.04,
+        width: MediaQuery.of(context).size.width * 0.5,
+        decoration: BoxDecoration(
+          color: Theme.Colors.secondaryColor,
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(5),
+          child: Align(
+            alignment: Alignment.center,
+            child: TextModel(
+              text: loginFormType == LoginFormType.login ? Translations.of(context).loginTitle : Translations.of(context).lblForgot, size: 14, color: _darkmode ? Theme.Colors.blackColor : Theme.Colors.primaryColor,
+            ),
           ),
         ),
       ),
@@ -193,101 +209,100 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
   }
 
   Widget _buildForm(LoginState state, max) {
-    return Card(
-      elevation: 1,
-      color: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: loginFormType == LoginFormType.reset ? 90 : max < 400 ? MediaQuery.of(context).size.height * 0.2 : MediaQuery.of(context).size.height * 0.15,
-        child: Form(
-          key: formKey,
-          child: ListView(
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.only(
-                    bottom: 10.0, left: 25.0, right: 25.0),
-                child: TextFormField(
-                  cursorColor: Theme.Colors.primaryColor,
-                  focusNode: myFocusNodeEmailLogin,
-                  controller: loginEmailController,
-                  autocorrect: false,
-                  validator: (_) {
-                    return !state.isEmailValid ? Translations.of(context).invalidMail : null;
-                  },
-                  keyboardType: TextInputType.emailAddress,
-                  style: TextStyle(
-                      fontFamily: Theme.Fonts.primaryFont,
-                      fontSize: 15.0,
-                      color: Colors.black),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    icon: Icon(
-                      FontAwesomeIcons.envelope,
-                      color: Colors.black,
-                      size: 15.0,
-                    ),
-                    hintText: Translations.of(context).emailHint,
-                    hintStyle: TextStyle(
-                        fontFamily: Theme.Fonts.primaryFont, fontSize: 15.0, color: Colors.black54),
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      height: loginFormType == LoginFormType.reset ? 80 : max < 400 ? MediaQuery.of(context).size.height * 0.25 : MediaQuery.of(context).size.height * 0.2,
+      child: Form(
+        key: formKey,
+        child: ListView(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: 10.0, left: 25.0, right: 25.0),
+              child: TextFormField(
+                cursorColor: Theme.Colors.primaryColor,
+                focusNode: myFocusNodeEmailLogin,
+                controller: loginEmailController,
+                autocorrect: false,
+                validator: (_) {
+                  return !state.isEmailValid ? Translations.of(context).invalidMail : null;
+                },
+                keyboardType: TextInputType.emailAddress,
+                style: TextStyle(
+                    fontFamily: Theme.Fonts.primaryFont,
+                    fontSize: 15.0,
+                    color: Colors.black),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  icon: Icon(
+                    FontAwesomeIcons.envelope,
+                    color: Colors.black,
+                    size: 15.0,
                   ),
+                  hintText: Translations.of(context).emailHint,
+                  hintStyle: TextStyle(
+                      fontFamily: Theme.Fonts.primaryFont, fontSize: 15.0, color: Colors.black54),
                 ),
               ),
-              Divider(
-                height: 1,
-                color: Colors.grey,
-              ),
-              loginFormType == LoginFormType.reset ? Container() : Padding(
-                padding: EdgeInsets.only(
-                    top: 10.0, bottom: 10.0, left: 25.0, right: 25.0),
-                child: TextFormField(
-                  cursorColor: Theme.Colors.primaryColor,
-                  focusNode: myFocusNodePasswordLogin,
-                  controller: loginPasswordController,
-                  obscureText: _obscureTextLogin,
-                  autocorrect: false,
-                  validator: (_) {
-                    return !state.isPasswordValid ? Translations.of(context).invalidPass : null;
-                  },
-                  style: TextStyle(
-                      fontFamily: Theme.Fonts.primaryFont,
-                      fontSize: 15.0,
-                      color: Colors.black),
-                  decoration: InputDecoration(
-                    border: InputBorder.none,
-                    icon: Icon(
-                      FontAwesomeIcons.lock,
+            ),
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            loginFormType == LoginFormType.reset ? Container() : Padding(
+              padding: EdgeInsets.only(
+                  top: 10.0, bottom: 10.0, left: 25.0, right: 25.0),
+              child: TextFormField(
+                cursorColor: Theme.Colors.primaryColor,
+                focusNode: myFocusNodePasswordLogin,
+                controller: loginPasswordController,
+                obscureText: _obscureTextLogin,
+                autocorrect: false,
+                validator: (_) {
+                  return !state.isPasswordValid ? Translations.of(context).invalidPass : null;
+                },
+                style: TextStyle(
+                    fontFamily: Theme.Fonts.primaryFont,
+                    fontSize: 15.0,
+                    color: Colors.black),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  icon: Icon(
+                    FontAwesomeIcons.lock,
+                    size: 15.0,
+                    color: Colors.black,
+                  ),
+                  hintText: Translations.of(context).passHint,
+                  hintStyle: TextStyle(
+                      fontFamily: Theme.Fonts.primaryFont, fontSize: 15.0, color: Colors.black54),
+                  suffixIcon: GestureDetector(
+                    onTap: _toggleLogin,
+                    child: Icon(
+                      _obscureTextLogin
+                          ? FontAwesomeIcons.eye
+                          : FontAwesomeIcons.eyeSlash,
                       size: 15.0,
                       color: Colors.black,
-                    ),
-                    hintText: Translations.of(context).passHint,
-                    hintStyle: TextStyle(
-                        fontFamily: Theme.Fonts.primaryFont, fontSize: 15.0, color: Colors.black54),
-                    suffixIcon: GestureDetector(
-                      onTap: _toggleLogin,
-                      child: Icon(
-                        _obscureTextLogin
-                            ? FontAwesomeIcons.eye
-                            : FontAwesomeIcons.eyeSlash,
-                        size: 15.0,
-                        color: Colors.black,
-                      ),
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        color: Theme.Colors.secondaryColor,
       ),
     );
   }
 
-  Widget _buildLoginButton(LoginState state){
+  Widget _buildLoginButton(LoginState state, max){
     return Container(
-      margin: EdgeInsets.only(top: loginFormType == LoginFormType.reset ? 80 : MediaQuery.of(context).size.height * 0.03, bottom: 15),
+      width: MediaQuery.of(context).size.width / 2,
+      height: MediaQuery.of(context).size.height * 0.05,
+      margin: EdgeInsets.only(top: loginFormType == LoginFormType.reset ? 60 : MediaQuery.of(context).size.height * 0.03, bottom: 5),
       decoration: new BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
         boxShadow: <BoxShadow>[
@@ -310,14 +325,15 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
   }
 
   Widget _buildLastButtons() {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.7,
-      height: MediaQuery.of(context).size.height * 0.2,
-      child: Stack(
-        children: <Widget>[
-          Align(
-            alignment: Alignment.topCenter,
-            child: FlatButton(
+    return Flexible(
+      flex: 2,
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.7,
+        height: MediaQuery.of(context).size.height * 0.2,
+        child: Wrap(
+          alignment: WrapAlignment.center,
+          children: <Widget>[
+            FlatButton(
                 onPressed: () {
                   if(loginFormType == LoginFormType.reset){
                     switchFormState('login');
@@ -329,20 +345,20 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
                 },
                 child: TextModel(text: Translations.of(context).btnBack, size: 17, color: _darkmode ? Theme.Colors.whiteColor : Theme.Colors.primaryColor, decoration: TextDecoration.underline,
                 )),
-          ),
-          loginFormType == LoginFormType.reset ? Container() : Align(
-            alignment: Alignment.center,
-            child: FlatButton(
-                onPressed: () {
-                  setState(() {
-                    switchFormState('reset');
-                  });
-                  //BlocProvider.of<AuthenticationBloc>(context).dispatch(ForgotPassword());
-                },
-                child: TextModel(text: Translations.of(context).btnForgot, size: 17, color: _darkmode ? Theme.Colors.whiteColor : Theme.Colors.primaryColor, decoration: TextDecoration.underline,
-                )),
-          ),
-        ],
+            loginFormType == LoginFormType.reset ? Container() : Align(
+              alignment: Alignment.topCenter,
+              child: FlatButton(
+                  onPressed: () {
+                    setState(() {
+                      switchFormState('reset');
+                    });
+                    //BlocProvider.of<AuthenticationBloc>(context).dispatch(ForgotPassword());
+                  },
+                  child: TextModel(text: Translations.of(context).btnForgot, size: 17, color: _darkmode ? Theme.Colors.whiteColor : Theme.Colors.primaryColor, decoration: TextDecoration.underline,
+                  )),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -415,12 +431,7 @@ class _LoginFormState extends State<LoginForm> with SingleTickerProviderStateMix
     if(_connectionStatus == 'ConnectivityResult.none'){
       ShowToast().show(Translations().connectionError, 10);
     }else{
-      _loginBloc.dispatch(
-        LoginWithCredentialsPressed(
-          email: loginEmailController.text,
-          password: loginPasswordController.text,
-        ),
-      );
+      _loginBloc.dispatch(GetIsAuthenticated(email: loginEmailController.text));
     }
   }
 }

@@ -135,7 +135,7 @@
         "type": "text",
         "placeholders": {}
       },
-    "emailSent": "Thanks! Your request has been sent successfully.",
+    "emailSent": "Thanks! Wait for our confirm.",
     "@emailSent": {
       "type": "text",
       "placeholders": {}
@@ -145,6 +145,11 @@
       "type": "text",
       "placeholders": {}
     },
+      "emailDuplicate": "User already exist.",
+      "@emailDuplicate": {
+        "type": "text",
+        "placeholders": {}
+      },
   "mapLoading": "Loading map...",
   "@mapLoading": {
     "type": "text",
@@ -280,7 +285,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "registerTitle": "Register user",
+  "registerTitle": "Register new minyan",
   "@registerTitle": {
     "type": "text",
     "placeholders": {}

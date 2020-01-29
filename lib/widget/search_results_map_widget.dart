@@ -16,6 +16,79 @@ class SearchResults extends StatelessWidget {
   final TextEditingController searchController;
   SearchResults({Key key, this.searchFilter, this.darkmode, this.searchController, this.controller}) : super(key: key);
 
+  List<MarkerData> _filter = List();
+
+  @override
+  Widget build(BuildContext context) {
+    return searchFilter != '' && searchFilter != null
+//        ? StreamBuilder<QuerySnapshot>(
+        ? StreamBuilder<List<MarkerData>>(
+//        stream: blocMarker.documentData,
+        stream: blocMarker.getMarkerList,
+        builder: (context, snapshot) {
+          if(!snapshot.hasData){return Center(child: CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Theme.Colors.primaryColor)));}
+          else{
+            _filter.clear();
+            for(var i=0; i<snapshot.data.length; i++){
+              if(snapshot.data[i].title.toLowerCase().contains(searchFilter.toLowerCase())){
+                _filter.add(snapshot.data[i]);
+              }
+            }
+            return _searchBox(_filter, context);
+          }
+        }
+    )
+        : const Padding(
+      padding: const EdgeInsets.all(0),
+    );
+  }
+
+  Widget _searchBox(List<MarkerData> data, context){
+    return data.length != 0 ? Container(
+        height: data.length >= 0 && data.length < 2 ? 120 : data.length >= 2 && data.length < 4 ? 250 : 300,
+        width: MediaQuery.of(context).size.width,
+        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+        margin: EdgeInsets.only(
+          left: 16,
+          top: 100,
+          right: 50,
+        ),
+        child: ListView.builder(
+            itemCount: data.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ListTile(
+                title: TextModel(text: data[index].title, size: 16, color: darkmode ? Theme.Colors.secondaryColor :Theme.Colors.blackColor),
+                subtitle: TextModel(text: data[index].address, size: 12, color: darkmode ? Theme.Colors.secondaryColor :Theme.Colors.blackColor),
+                trailing: Icon(Icons.arrow_forward, color:  darkmode ? Theme.Colors.secondaryColor :Theme.Colors.primaryColor),
+                onTap: (){
+                  searchController.clear();
+                  blocMap.goToLocation(data[index].latitude, data[index].longitude, controller, 18);
+                  FocusScope.of(context).requestFocus(new FocusNode()); //Hide the Keyboard
+                },
+              );
+            }
+        ),
+        decoration: BoxDecoration(
+            color: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.secondaryColor,
+            borderRadius: BorderRadius.all(Radius.circular(36)),
+            boxShadow: [
+              BoxShadow(color: Color.fromRGBO(0, 0, 0, 0.3), blurRadius: 36),
+            ]),
+      ): Container();
+  }
+
+
+}
+
+
+class SearchingResults extends StatelessWidget {
+
+  final String searchFilter;
+  final Completer<GoogleMapController> controller;
+  final bool darkmode;
+  final TextEditingController searchController;
+  SearchingResults({Key key, this.searchFilter, this.darkmode, this.searchController, this.controller}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return searchFilter != '' && searchFilter != null
@@ -70,7 +143,8 @@ class SearchResults extends StatelessWidget {
                           return Container();
                         }
                       },
-                    ) : ListTile(title: TextModel(text: Translations.of(context).lblNoData, size: 16, color: darkmode ? Theme.Colors.secondaryColor :Theme.Colors.blackColor)),
+//                    ) : ListTile(title: TextModel(text: Translations.of(context).lblNoData, size: 16, color: darkmode ? Theme.Colors.secondaryColor :Theme.Colors.blackColor)),
+                    ) : Container(),
                   ),
                 ],
               ),
@@ -89,3 +163,4 @@ class SearchResults extends StatelessWidget {
     );
   }
 }
+

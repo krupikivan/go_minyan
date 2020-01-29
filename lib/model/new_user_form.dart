@@ -1,15 +1,15 @@
-class ContactForm{
+class NewUser{
 
-  String name;
   String instName;
   String phone;
   String email;
+  String password;
 
-  ContactForm({
-    this.name,
+  NewUser({
     this.instName,
     this.phone,
     this.email,
+    this.password,
   });
 
 }
