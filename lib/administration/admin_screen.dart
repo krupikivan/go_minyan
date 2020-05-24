@@ -351,7 +351,7 @@ class _AdminScreenState extends State<AdminScreen>{
     blocUserData.submit(Provider.of<AppModel>(context)).then((value) {
       showInSnackBar(Translations.of(context).saveMsg);
       blocUserData.changeProgress(false);
-    }).timeout(Duration(seconds: 2), onTimeout: _catchError);
+    }).catchError(_catchError);
   }
 
   _catchError(){

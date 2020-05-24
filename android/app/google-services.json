@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "674755739794",
+    "firebase_url": "https://minianbsas-5c1c2.firebaseio.com",
+    "project_id": "minianbsas-5c1c2",
+    "storage_bucket": "minianbsas-5c1c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:674755739794:android:a4b37808351ec99b09264b",
+        "android_client_info": {
+          "package_name": "com.kfarsoft.go_minyan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "674755739794-j91eab6vdt1pquhdrl3bhlvurah20b1f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJcaV-rCJtg6eh82BJFY4WKuU50XRJyeo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "674755739794-j91eab6vdt1pquhdrl3bhlvurah20b1f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "674755739794-8q1nilkp3uv2m7nk4hmm6uskut1orcrv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kfarsoft.goMinyan"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

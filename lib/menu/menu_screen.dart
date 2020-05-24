@@ -149,7 +149,7 @@ class _MenuScreenState extends State<MenuScreen> {
     }
   }
 
-  ///Device information
+//   /Device information
 //  _saveDeviceToken() async{
 //    await _messaging.getToken().then((token){
 //      repos.saveToken(token);
