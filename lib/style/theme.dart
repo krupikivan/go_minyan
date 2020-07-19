@@ -2,8 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 
-class Colors{
-
+class Colors {
   const Colors();
 
   ///Segunda opcion
@@ -12,6 +11,8 @@ class Colors{
   static const Color secondaryColor = const Color(0xFFf7f7f7);
   static const Color whiteColor = const Color(0xFFFFFFFF);
   static const Color blackColor = const Color(0x8A000000);
+  static const Color accentColorLight = const Color(0x8AF9F908);
+  static const Color accentColorDark = const Color(0x8A797902);
 
   static const Color hintDarkColor = const Color(0xB3FFFFFF);
   static const Color hintColor = const Color(0x8A000000);
@@ -35,10 +36,7 @@ class Colors{
   );
 
   static const loginButtonGradient = const LinearGradient(
-      colors: [
-        secondaryColor,
-        primaryColor
-      ],
+      colors: [secondaryColor, primaryColor],
       begin: const FractionalOffset(0.2, 0.2),
       end: const FractionalOffset(1.0, 1.0),
       stops: [0.0, 1.0],
@@ -49,8 +47,6 @@ class Colors{
   static const Color secondaryDarkColor = const Color(0xFF333333);
 }
 
-class Fonts{
-
+class Fonts {
   static const String primaryFont = "WorkSansMedium";
-
 }

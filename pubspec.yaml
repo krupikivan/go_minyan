@@ -44,7 +44,7 @@ dependencies:
   flutter_local_notifications: ^0.9.1
 
   #Send Mail
-  mailer: ^3.0.2
+  mailer2: ^1.2.5
   url_launcher: ^5.4.1
 
   fluttertoast: ^3.1.3

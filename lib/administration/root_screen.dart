@@ -7,10 +7,9 @@ import 'package:go_minyan/utils/items.dart';
 import 'package:go_minyan/widget/widget.dart';
 import 'package:provider/provider.dart';
 import 'package:go_minyan/style/theme.dart' as Theme;
-
+import 'package:url_launcher/url_launcher.dart';
 
 class RootScreen extends StatefulWidget {
-
   ///POPUP menu
   static String menu;
   static String exit;
@@ -24,7 +23,6 @@ class _RootScreenState extends State<RootScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   bool darkmode;
 
-
   @override
   void initState() {
     super.initState();
@@ -32,75 +30,108 @@ class _RootScreenState extends State<RootScreen> {
 
   @override
   Widget build(BuildContext context) {
-    blocRoot.getMarkersAuth(Provider.of<AppModel>(context));
+    blocRoot.getMarkersAuth();
     _fillPopupData();
     darkmode = Provider.of<AppModel>(context).darkmode;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(Translations.of(context).registerTitle
-        ),
+        title: Text(Translations.of(context).registerTitle),
         actions: <Widget>[
           PopupMenu(choices: choices, type: 'root'),
         ],
-        backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+        backgroundColor: darkmode
+            ? Theme.Colors.primaryDarkColor
+            : Theme.Colors.primaryColor,
       ),
       body: Center(
-        child: StreamBuilder<List<MarkerData>>(
-          stream: blocRoot.listenMarker,
-          builder: (context, snapshot) {
-            if(!snapshot.hasData) return Container(child: Text(Translations().lblNoData));
-            return Container(
-              child: ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (BuildContext context, int index) {
-                  return ListTile(
-                    title: Text(snapshot.data[index].title),
-                    subtitle: Text(snapshot.data[index].email),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        snapshot.data[index].isAuthenticated == false ? IconButton(icon: Icon(Icons.email, color: darkmode == true ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor), onPressed: () => _sendMail(snapshot.data[index])) : Container(),
-                        IconButton(icon: Icon(Icons.verified_user, color: snapshot.data[index].isAuthenticated == true ? Colors.green : Colors.grey,), onPressed: () {
-                          setState(() {
-                          blocRoot.authenticateUser(snapshot.data[index]);
-                          });
-                        }),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            );
-          }
-        )
-      ),
+          child: StreamBuilder<List<MarkerData>>(
+              stream: blocRoot.listenMarker,
+              builder: (context, snapshot) {
+                if (!snapshot.hasData)
+                  return Center(child: CircularProgressIndicator());
+                return Container(
+                  child: ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return ListTile(
+                        title: Text(snapshot.data[index].title),
+                        subtitle: Text(snapshot.data[index].email),
+                        trailing: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: <Widget>[
+                            snapshot.data[index].isAuthenticated == false
+                                ? IconButton(
+                                    icon: Icon(Icons.email,
+                                        color: darkmode == true
+                                            ? Theme.Colors.secondaryColor
+                                            : Theme.Colors.primaryColor),
+                                    onPressed: () =>
+                                        _sendMail(snapshot.data[index]))
+                                : Container(),
+                            snapshot.data[index].isAuthenticated == false
+                                ? IconButton(
+                                    icon: Icon(Icons.delete,
+                                        color: darkmode == true
+                                            ? Theme.Colors.secondaryColor
+                                            : Theme.Colors.primaryColor),
+                                    onPressed: () =>
+                                        blocRoot.delete(snapshot.data[index]))
+                                : Container(),
+                            IconButton(
+                                icon: Icon(
+                                  Icons.verified_user,
+                                  color: snapshot.data[index].isAuthenticated ==
+                                          true
+                                      ? Colors.green
+                                      : Colors.grey,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    blocRoot
+                                        .authenticateUser(snapshot.data[index]);
+                                  });
+                                }),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                );
+              })),
     );
   }
 
-///Popup menu
-  _fillPopupData(){
+  ///Popup menu
+  _fillPopupData() {
     RootScreen.menu = Translations().menuTitle;
     RootScreen.exit = Translations().logOut;
     choices = <Items>[
-      Items(Text(RootScreen.menu, style: TextStyle(fontFamily: Theme.Fonts.primaryFont)), Icon(Icons.menu)),
-      Items(Text(RootScreen.exit, style: TextStyle(fontFamily: Theme.Fonts.primaryFont)), Icon(Icons.exit_to_app)),
+      Items(
+          Text(RootScreen.menu,
+              style: TextStyle(fontFamily: Theme.Fonts.primaryFont)),
+          Icon(Icons.menu)),
+      Items(
+          Text(RootScreen.exit,
+              style: TextStyle(fontFamily: Theme.Fonts.primaryFont)),
+          Icon(Icons.exit_to_app)),
     ];
   }
 
-  void _sendMail(data) {
+  void _sendMail(MarkerData data) {
     MailProvider mailProvider = new MailProvider();
-      mailProvider.sendGMail(data).then((value) {
-        showInSnackBar(Translations().successDialogTitle);
-      }
-      ).catchError((err) {
-        showInSnackBar(Translations().errorDialog);});
+    mailProvider.sendGMail(data).then((value) {
+      showInSnackBar(Translations().successDialogTitle);
+    }).catchError((err) {
+      showInSnackBar(Translations().errorDialog);
+    });
   }
 
   void showInSnackBar(String value) {
     _scaffoldKey.currentState.showSnackBar(SnackBar(
-      content: TextModel(text: value, color: Theme.Colors.secondaryColor), backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+      content: TextModel(text: value, color: Theme.Colors.secondaryColor),
+      backgroundColor:
+          darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
     ));
   }
-
 }

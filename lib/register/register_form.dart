@@ -22,7 +22,10 @@ class _RegisterFormState extends State<RegisterForm> {
   RegisterBloc _registerBloc;
 
   bool get isPopulated =>
-      _emailController.text.isNotEmpty && _passwordController.text.isNotEmpty && _phoneController.text.isNotEmpty && _instController.text.isNotEmpty;
+      _emailController.text.isNotEmpty &&
+      _passwordController.text.isNotEmpty &&
+      _phoneController.text.isNotEmpty &&
+      _instController.text.isNotEmpty;
 
   bool isRegisterButtonEnabled(RegisterState state) {
     return state.isFormValid && isPopulated && !state.isSubmitting;
@@ -51,7 +54,9 @@ class _RegisterFormState extends State<RegisterForm> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(Translations.of(context).registerLoading),
-                    CircularProgressIndicator(valueColor: new AlwaysStoppedAnimation<Color>(Theme.Colors.primaryColor)),
+                    CircularProgressIndicator(
+                        valueColor: new AlwaysStoppedAnimation<Color>(
+                            Theme.Colors.primaryColor)),
                   ],
                 ),
               ),
@@ -65,10 +70,14 @@ class _RegisterFormState extends State<RegisterForm> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(Translations.of(context).emailSent, maxLines: 2, style: TextStyle(color: Theme.Colors.secondaryColor)),
+                    Text(Translations.of(context).emailSent,
+                        maxLines: 2,
+                        style: TextStyle(color: Theme.Colors.secondaryColor)),
                   ],
                 ),
-                backgroundColor: widget.darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+                backgroundColor: widget.darkmode
+                    ? Theme.Colors.primaryDarkColor
+                    : Theme.Colors.primaryColor,
               ),
             );
           _onClearForm();
@@ -81,11 +90,23 @@ class _RegisterFormState extends State<RegisterForm> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextModel(text: Translations.of(context).emailNotSent, color: Theme.Colors.secondaryColor,),
-                    Icon(Icons.error, color: Theme.Colors.secondaryColor,),
+                    Expanded(
+                      child: TextModel(
+                        text: Translations.of(context).emailNotSent,
+                        color: Theme.Colors.secondaryColor,
+                      ),
+                    ),
+                    Expanded(
+                      child: Icon(
+                        Icons.error,
+                        color: Theme.Colors.secondaryColor,
+                      ),
+                    ),
                   ],
                 ),
-                backgroundColor: widget.darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+                backgroundColor: widget.darkmode
+                    ? Theme.Colors.primaryDarkColor
+                    : Theme.Colors.primaryColor,
               ),
             );
         }
@@ -97,11 +118,19 @@ class _RegisterFormState extends State<RegisterForm> {
                 content: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextModel(text: Translations.of(context).emailDuplicate, color: Theme.Colors.secondaryColor,),
-                    Icon(Icons.warning, color: Theme.Colors.secondaryColor,),
+                    TextModel(
+                      text: Translations.of(context).emailDuplicate,
+                      color: Theme.Colors.secondaryColor,
+                    ),
+                    Icon(
+                      Icons.warning,
+                      color: Theme.Colors.secondaryColor,
+                    ),
                   ],
                 ),
-                backgroundColor: widget.darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+                backgroundColor: widget.darkmode
+                    ? Theme.Colors.primaryDarkColor
+                    : Theme.Colors.primaryColor,
               ),
             );
         }
@@ -114,11 +143,17 @@ class _RegisterFormState extends State<RegisterForm> {
               child: ListView(
                 children: <Widget>[
                   _instNameBox(state),
-                  SizedBox(height: 10.0,),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   _phoneBox(state),
-                  SizedBox(height: 10.0,),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   _emailBox(state),
-                  SizedBox(height: 10.0,),
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   _passwordBox(state),
                   SizedBox(
                     height: 20.0,
@@ -132,7 +167,9 @@ class _RegisterFormState extends State<RegisterForm> {
                             ? _onFormSubmitted
                             : null,
                       ),
-                      SizedBox(width: 20,),
+                      SizedBox(
+                        width: 20,
+                      ),
                       RegisterButton(
                         name: Translations.of(context).btnClear,
                         onPressed: _onClearForm,
@@ -149,26 +186,23 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 
-  Widget _instNameBox(state){
+  Widget _instNameBox(state) {
     return TextFormField(
       autovalidate: true,
       textCapitalization: TextCapitalization.words,
       cursorColor: Theme.Colors.primaryColor,
       controller: _instController,
       decoration: InputDecoration(
-        focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey)),
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
         icon: _getIcon(Icons.home),
-        labelText: Translations
-            .of(context)
-            .lblName,
+        labelText: Translations.of(context).lblName,
         labelStyle: TextStyle(
-            color: widget.darkmode ? Theme.Colors.hintDarkColor : Theme.Colors
-                .hintColor),
+            color: widget.darkmode
+                ? Theme.Colors.hintDarkColor
+                : Theme.Colors.hintColor),
       ),
-      inputFormatters: [
-        new LengthLimitingTextInputFormatter(15)
-      ],
+      inputFormatters: [new LengthLimitingTextInputFormatter(15)],
       validator: (_) {
         return !state.isNameValid ? Translations.of(context).nameValid : null;
       },
@@ -176,26 +210,23 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 
-  Widget _phoneBox(state){
+  Widget _phoneBox(state) {
     return TextFormField(
       autovalidate: true,
       cursorColor: Theme.Colors.primaryColor,
       controller: _phoneController,
       decoration: InputDecoration(
-        focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey)),
+        focusedBorder:
+            UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
         icon: _getIcon(Icons.phone),
-        labelText: Translations
-            .of(context)
-            .lblContact,
+        labelText: Translations.of(context).lblContact,
         labelStyle: TextStyle(
-            color: widget.darkmode ? Theme.Colors.hintDarkColor : Theme.Colors
-                .hintColor),
+            color: widget.darkmode
+                ? Theme.Colors.hintDarkColor
+                : Theme.Colors.hintColor),
       ),
       keyboardType: TextInputType.phone,
-      inputFormatters: [
-        WhitelistingTextInputFormatter.digitsOnly
-      ],
+      inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
       validator: (_) {
         return !state.isPhoneValid ? Translations.of(context).phoneValid : null;
       },
@@ -203,49 +234,74 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 
-  Widget _emailBox(state){
+  Widget _emailBox(state) {
     return TextFormField(
       autovalidate: true,
       controller: _emailController,
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: widget.darkmode ? Theme.Colors.hintDarkColor : Theme.Colors.hintColor)),
+            borderSide: BorderSide(
+                color: widget.darkmode
+                    ? Theme.Colors.hintDarkColor
+                    : Theme.Colors.hintColor)),
         icon: _getIcon(Icons.email),
         labelText: Translations.of(context).emailHint,
-        hintStyle: TextStyle(color: widget.darkmode ? Theme.Colors.hintDarkColor : Theme.Colors.hintColor),
-        labelStyle: TextStyle(color: widget.darkmode ? Theme.Colors.hintDarkColor : Theme.Colors.hintColor),
+        hintStyle: TextStyle(
+            color: widget.darkmode
+                ? Theme.Colors.hintDarkColor
+                : Theme.Colors.hintColor),
+        labelStyle: TextStyle(
+            color: widget.darkmode
+                ? Theme.Colors.hintDarkColor
+                : Theme.Colors.hintColor),
       ),
       cursorColor: Theme.Colors.primaryColor,
       validator: (_) {
-        return !state.isEmailValid ? Translations.of(context).invalidMail : null;
+        return !state.isEmailValid
+            ? Translations.of(context).invalidMail
+            : null;
       },
     );
   }
 
-  Widget _passwordBox(state){
+  Widget _passwordBox(state) {
     return TextFormField(
       controller: _passwordController,
       autovalidate: true,
       decoration: InputDecoration(
         focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: widget.darkmode ? Theme.Colors.hintDarkColor : Theme.Colors.hintColor)),
+            borderSide: BorderSide(
+                color: widget.darkmode
+                    ? Theme.Colors.hintDarkColor
+                    : Theme.Colors.hintColor)),
         icon: _getIcon(Icons.lock),
         labelText: Translations.of(context).passHint,
-        hintStyle: TextStyle(color: widget.darkmode ? Theme.Colors.hintDarkColor : Theme.Colors.hintColor),
-        labelStyle: TextStyle(color: widget.darkmode ? Theme.Colors.hintDarkColor : Theme.Colors.hintColor),
+        hintStyle: TextStyle(
+            color: widget.darkmode
+                ? Theme.Colors.hintDarkColor
+                : Theme.Colors.hintColor),
+        labelStyle: TextStyle(
+            color: widget.darkmode
+                ? Theme.Colors.hintDarkColor
+                : Theme.Colors.hintColor),
       ),
       obscureText: true,
       cursorColor: Theme.Colors.primaryColor,
       validator: (_) {
-        return !state.isPasswordValid ? Translations.of(context).invalidPass : null;
+        return !state.isPasswordValid
+            ? Translations.of(context).invalidPass
+            : null;
       },
     );
   }
 
-  Widget _getIcon(IconData icon){
+  Widget _getIcon(IconData icon) {
     return Icon(
-      icon, color: widget.darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor,
+      icon,
+      color: widget.darkmode
+          ? Theme.Colors.secondaryColor
+          : Theme.Colors.primaryColor,
     );
   }
 
