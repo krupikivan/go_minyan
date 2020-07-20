@@ -35,16 +35,37 @@ class UserRepository {
       password: password,
     )
         .then((firebaseUser) async {
-      final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
-        functionName: 'addUser',
-      );
-//    dynamic resp = await callable.call();
-      await callable.call(<String, dynamic>{
-        // 'isUser': isUser,
-        'title': title,
-        'contact': contact,
-        'uid': firebaseUser.user.uid,
-      });
+      if (isUser) {
+        final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
+          functionName: 'createUser',
+        );
+        //    dynamic resp = await callable.call();
+        await callable.call(<String, dynamic>{
+          'name': title,
+          'lastName': contact,
+          'email': email,
+          'uid': firebaseUser.user.uid,
+        });
+      } else {
+        final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
+          functionName: 'createMinian',
+        );
+        await callable.call(<String, dynamic>{
+          'title': title,
+          'contact': contact,
+          'email': email,
+          'uid': firebaseUser.user.uid,
+        });
+        //       final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
+        //         functionName: 'addUser',
+        //       );
+        // //    dynamic resp = await callable.call();
+        //       await callable.call(<String, dynamic>{
+        //         'title': title,
+        //         'contact': contact,
+        //         'uid': firebaseUser.user.uid,
+        //       });
+      }
 
       _firebaseAuth
           .signOut(); //Deslogue al usuario creado porque firebase lo loguea automaticamente

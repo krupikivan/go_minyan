@@ -26,7 +26,7 @@ class _MarkerDetailScreenState extends State<MarkerDetailScreen> {
   void initState() {
     super.initState();
     //Trae de firebase los horarios
-    blocMarker.getMarkerDetails(widget.documentId);
+    // blocMarker.getMarkerDetails(widget.documentId);
   }
 
   @override
@@ -62,21 +62,21 @@ class _MarkerDetailScreenState extends State<MarkerDetailScreen> {
   }
 
   Widget _infoTable() {
-    return StreamBuilder<QuerySnapshot>(
-        stream: blocMarker.documentSchedule,
+    return StreamBuilder<MarkerData>(
+        stream: blocMarker.markerSelected,
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Container();
           } else {
-            if (snapshot.data.documents.length == 0) {
-              return Center(
-                  child: TextModel(
-                text: Translations.of(context).connectionError,
-                size: 20,
-                color: Theme.Colors.blackColor,
-              ));
-            }
-            var documents = snapshot.data.documents;
+            // if (snapshot.data.documents.length == 0) {
+            //   return Center(
+            //       child: TextModel(
+            //     text: Translations.of(context).connectionError,
+            //     size: 20,
+            //     color: Theme.Colors.blackColor,
+            //   ));
+            // }
+            // var documents = snapshot.data.documents;
             return ListView(
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
@@ -92,20 +92,20 @@ class _MarkerDetailScreenState extends State<MarkerDetailScreen> {
                     ]),
                   ],
                 ),
-                _getRowTime(
-                    FS.sunday, Translations.of(context).sunday, documents),
-                _getRowTime(
-                    FS.monday, Translations.of(context).monday, documents),
-                _getRowTime(
-                    FS.tuesday, Translations.of(context).tuesday, documents),
+                _getRowTime(FS.sunday, Translations.of(context).sunday,
+                    snapshot.data.schedule[FS.sunday]),
+                _getRowTime(FS.monday, Translations.of(context).monday,
+                    snapshot.data.schedule[FS.monday]),
+                _getRowTime(FS.tuesday, Translations.of(context).tuesday,
+                    snapshot.data.schedule[FS.tuesday]),
                 _getRowTime(FS.wednesday, Translations.of(context).wednesday,
-                    documents),
-                _getRowTime(
-                    FS.thursday, Translations.of(context).thursday, documents),
-                _getRowTime(
-                    FS.friday, Translations.of(context).friday, documents),
-                _getRowTime(
-                    FS.shabat, Translations.of(context).shabatTitle, documents),
+                    snapshot.data.schedule[FS.wednesday]),
+                _getRowTime(FS.thursday, Translations.of(context).thursday,
+                    snapshot.data.schedule[FS.thursday]),
+                _getRowTime(FS.friday, Translations.of(context).friday,
+                    snapshot.data.schedule[FS.friday]),
+                _getRowTime(FS.shabat, Translations.of(context).shabatTitle,
+                    snapshot.data.schedule[FS.shabat]),
               ],
             );
           }
@@ -146,25 +146,25 @@ class _MarkerDetailScreenState extends State<MarkerDetailScreen> {
   }
 
   Widget _getScheduleList(String pray, String day, documents) {
-    int document;
+    // int document;
 
     ///Corroboro que sea del dia que viene por parametro
-    for (var i = 0; i < documents.length; i++) {
-      if (documents[i].documentID == day) {
-        document = i;
-        break;
-      }
-    }
+    // for (var i = 0; i < documents.length; i++) {
+    //   if (documents[i].documentID == day) {
+    //     document = i;
+    //     break;
+    //   }
+    // }
     //Ordenamos los horarios
     List timeList;
-    if (documents[document][pray].length != 0) {
-      timeList = documents[document][pray];
+    if (documents[pray].length != 0) {
+      timeList = documents[pray];
       timeList.sort();
     }
     return ListView.builder(
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
-      itemCount: documents[document][pray].length,
+      itemCount: documents[pray].length,
       itemBuilder: (BuildContext context, int index) {
         var time = convertData
             .timestampToString(timeList[index].millisecondsSinceEpoch);

@@ -23,8 +23,7 @@ String listadoMarkerToJson(List<MarkerData> data) {
 //  final dyn = new List<dynamic>.from(data.map((x) => x.toJson()));
 //  return json.encode(dyn);
 //}
-class MarkerData{
-
+class MarkerData {
   List nusach;
   String address;
   String contact;
@@ -35,6 +34,8 @@ class MarkerData{
   String email;
   String documentID;
   bool isAuthenticated;
+
+  Map schedule;
 
   MarkerData({
     this.nusach,
@@ -47,41 +48,55 @@ class MarkerData{
     this.email,
     this.documentID,
     this.isAuthenticated,
+    this.schedule,
   });
 
   factory MarkerData.fromJJson(Map<dynamic, dynamic> json) {
     MarkerData sch = new MarkerData(
-      address: json['address'],
-      contact: json['contact'],
-      latitude: json['latitude'] as double,
-      longitude: json['longitude'] as double,
-      title: json['title'],
-      userUID: json['userUID'],
-      email: json['email'],
-      documentID: json['documentID'],
-      isAuthenticated: json['isAuthenticated'] as bool,
-      nusach: listadoNusachFromJson(json['nusach']),
-    );
+        address: json['address'],
+        contact: json['contact'],
+        latitude: json['latitude'] as double,
+        longitude: json['longitude'] as double,
+        title: json['title'],
+        userUID: json['userUID'],
+        email: json['email'],
+        documentID: json['documentID'],
+        isAuthenticated: json['isAuthenticated'] as bool,
+        nusach: listadoNusachFromJson(json['nusach']),
+        schedule: json['schedule']);
+    return sch;
+  }
+
+  factory MarkerData.fromFirebase(Map<dynamic, dynamic> data, id) {
+    MarkerData sch = new MarkerData(
+        address: data['address'],
+        contact: data['contact'],
+        latitude: data['location'].latitude as double,
+        longitude: data['location'].longitude as double,
+        title: data['title'],
+        email: data['email'],
+        documentID: id,
+        isAuthenticated: data['isAuthenticated'] as bool,
+        nusach: data['nusach'],
+        schedule: data['schedule']);
     return sch;
   }
 
   Map<dynamic, dynamic> toJson(List listNusach) => {
-    'address': this.address,
-    'contact': this.contact,
-    'latitude': this.latitude,
-    'longitude': this.longitude,
-    'title': this.title,
-    'userUID': this.userUID,
-    'email': this.email,
-    'documentID': this.documentID,
-    'isAuthenticated': this.isAuthenticated,
-    'nusach': listNusach,
-  };
-
+        'address': this.address,
+        'contact': this.contact,
+        'latitude': this.latitude,
+        'longitude': this.longitude,
+        'title': this.title,
+        'userUID': this.userUID,
+        'email': this.email,
+        'documentID': this.documentID,
+        'isAuthenticated': this.isAuthenticated,
+        'nusach': listNusach,
+      };
 }
 
-class Nusach{
-
+class Nusach {
   String nusach;
 
   Nusach({
@@ -89,8 +104,8 @@ class Nusach{
   });
 
   Map<dynamic, dynamic> toJson() => {
-    'nusach': nusach,
-  };
+        'nusach': nusach,
+      };
 
   factory Nusach.fromJJson(Map<dynamic, dynamic> json) {
     Nusach nusach = new Nusach(
@@ -98,5 +113,4 @@ class Nusach{
     );
     return nusach;
   }
-
 }

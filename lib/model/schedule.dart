@@ -8,6 +8,17 @@ List<Schedule> listadoScheduleFromJson(String str) {
   return new List<Schedule>.from(getList.map((x) => Schedule.fromJJson(x)));
 }
 
+List<Pray> listadoPrayFromFirebase(Map str) {
+  // final jsonData = json.decode(str);
+//  var js = json.decode(jsonData);
+  List<Pray> getList = [];
+  str.forEach((key, value) {
+    getList.add(Pray.fromFirebase(key, value));
+  });
+  return getList;
+  // return List<Pray>.from(str.map((x, y) => Pray.fromFirebase(x)));
+}
+
 List<Pray> listadoPrayFromJson(String str) {
   final jsonData = json.decode(str);
 //  var js = json.decode(jsonData);
@@ -16,7 +27,8 @@ List<Pray> listadoPrayFromJson(String str) {
 }
 
 String listadoScheduleToJson(List<Schedule> data) {
-  final dyn = new List<dynamic>.from(data.map((x) => x.toJson(listadoPrayToJson(x.pray))));
+  final dyn = new List<dynamic>.from(
+      data.map((x) => x.toJson(listadoPrayToJson(x.pray))));
   return json.encode(dyn);
 }
 
@@ -25,16 +37,15 @@ String listadoPrayToJson(List<Pray> data) {
   return json.encode(dyn);
 }
 
-class Schedule{
-
+class Schedule {
   List<Pray> pray;
   String name;
-  int value;
+  // int value;
 
   Schedule({
     this.pray,
     this.name,
-    this.value,
+    // this.value,
   });
 
 //  Schedule.froamJson(Map<dynamic, dynamic> json)
@@ -45,22 +56,30 @@ class Schedule{
   factory Schedule.fromJJson(Map<dynamic, dynamic> json) {
     Schedule sch = new Schedule(
       name: json['name'],
-      value: json['value'] as int,
+      // value: json['value'] as int,
       pray: listadoPrayFromJson(json['pray']),
     );
     print(sch.pray);
     return sch;
   }
 
-  Map<dynamic, dynamic> toJson(String listPray) => {
-    'name': this.name,
-    'value': this.value,
-    'pray': listPray,
-  };
+  factory Schedule.fromFirebase(day, json) {
+    Schedule sch = new Schedule(
+      name: day,
+      pray: listadoPrayFromFirebase(json),
+    );
+    print(sch.pray);
+    return sch;
+  }
 
+  Map<dynamic, dynamic> toJson(String listPray) => {
+        'name': this.name,
+        // 'value': this.value,
+        'pray': listPray,
+      };
 }
 
-class Pray{
+class Pray {
   String name;
   List type;
 
@@ -70,9 +89,9 @@ class Pray{
   });
 
   Map<dynamic, dynamic> toJson() => {
-    'name': name,
-    'value': type,
-  };
+        'name': name,
+        'value': type,
+      };
 
 //  Pray.fromJson(Map<dynamic, dynamic> json)
 //      : this.name = json['name'],
@@ -87,13 +106,29 @@ class Pray{
     return pr;
   }
 
-  static _getTimestamp(json){
+  factory Pray.fromFirebase(key, List value) {
+    Pray pr = new Pray(
+      name: key,
+      type: _getTimestampFromFirebase(value),
+    );
+    return pr;
+  }
+
+  static _getTimestamp(json) {
     List<int> list = List();
-    for(var j=0; j< json.length; j++){
+    for (var j = 0; j < json.length; j++) {
       Timestamp timestamp = Timestamp.fromMillisecondsSinceEpoch(json[j]);
       list.add(timestamp.millisecondsSinceEpoch);
     }
     return list;
   }
 
+  static _getTimestampFromFirebase(json) {
+    List<int> list = List();
+    for (var j = 0; j < json.length; j++) {
+      Timestamp timestamp = json[j];
+      list.add(timestamp.millisecondsSinceEpoch);
+    }
+    return list;
+  }
 }

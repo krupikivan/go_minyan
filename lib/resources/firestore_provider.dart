@@ -30,6 +30,78 @@ class FirestoreProvider {
     });
   }
 
+  Future<void> complete() async {
+    // await _firestore.collection('markers').getDocuments().then((value) async {
+    //   for (var i = 0; i < value.documents.length; i++) {
+    // await _firestore
+    //     .collection('markers')
+    //     .document(value.documents[i].documentID)
+    //     .updateData({
+    //   'schedule': {
+    //     'sunday': {
+    //       'shajarit': [],
+    //       'minja': [],
+    //       'arvit': [],
+    //     },
+    //     'monday': {
+    //       'shajarit': [],
+    //       'minja': [],
+    //       'arvit': [],
+    //     },
+    //     'tuesday': {
+    //       'shajarit': [],
+    //       'minja': [],
+    //       'arvit': [],
+    //     },
+    //     'wednesday': {
+    //       'shajarit': [],
+    //       'minja': [],
+    //       'arvit': [],
+    //     },
+    //     'thursday': {
+    //       'shajarit': [],
+    //       'minja': [],
+    //       'arvit': [],
+    //     },
+    //     'friday': {
+    //       'shajarit': [],
+    //       'minja': [],
+    //       'arvit': [],
+    //     },
+    //     'shabat': {
+    //       'shajarit': [],
+    //       'minja': [],
+    //       'arvit': [],
+    //     },
+    //   }
+    // });
+    //       await _firestore
+    //           .collection('markers')
+    //           .document(value.documents[i].documentID)
+    //           .collection('schedule')
+    //           .getDocuments()
+    //           .then((value2) async {
+    //         for (var j = 0; j < value2.documents.length; j++) {
+    //           String id = value2.documents[j].documentID;
+    //           List sh = value2.documents[j].data['shajarit'];
+    //           List mi = value2.documents[j].data['minja'];
+    //           List ar = value2.documents[j].data['arvit'];
+    //           await _firestore
+    //               .collection('markers')
+    //               .document(value.documents[i].documentID)
+    //               .updateData({
+    //             'schedule.$id': {
+    //               'shajarit': sh,
+    //               'minja': mi,
+    //               'arvit': ar,
+    //             }
+    //           });
+    //         }
+    //       });
+    //     }
+    //   });
+  }
+
   Future<void> authenticateUser(String documentId, value) async {
     await _firestore
         .collection(FS.markers)
@@ -56,20 +128,20 @@ class FirestoreProvider {
   ///Sabido que devuelve un solo documento, tomo el ID y lo paso para agregar los datos ahi
   Future<void> saveNewTime(String documentID, String day, String pray,
       DateTime time, String dayDocumentId) async {
-    await _firestore
-        .collection(FS.markers)
-        .document(documentID)
-        .collection(FS.schedule)
-        .where(FS.name, isEqualTo: day)
-        .getDocuments()
-        .then((doc) => _firestore
-                .collection(FS.markers)
-                .document(documentID)
-                .collection(FS.schedule)
-                .document(doc.documents[0].documentID)
-                .updateData({
-              pray: FieldValue.arrayUnion([time]),
-            }));
+    await _firestore.collection(FS.markers).document(documentID).updateData({
+      'schedule.$day.$pray': FieldValue.arrayUnion([time]),
+    });
+    // .collection(FS.schedule)
+    // .where(FS.name, isEqualTo: day)
+    // .getDocuments()
+    // .then((doc) => _firestore
+    //         .collection(FS.markers)
+    //         .document(documentID)
+    //         .collection(FS.schedule)
+    //         .document(doc.documents[0].documentID)
+    //         .updateData({
+    //       pray: FieldValue.arrayUnion([time]),
+    //     }));
   }
 
   ///Para crear las tablas
@@ -105,13 +177,8 @@ class FirestoreProvider {
 
   Future<void> deleteTime(String documentId, String day, String pray,
       Timestamp time, String dayDocumentId) async {
-    await _firestore
-        .collection(FS.markers)
-        .document(documentId)
-        .collection(FS.schedule)
-        .document(dayDocumentId)
-        .updateData({
-      pray: FieldValue.arrayRemove([time])
+    await _firestore.collection(FS.markers).document(documentId).updateData({
+      'schedule.$day.$pray': FieldValue.arrayRemove([time])
     });
   }
 

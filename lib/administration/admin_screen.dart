@@ -81,8 +81,7 @@ class _AdminScreenState extends State<AdminScreen> {
     //Get nusach list from firebase
     blocNusach.getNusachList(Provider.of<AppModel>(context));
     //Fill userData bloc
-    blocUserData.getUserDataFromFirebase(
-        widget.userUID, Provider.of<AppModel>(context));
+    blocUserData.getUserDataFromFirebase(widget.userUID);
     //Para editar y guardarlo en el stream
     _userDataEditable = Provider.of<AppModel>(context).userData;
     _fillPopupData();

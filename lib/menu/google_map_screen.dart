@@ -17,7 +17,8 @@ class MinianScreen extends StatefulWidget {
   _MinianScreenState createState() => _MinianScreenState();
 }
 
-class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMixin {
+class _MinianScreenState extends State<MinianScreen>
+    with TickerProviderStateMixin {
   Position position;
   Completer<GoogleMapController> _controller = Completer();
   AnimationController animationControllerSearch;
@@ -37,18 +38,19 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
   static LatLng _initialPosition;
   MapType _currentMapType = MapType.normal;
 
-
-
   @override
   void initState() {
     super.initState();
-    BitmapDescriptor.fromAssetImage(ImageConfiguration(size: Size(20, 20)), 'assets/img/pinMap.png').then((onValue){
+
+    BitmapDescriptor.fromAssetImage(
+            ImageConfiguration(size: Size(20, 20)), 'assets/img/pinMap.png')
+        .then((onValue) {
       //Set marker icon on google map start
       setState(() {
         myIcon = onValue;
       });
     });
-    searchController.addListener((){
+    searchController.addListener(() {
       setState(() {
         searchFilter = searchController.text;
       });
@@ -57,7 +59,8 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
   }
 
   _getUserLocation() async {
-    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator()
+        .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     setState(() {
       _initialPosition = LatLng(position.latitude, position.longitude);
     });
@@ -69,7 +72,6 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
     searchController.dispose();
     blocMarker.dispose();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -84,51 +86,81 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
       key: _scaffoldKey,
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
-        backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+        backgroundColor: darkmode
+            ? Theme.Colors.primaryDarkColor
+            : Theme.Colors.primaryColor,
         title: Text(Translations.of(context).minianFinder),
-        actions: <Widget>[
-        ],
+        actions: <Widget>[],
       ),
       body: Stack(
         children: <Widget>[
-          GoogleMapWidget(context: context, controller: _controller, currentMapType: _currentMapType, myIcon: myIcon, markers: markers, markIdList: markIdList, initialPosition: _initialPosition,),
+          GoogleMapWidget(
+            context: context,
+            controller: _controller,
+            currentMapType: _currentMapType,
+            myIcon: myIcon,
+            markers: markers,
+            markIdList: markIdList,
+            initialPosition: _initialPosition,
+          ),
           _btnLocationMap(),
           SearchMap(searchController: searchController, darkmode: darkmode),
-          SearchResults(controller: _controller, darkmode: darkmode, searchFilter: searchFilter, searchController: searchController),
+          SearchResults(
+              controller: _controller,
+              darkmode: darkmode,
+              searchFilter: searchFilter,
+              searchController: searchController),
         ],
       ),
       floatingActionButton: _bntExpanded(lang),
     );
   }
 
-  Widget _bntExpanded(lang){
+  Widget _bntExpanded(lang) {
     return SpeedDial(
       marginRight: lang == true ? 40 : 10,
       overlayOpacity: lang == true ? 0 : 0.3,
       overlayColor: Theme.Colors.secondaryDarkColor,
       heroTag: 'bntExpand',
-      backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
-      child: Icon(Icons.add, color: Theme.Colors.secondaryColor,),
+      backgroundColor:
+          darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+      child: Icon(
+        Icons.add,
+        color: Theme.Colors.secondaryColor,
+      ),
       children: [
         SpeedDialChild(
-          child: Icon(Icons.near_me, size: 36.0, color: Theme.Colors.secondaryColor),
-          backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+          child: Icon(Icons.near_me,
+              size: 36.0, color: Theme.Colors.secondaryColor),
+          backgroundColor: darkmode
+              ? Theme.Colors.primaryDarkColor
+              : Theme.Colors.primaryColor,
           label: Translations.of(context).btnNearMe,
-          labelStyle: TextStyle(fontFamily: Theme.Fonts.primaryFont, color: Theme.Colors.blackColor),
+          labelStyle: TextStyle(
+              fontFamily: Theme.Fonts.primaryFont,
+              color: Theme.Colors.blackColor),
           onTap: _inputDialog,
         ),
         SpeedDialChild(
           child: Icon(Icons.map, color: Theme.Colors.secondaryColor),
-          backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+          backgroundColor: darkmode
+              ? Theme.Colors.primaryDarkColor
+              : Theme.Colors.primaryColor,
           label: Translations.of(context).btnMapView,
-          labelStyle: TextStyle(fontFamily: Theme.Fonts.primaryFont, color: Theme.Colors.blackColor),
+          labelStyle: TextStyle(
+              fontFamily: Theme.Fonts.primaryFont,
+              color: Theme.Colors.blackColor),
           onTap: _onMapTypeButtonPressed,
         ),
         SpeedDialChild(
           child: Icon(Icons.watch_later, color: Theme.Colors.secondaryColor),
-          backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+          backgroundColor: darkmode
+              ? Theme.Colors.primaryDarkColor
+              : Theme.Colors.primaryColor,
           label: Translations.of(context).btnNow,
-          labelStyle: TextStyle(fontFamily: Theme.Fonts.primaryFont, color: Theme.Colors.blackColor),
+          labelStyle: TextStyle(
+              fontFamily: Theme.Fonts.primaryFont,
+              color: Theme.Colors.blackColor),
           onTap: _onNowPressed,
         )
       ],
@@ -136,7 +168,7 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
   }
 
   ///Location Button
-  Widget _btnLocationMap(){
+  Widget _btnLocationMap() {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Align(
@@ -145,90 +177,93 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
           heroTag: 'btnLocate',
           onPressed: _takeLocation,
           materialTapTargetSize: MaterialTapTargetSize.padded,
-          backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
-          child: const Icon(Icons.my_location, size: 36.0, color: Theme.Colors.secondaryColor),
+          backgroundColor: darkmode
+              ? Theme.Colors.primaryDarkColor
+              : Theme.Colors.primaryColor,
+          child: const Icon(Icons.my_location,
+              size: 36.0, color: Theme.Colors.secondaryColor),
         ),
       ),
     );
   }
 
   //Get minyan now
-  _onNowPressed() async{
+  _onNowPressed() async {
     ShowToast().show(Translations().searching, 10);
-    String title = await blocMap.getNow(markIdList, markers, _scaffoldKey.currentContext);
+    String title =
+        await blocMap.getNow(markIdList, markers, _scaffoldKey.currentContext);
     Future.delayed(Duration(seconds: 2));
     return showDialog(
       context: _scaffoldKey.currentContext,
-      barrierDismissible: false, // dialog is dismissible with a tap on the barrier
+      barrierDismissible:
+          false, // dialog is dismissible with a tap on the barrier
       builder: (BuildContext context) {
         return StreamBuilder<List<MarkerNow>>(
-          stream: blocMap.getNowMarkes,
-          builder: (context, snapshot) {
-          if(!snapshot.hasData){
-            return Container();
-          }else
-            if (title == '') {
-            return _alertIfNoData();
-          }
-          else{
-            return AlertDialog(
-              title: Text(title),
-              content: Container(
-                height: snapshot.data.length == 1 ? 60 : snapshot.data.length == 2 ? 150 : 200,
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width / 2,
-                child: ListView.builder(
-                  physics: snapshot.data.length == 1 ? NeverScrollableScrollPhysics() : null,
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListTile(
-                        title: Text(snapshot.data[index].title),
-                        subtitle: Text(snapshot.data[index].times),
-                        trailing: Icon(Icons.location_on),
-                        onTap: () {
-                          blocMap.goToLocation(snapshot.data[index].latitude,
-                              snapshot.data[index].longitude, _controller, 18);
-                          Navigator.pop(context);
-                        },
-                      );
-                    }),
-              ),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text(Translations
-                      .of(context)
-                      .btnBack),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-        }
-          }
-        );
+            stream: blocMap.getNowMarkes,
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
+                return Container();
+              } else if (title == '') {
+                return _alertIfNoData();
+              } else {
+                return AlertDialog(
+                  title: Text(title),
+                  content: Container(
+                    height: snapshot.data.length == 1
+                        ? 60
+                        : snapshot.data.length == 2 ? 150 : 200,
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: ListView.builder(
+                        physics: snapshot.data.length == 1
+                            ? NeverScrollableScrollPhysics()
+                            : null,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: snapshot.data.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ListTile(
+                            title: Text(snapshot.data[index].title),
+                            subtitle: Text(snapshot.data[index].times),
+                            trailing: Icon(Icons.location_on),
+                            onTap: () {
+                              blocMap.goToLocation(
+                                  snapshot.data[index].latitude,
+                                  snapshot.data[index].longitude,
+                                  _controller,
+                                  18);
+                              Navigator.pop(context);
+                            },
+                          );
+                        }),
+                  ),
+                  actions: <Widget>[
+                    FlatButton(
+                      child: Text(Translations.of(context).btnBack),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ],
+                );
+              }
+            });
       },
     );
   }
 
   _alertIfNoData() {
-        return AlertDialog(
-          title: Text(Translations.of(context).errorDialog),
-          content: Text(Translations.of(context).contentNotFindNow),
-          actions: <Widget>[
-            FlatButton(
-              child: Text(Translations.of(context).btnBack),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-
+    return AlertDialog(
+      title: Text(Translations.of(context).errorDialog),
+      content: Text(Translations.of(context).contentNotFindNow),
+      actions: <Widget>[
+        FlatButton(
+          child: Text(Translations.of(context).btnBack),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
   }
 
   //Change map view
@@ -241,26 +276,33 @@ class _MinianScreenState extends State<MinianScreen> with TickerProviderStateMix
   }
 
   //Input filter meters
- _inputDialog() {
+  _inputDialog() {
     return showDialog<String>(
       context: context,
-      barrierDismissible: false, // dialog is dismissible with a tap on the barrier
+      barrierDismissible:
+          false, // dialog is dismissible with a tap on the barrier
       builder: (BuildContext context) {
-        return InputMeters(darkmode: darkmode, markers: markers, markIdList: markIdList, context: _scaffoldKey.currentContext, controller: _controller,);
+        return InputMeters(
+          darkmode: darkmode,
+          markers: markers,
+          markIdList: markIdList,
+          context: _scaffoldKey.currentContext,
+          controller: _controller,
+        );
       },
     );
   }
 
   //btnLocation
-  _takeLocation() async{
+  _takeLocation() async {
     ShowToast().show(Translations().searching, 10);
-    if(await Geolocator().isLocationServiceEnabled()) {
-      position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
-      blocMap.goToLocation(position.latitude, position.longitude, _controller, 18);
-    }else{
+    if (await Geolocator().isLocationServiceEnabled()) {
+      position = await Geolocator()
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+      blocMap.goToLocation(
+          position.latitude, position.longitude, _controller, 18);
+    } else {
       blocMap.requestLocationPermission();
     }
   }
-
-
 }

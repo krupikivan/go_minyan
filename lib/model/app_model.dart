@@ -4,11 +4,18 @@ import 'package:go_minyan/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppModel with ChangeNotifier {
-
   SharedPreferences instance;
 
+  static final AppModel _instancia = new AppModel._internal();
+
+  factory AppModel() {
+    return _instancia;
+  }
+
+  AppModel._internal();
+
   ///Inicializar los valores del SHARED PREFS
-  void initializeValues() async{
+  void initializeValues() async {
     instance = await SharedPreferences.getInstance();
     _language = instance.getString('language') ?? 'es';
     _reminder = instance.getString('reminder') ?? '10';
@@ -24,6 +31,7 @@ class AppModel with ChangeNotifier {
     _appLocale = Locale(value);
     notifyListeners();
   }
+
   //TODO habilitar idiomas
   List<Map<String, String>> _langList = [
     {"name": "Español", "value": "es"},
@@ -35,12 +43,12 @@ class AppModel with ChangeNotifier {
   List<Map<String, String>> get langList => _langList;
   String get language => _language;
 
-  bool get isReverse{
-    if(_language == 'he') return true;
+  bool get isReverse {
+    if (_language == 'he') return true;
     return false;
   }
 
-  void setLanguage(String value) async{
+  void setLanguage(String value) async {
     _language = value;
     changeDirection(value);
     instance.setString('language', _language);
@@ -55,7 +63,7 @@ class AppModel with ChangeNotifier {
   bool _darkmode;
   bool get darkmode => _darkmode;
 
-  void setTheme(bool value){
+  void setTheme(bool value) {
     _darkmode = value;
     instance.setBool('darkmode', _darkmode);
     notifyListeners();
@@ -84,74 +92,77 @@ class AppModel with ChangeNotifier {
   ];
   List<Map<String, String>> get minList => _minList;
 
-  getReminderList(String text){
+  getReminderList(String text) {
     List<Map<String, String>> minList = [
-      {"name": "10 "+text, "value": "10"},
-      {"name": "15 "+text, "value": "15"},
-      {"name": "20 "+text, "value": "20"},
-      {"name": "30 "+text, "value": "30"},
-      {"name": "45 "+text, "value": "45"},
-      {"name": "60 "+text, "value": "60"},
+      {"name": "10 " + text, "value": "10"},
+      {"name": "15 " + text, "value": "15"},
+      {"name": "20 " + text, "value": "20"},
+      {"name": "30 " + text, "value": "30"},
+      {"name": "45 " + text, "value": "45"},
+      {"name": "60 " + text, "value": "60"},
     ];
     return minList;
   }
 
-  void setReminder(String value) async{
+  void setReminder(String value) async {
     _reminder = value;
     changeNotification(value);
     notifyListeners();
     instance.setString('reminder', _reminder);
   }
 
-///---------------------------marker-detail---------------------------------
+  ///---------------------------marker-detail---------------------------------
   bool isSwitch;
-  Future<Null> getSwitch(String documentId) async{
+  Future<Null> getSwitch(String documentId) async {
     ///Shared preferences INSTANCE
     isSwitch = instance.getBool(documentId) ?? false;
   }
 
   ///Set bool data from switch with documentId as KEY
-  onSwitchChanged(bool value, String documentId) async{
+  onSwitchChanged(bool value, String documentId) async {
     List<String> list = instance.getStringList(PrefsString.notification);
-    if(list == null){list = new List();}
-    if(!value){
+    if (list == null) {
+      list = new List();
+    }
+    if (!value) {
       isSwitch = false;
       instance.setBool(documentId, false);
       list.remove(documentId);
       instance.setStringList(PrefsString.notification, list);
-    }else{
+    } else {
       isSwitch = true;
       instance.setBool(documentId, true);
       list.add(documentId);
       instance.setStringList(PrefsString.notification, list);
     }
   }
-///---------------------------marker-detail---------------------------------
 
-///---------------------------nusach-list-Firebase-----------------------------------
+  ///---------------------------marker-detail---------------------------------
+
+  ///---------------------------nusach-list-Firebase-----------------------------------
 
   List<String> _nusachList = List();
   List<String> get nusachList => _nusachList;
 
-    getNusachList(){
+  getNusachList() {
     _nusachList = instance.getStringList('nusachList');
   }
 
-  setNusachList(List<String> list){
-      if(_nusachList == null){
-        _nusachList = list;
-        instance.setStringList('nusachList', list);
-      }
+  setNusachList(List<String> list) {
+    if (_nusachList == null) {
+      _nusachList = list;
+      instance.setStringList('nusachList', list);
+    }
   }
 
-///---------------------------nusach-list-Firebase------------------------------------
+  ///---------------------------nusach-list-Firebase------------------------------------
 
-///---------------------------FIREBASE ADMIN DATA----------------------------
+  ///---------------------------FIREBASE ADMIN DATA----------------------------
 
   UserData _userData = UserData();
   UserData get userData => _userData;
 
-  Future<Null> getUserData() async{
+  Future<Null> getUserData() async {
     _userData.title = instance.getString('title');
     _userData.address = instance.getString('address');
     _userData.contact = instance.getString('contact');
@@ -190,58 +201,57 @@ class AppModel with ChangeNotifier {
     instance.remove('scheduleList');
   }
 
+  ///---------------------------FIREBASE ADMIN DATA---------------------------------
 
-///---------------------------FIREBASE ADMIN DATA---------------------------------
-
-///---------------------------FIREBASE SCHEDULE DATA---------------------------------
+  ///---------------------------FIREBASE SCHEDULE DATA---------------------------------
 
   List<Schedule> _scheduleList = List();
   List<Schedule> get scheduleList => _scheduleList;
 
-
-  saveScheduleData(String json, scheduleList){
+  saveScheduleData(String json, scheduleList) {
     _scheduleList = scheduleList;
     instance.setString('scheduleList', json);
   }
 
-  Future<Null> getScheduleData() async{
+  Future<Null> getScheduleData() async {
     _scheduleList = listadoScheduleFromJson(instance.getString('scheduleList'));
   }
 
-///---------------------------FIREBASE SCHEDULE DATA---------------------------------
+  ///---------------------------FIREBASE SCHEDULE DATA---------------------------------
 
-///---------------------------marker-tempData---------------------------------
+  ///---------------------------marker-tempData---------------------------------
   //Esto lo usamos solo para tener cargados los markes del google map mientras la app esta activa
   //para no hacer tantas llamadas a firebase
   List<MarkerData> _markersList = List();
   List<MarkerData> get markersList => _markersList;
 
-
-  saveMarkersData(String json, markerDataList){
+  saveMarkersData(String json, markerDataList) {
     _markersList = markerDataList;
     instance.setString('markersList', json);
   }
 
   //Este metodo nunca se ejecuta pero nos podria servir en un futuro
-  Future<Null> getMarkersData() async{
+  Future<Null> getMarkersData() async {
 //    if(_markersList.isNotEmpty){
-      _markersList = listadoMarkerFromJson(instance.getString('markersList')) ?? [];
+    _markersList =
+        listadoMarkerFromJson(instance.getString('markersList')) ?? [];
 //    }
   }
+
   //Este metodo nunca se ejecuta pero nos podria servir en un futuro
   removeMarkerTempData() {
-    if(_markersList.isNotEmpty){
+    if (_markersList.isNotEmpty) {
       instance.remove('markersList');
     }
   }
 
-///---------------------------marker-tempData---------------------------------
+  ///---------------------------marker-tempData---------------------------------
 
-///---------------------------update-data---------------------------------
-  removeForUpdate(){
+  ///---------------------------update-data---------------------------------
+  removeForUpdate() {
     _markersList.clear();
     instance.remove('markersList');
   }
 
-///---------------------------update-data---------------------------------
+  ///---------------------------update-data---------------------------------
 }

@@ -65,6 +65,8 @@ class Repository {
 
   Stream<DocumentSnapshot> getPlaceName(String documentId) =>
       _firestoreProvider.getPlaceName(documentId);
+
+  Future<void> complete() => _firestoreProvider.complete();
 }
 
 final repos = Repository();

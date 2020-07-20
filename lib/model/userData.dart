@@ -1,6 +1,4 @@
-
-class UserData{
-
+class UserData {
   String title;
   String address;
   String contact;
@@ -8,7 +6,6 @@ class UserData{
   double latitude;
   double longitude;
   String documentId;
-
 
   UserData({
     this.title,
