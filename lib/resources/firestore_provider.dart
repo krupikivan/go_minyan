@@ -109,11 +109,8 @@ class FirestoreProvider {
         .updateData({FS.isAuthenticated: value});
   }
 
-  Future<QuerySnapshot> isAuthenticated(String email) {
-    return _firestore
-        .collection(FS.markers)
-        .where(FS.email, isEqualTo: email)
-        .getDocuments();
+  Future<DocumentSnapshot> isAuthenticated(String email) {
+    return _firestore.collection('emails').document(email).get();
   }
 
   Future<QuerySnapshot> userExist(String email) {

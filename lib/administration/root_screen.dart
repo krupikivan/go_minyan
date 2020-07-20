@@ -7,7 +7,6 @@ import 'package:go_minyan/utils/items.dart';
 import 'package:go_minyan/widget/widget.dart';
 import 'package:provider/provider.dart';
 import 'package:go_minyan/style/theme.dart' as Theme;
-import 'package:url_launcher/url_launcher.dart';
 
 class RootScreen extends StatefulWidget {
   ///POPUP menu

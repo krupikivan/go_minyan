@@ -6,8 +6,6 @@ import 'package:go_minyan/model/model.dart';
 import 'package:go_minyan/utils/items.dart';
 import 'package:provider/provider.dart';
 
-import '../authentication_bloc/authentication_state.dart';
-
 class PopupMenu extends StatefulWidget {
   final List<Items> choices;
   final String type;

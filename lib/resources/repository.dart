@@ -23,7 +23,7 @@ class Repository {
   ///Device information - menu-screen
   Future<void> saveToken(String token) => _firestoreProvider.saveToken(token);
 
-  Future<QuerySnapshot> isAuthenticated(String email) =>
+  Future<DocumentSnapshot> isAuthenticated(String email) =>
       _firestoreProvider.isAuthenticated(email);
 
   Future<QuerySnapshot> userExist(String email) =>

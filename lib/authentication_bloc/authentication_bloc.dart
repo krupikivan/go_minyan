@@ -5,8 +5,6 @@ import 'package:go_minyan/authentication_bloc/bloc.dart';
 import 'package:go_minyan/user_repository.dart';
 
 import 'authentication_state.dart';
-import 'authentication_state.dart';
-import 'authentication_state.dart';
 
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {

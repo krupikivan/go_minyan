@@ -7,7 +7,6 @@ import 'package:go_minyan/utils/utils.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../model/app_model.dart';
-import '../model/app_model.dart';
 export 'package:go_minyan/utils/utils.dart';
 
 class UserDataBloc {

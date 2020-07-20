@@ -2,12 +2,9 @@ import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:go_minyan/model/model.dart';
 import 'package:go_minyan/resources/repository.dart';
-import 'package:go_minyan/utils/utils.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../model/app_model.dart';
-import '../model/app_model.dart';
-import '../model/model.dart';
 import '../model/model.dart';
 
 class TimesBloc {
@@ -68,39 +65,39 @@ class TimesBloc {
     appModel.saveScheduleData(jsonString, scheduleList);
   }
 
-  Schedule _fillDayData(String day, DocumentSnapshot doc) {
-    Schedule day = new Schedule();
-    day.name = doc.data[FS.name];
-    // day.value = doc.data[FS.value];
-    List<Pray> listPray = new List();
-    for (var i = 0; i < 3; i++) {
-      switch (i) {
-        case 0:
-          Pray pray = new Pray();
-          pray = _fillListPray(FS.shajarit, pray, doc);
-          listPray.add(pray);
-          break;
-        case 1:
-          Pray pray = new Pray();
-          pray = _fillListPray(FS.minja, pray, doc);
-          listPray.add(pray);
-          break;
-        case 2:
-          Pray pray = new Pray();
-          pray = _fillListPray(FS.arvit, pray, doc);
-          listPray.add(pray);
-          break;
-      }
-    }
-    day.pray = listPray;
-    return day;
-  }
+  // Schedule _fillDayData(String day, DocumentSnapshot doc) {
+  //   Schedule day = new Schedule();
+  //   day.name = doc.data[FS.name];
+  //   // day.value = doc.data[FS.value];
+  //   List<Pray> listPray = new List();
+  //   for (var i = 0; i < 3; i++) {
+  //     switch (i) {
+  //       case 0:
+  //         Pray pray = new Pray();
+  //         pray = _fillListPray(FS.shajarit, pray, doc);
+  //         listPray.add(pray);
+  //         break;
+  //       case 1:
+  //         Pray pray = new Pray();
+  //         pray = _fillListPray(FS.minja, pray, doc);
+  //         listPray.add(pray);
+  //         break;
+  //       case 2:
+  //         Pray pray = new Pray();
+  //         pray = _fillListPray(FS.arvit, pray, doc);
+  //         listPray.add(pray);
+  //         break;
+  //     }
+  //   }
+  //   day.pray = listPray;
+  //   return day;
+  // }
 
-  _fillListPray(String name, Pray pray, doc) {
-    pray.name = name;
-    pray.type = convertTimestamp(doc.data[name]);
-    return pray;
-  }
+  // _fillListPray(String name, Pray pray, doc) {
+  //   pray.name = name;
+  //   pray.type = convertTimestamp(doc.data[name]);
+  //   return pray;
+  // }
 
   convertTimestamp(List list) {
     List newList = List();

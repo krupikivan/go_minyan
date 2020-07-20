@@ -22,9 +22,9 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   @override
   Stream<LoginState> transform(
-      Stream<LoginEvent> events,
-      Stream<LoginState> Function(LoginEvent event) next,
-      ) {
+    Stream<LoginEvent> events,
+    Stream<LoginState> Function(LoginEvent event) next,
+  ) {
     final observableStream = events as Observable<LoginEvent>;
     final nonDebounceStream = observableStream.where((event) {
       return (event is! EmailChanged && event is! PasswordChanged);
@@ -47,7 +47,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         password: event.password,
         isAuth: event.isAuth,
       );
-    }else if (event is GetIsAuthenticated) {
+    } else if (event is GetIsAuthenticated) {
       yield* _mapGetIsAuthenticated(
         email: event.email,
       );
@@ -73,10 +73,10 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }) async* {
     yield LoginState.loading();
     try {
-      if(isAuth){
+      if (isAuth) {
         await _userRepository.signInWithCredentials(email, password);
         yield LoginState.success();
-      }else{
+      } else {
         yield LoginState.failure();
       }
     } catch (_) {
@@ -93,18 +93,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       bool auth;
       await _repo.isAuthenticated(email).then((data) {
         //Si es == 0  significa que no existe registros en la tabla por ende es un usuario root
-            if(data.documents.length == 0 || data.documents[0].data[FS.isAuthenticated] == true){
-              auth = true;
-            }else{auth = false;}
-      });
-        if(auth){
-          yield LoginState.authenticated();
-        }else{
-          yield LoginState.failure();
+        // if(data.documents.length == 0 || data.documents[0].data[FS.isAuthenticated] == true){
+        if (!data.exists) {
+          auth = true;
+        } else {
+          auth = false;
         }
+      });
+      if (auth) {
+        yield LoginState.authenticated();
+      } else {
+        yield LoginState.failure();
+      }
     } catch (_) {
       yield LoginState.failure();
     }
   }
-
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_minyan/model/model.dart';
 import 'package:go_minyan/translation.dart';
-import 'package:go_minyan/user_repository.dart';
 import 'package:go_minyan/register/register.dart';
 import 'package:go_minyan/style/theme.dart' as Theme;
 import 'package:go_minyan/utils/utils.dart';

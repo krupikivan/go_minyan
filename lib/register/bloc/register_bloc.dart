@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:go_minyan/resources/repository.dart';
-import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:go_minyan/user_repository.dart';
 import 'package:go_minyan/register/register.dart';
@@ -97,11 +96,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       bool exist;
       await _repo.isAuthenticated(email).then((data) {
         //Si es == 0  significa que no existe registros en la tabla por ende es un usuario root
-        if (data.documents.length != 0) {
-          exist = true;
-        } else {
-          exist = false;
-        }
+        exist = data.exists;
       });
 
       if (!exist) {
