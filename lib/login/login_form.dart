@@ -390,40 +390,53 @@ class _LoginFormState extends State<LoginForm>
                     switchFormState('login');
                     BlocProvider.of<AuthenticationBloc>(context)
                         .dispatch(AppStarted());
-                  } else {
-                    BlocProvider.of<AuthenticationBloc>(context)
-                        .dispatch(GuestStarted());
                   }
                   //loginFormType == LoginFormType.login ? BlocProvider.of<AuthenticationBloc>(context).dispatch(GuestStarted()) : BlocProvider.of<AuthenticationBloc>(context).dispatch(AppStarted());
                 },
-                child: TextModel(
-                  text: Translations.of(context).btnBack,
-                  size: 17,
-                  color: _darkmode
-                      ? Theme.Colors.whiteColor
-                      : Theme.Colors.primaryColor,
-                  decoration: TextDecoration.underline,
-                )),
-            loginFormType == LoginFormType.reset
-                ? Container()
-                : Align(
-                    alignment: Alignment.topCenter,
-                    child: FlatButton(
-                        onPressed: () {
-                          setState(() {
-                            switchFormState('reset');
-                          });
-                          //BlocProvider.of<AuthenticationBloc>(context).dispatch(ForgotPassword());
-                        },
-                        child: TextModel(
-                          text: Translations.of(context).btnForgot,
-                          size: 17,
-                          color: _darkmode
-                              ? Theme.Colors.whiteColor
-                              : Theme.Colors.primaryColor,
-                          decoration: TextDecoration.underline,
-                        )),
-                  ),
+                child: loginFormType == LoginFormType.login
+                    ? Align(
+                        alignment: Alignment.topCenter,
+                        child: Column(
+                          children: <Widget>[
+                            FlatButton(
+                                onPressed: () {
+                                  BlocProvider.of<AuthenticationBloc>(context)
+                                      .dispatch(GoToRegister());
+                                },
+                                child: TextModel(
+                                  text: Translations.of(context).registerTitle,
+                                  size: 17,
+                                  color: _darkmode
+                                      ? Theme.Colors.whiteColor
+                                      : Theme.Colors.primaryColor,
+                                  decoration: TextDecoration.underline,
+                                )),
+                            FlatButton(
+                                onPressed: () {
+                                  setState(() {
+                                    switchFormState('reset');
+                                  });
+                                  //BlocProvider.of<AuthenticationBloc>(context).dispatch(ForgotPassword());
+                                },
+                                child: TextModel(
+                                  text: Translations.of(context).btnForgot,
+                                  size: 17,
+                                  color: _darkmode
+                                      ? Theme.Colors.whiteColor
+                                      : Theme.Colors.primaryColor,
+                                  decoration: TextDecoration.underline,
+                                )),
+                          ],
+                        ),
+                      )
+                    : TextModel(
+                        text: Translations.of(context).btnBack,
+                        size: 17,
+                        color: _darkmode
+                            ? Theme.Colors.whiteColor
+                            : Theme.Colors.primaryColor,
+                        decoration: TextDecoration.underline,
+                      )),
           ],
         ),
       ),

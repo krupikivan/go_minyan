@@ -24,7 +24,11 @@ class UserRepository {
   }
 
   Future<void> signUp(
-      {String email, String password, String title, String contact}) async {
+      {bool isUser,
+      String email,
+      String password,
+      String title,
+      String contact}) async {
     return await _firebaseAuth
         .createUserWithEmailAndPassword(
       email: email,
@@ -36,6 +40,7 @@ class UserRepository {
       );
 //    dynamic resp = await callable.call();
       await callable.call(<String, dynamic>{
+        // 'isUser': isUser,
         'title': title,
         'contact': contact,
         'uid': firebaseUser.user.uid,

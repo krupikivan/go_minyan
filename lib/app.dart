@@ -16,6 +16,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'administration/admin.dart';
+import 'authentication_bloc/authentication_state.dart';
+import 'register/register.dart';
 
 ///STEP 4
 
@@ -29,8 +31,8 @@ class MyApp extends StatelessWidget {
         super(key: key);
 
   bool _isAdmin(user, data) {
-    for(int i = 0; i < data[FS.userUID].length; i++){
-      if(data[FS.userUID][i] == user) return true;
+    for (int i = 0; i < data[FS.userUID].length; i++) {
+      if (data[FS.userUID][i] == user) return true;
     }
     return false;
   }
@@ -40,59 +42,64 @@ class MyApp extends StatelessWidget {
     final theme = Provider.of<ThemeChanger>(context);
     return StreamBuilder<DocumentSnapshot>(
         stream: blocUserData.getUserAdmin(),
-      builder: (context, userAdmin) {
-        return MaterialApp(
-          locale: model.appLocal,
-          localizationsDelegates: [
-            const TranslationsDelegate(),
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-          ],
-          supportedLocales: [
-            const Locale('es', ''), // Spanish
-            const Locale('en', ''), // English
-            const Locale('he', ''), // Hebrew
-          ],
-          debugShowCheckedModeBanner: false,
-          title: 'MinianLogin',
-          theme: theme.getTheme(),
-          initialRoute: '/',
-          routes: {
-            '/minian': (context) => MinianScreen(),
-            '/minianForm': (context) => RegisterScreen(userRepository: _userRepository),
-            '/info': (context) => AboutScreen(),
-            '/menu': (context) => MenuScreen(),
-          },
-          home: Consumer<AppModel>(
-            builder: (_, appModel, child) => BlocBuilder<AuthenticationBloc, AuthenticationState>(
-              builder: (context,  state) {
-                if (state is Guest || state is AuthBack) {
-                  return MenuScreen();
-                }
-                if (state is ChangePassScreen) {
-                  return ChangePassword();
-                }
-                if (state is Unauthenticated) {
-                  return LoginScreen(userRepository: _userRepository);
-                }
-                if (state is Authenticated) {
-                  if(_isAdmin(state.userUID, userAdmin.data)){
-                    return RootScreen();
-                  }else{
-                    //Get data from shared preferences
-                    appModel.getNusachList();
-                    appModel.getUserData();
-                    appModel.getScheduleData();
-                    return AdminScreen(username: state.displayName, userUID: state.userUID);
+        builder: (context, userAdmin) {
+          return MaterialApp(
+            locale: model.appLocal,
+            localizationsDelegates: [
+              const TranslationsDelegate(),
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+            ],
+            supportedLocales: [
+              const Locale('es', ''), // Spanish
+              const Locale('en', ''), // English
+              const Locale('he', ''), // Hebrew
+            ],
+            debugShowCheckedModeBanner: false,
+            title: 'MinianLogin',
+            theme: theme.getTheme(),
+            initialRoute: '/',
+            routes: {
+              '/minian': (context) => MinianScreen(),
+              '/info': (context) => AboutScreen(),
+              '/menu': (context) => MenuScreen(),
+            },
+            home: Consumer<AppModel>(
+              builder: (_, appModel, child) =>
+                  BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                builder: (context, state) {
+                  // if (state is Guest || state is AuthBack) {
+                  //   return MenuScreen();
+                  // }
+                  if (state is ChangePassScreen) {
+                    return ChangePassword();
                   }
-                }
-                return SplashScreen();
-              },
+                  if (state is Register) {
+                    return RegisterScreen();
+                  }
+                  if (state is Unauthenticated) {
+                    return LoginScreen(userRepository: _userRepository);
+                  }
+                  if (state is Authenticated || state is AuthBack) {
+                    return MenuScreen();
+                  }
+                  if (state is AdminPanel) {
+                    if (_isAdmin(state.userUID, userAdmin.data)) {
+                      return RootScreen();
+                    } else {
+                      //Get data from shared preferences
+                      appModel.getNusachList();
+                      appModel.getUserData();
+                      appModel.getScheduleData();
+                      return AdminScreen(
+                          username: state.displayName, userUID: state.userUID);
+                    }
+                  }
+                  return SplashScreen();
+                },
+              ),
             ),
-          ),
-        );
-      }
-    );
+          );
+        });
   }
-
 }

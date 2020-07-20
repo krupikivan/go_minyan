@@ -6,6 +6,9 @@ import 'package:go_minyan/style/theme.dart' as Theme;
 import 'package:go_minyan/translation.dart';
 import 'package:go_minyan/widget/widget.dart';
 
+import '../authentication_bloc/authentication_bloc.dart';
+import '../authentication_bloc/authentication_event.dart';
+
 class RegisterForm extends StatefulWidget {
   final bool darkmode;
 
@@ -25,15 +28,19 @@ class _RegisterFormState extends State<RegisterForm> {
       _emailController.text.isNotEmpty &&
       _passwordController.text.isNotEmpty &&
       _phoneController.text.isNotEmpty &&
+      _instController.text.isNotEmpty &&
       _instController.text.isNotEmpty;
 
   bool isRegisterButtonEnabled(RegisterState state) {
     return state.isFormValid && isPopulated && !state.isSubmitting;
   }
 
+  bool isUser;
+
   @override
   void initState() {
     super.initState();
+    isUser = false;
     _registerBloc = BlocProvider.of<RegisterBloc>(context);
     _emailController.addListener(_onEmailChanged);
     _passwordController.addListener(_onPasswordChanged);
@@ -142,6 +149,19 @@ class _RegisterFormState extends State<RegisterForm> {
             child: Form(
               child: ListView(
                 children: <Widget>[
+                  ChoiceChip(
+                      selected: isUser,
+                      backgroundColor: Theme.Colors.primaryColor,
+                      labelStyle: TextStyle(color: Colors.white),
+                      selectedColor: Theme.Colors.primaryDarkColor,
+                      label: Text(
+                          isUser ? 'Cargar un Minian' : 'Cargar un usuario'),
+                      onSelected: (value) {
+                        setState(() {
+                          isUser = value;
+                          _onClearForm();
+                        });
+                      }),
                   _instNameBox(state),
                   SizedBox(
                     height: 10.0,
@@ -175,6 +195,16 @@ class _RegisterFormState extends State<RegisterForm> {
                         onPressed: _onClearForm,
                         darkmode: widget.darkmode,
                       ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      RegisterButton(
+                        name: Translations.of(context).btnBack,
+                        onPressed: () =>
+                            BlocProvider.of<AuthenticationBloc>(context)
+                                .dispatch(AppStarted()),
+                        darkmode: widget.darkmode,
+                      ),
                     ],
                   ),
                 ],
@@ -195,8 +225,10 @@ class _RegisterFormState extends State<RegisterForm> {
       decoration: InputDecoration(
         focusedBorder:
             UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-        icon: _getIcon(Icons.home),
-        labelText: Translations.of(context).lblName,
+        icon: _getIcon(isUser ? Icons.person_pin : Icons.home),
+        labelText: isUser
+            ? Translations.of(context).lblUserName
+            : Translations.of(context).lblName,
         labelStyle: TextStyle(
             color: widget.darkmode
                 ? Theme.Colors.hintDarkColor
@@ -210,7 +242,7 @@ class _RegisterFormState extends State<RegisterForm> {
     );
   }
 
-  Widget _phoneBox(state) {
+  Widget _phoneBox(RegisterState state) {
     return TextFormField(
       autovalidate: true,
       cursorColor: Theme.Colors.primaryColor,
@@ -218,17 +250,24 @@ class _RegisterFormState extends State<RegisterForm> {
       decoration: InputDecoration(
         focusedBorder:
             UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-        icon: _getIcon(Icons.phone),
-        labelText: Translations.of(context).lblContact,
+        icon: _getIcon(isUser ? Icons.person_pin : Icons.phone),
+        labelText: isUser
+            ? Translations.of(context).lblUserLastName
+            : Translations.of(context).lblContact,
         labelStyle: TextStyle(
             color: widget.darkmode
                 ? Theme.Colors.hintDarkColor
                 : Theme.Colors.hintColor),
       ),
-      keyboardType: TextInputType.phone,
-      inputFormatters: [WhitelistingTextInputFormatter.digitsOnly],
+      keyboardType: isUser ? TextInputType.text : TextInputType.phone,
+      inputFormatters:
+          !isUser ? [WhitelistingTextInputFormatter.digitsOnly] : null,
       validator: (_) {
-        return !state.isPhoneValid ? Translations.of(context).phoneValid : null;
+        return !state.isPhoneValid
+            ? isUser
+                ? Translations.of(context).nameValid
+                : Translations.of(context).phoneValid
+            : null;
       },
 //      validator: Validators().validatePhoneNumber,
     );
@@ -328,7 +367,9 @@ class _RegisterFormState extends State<RegisterForm> {
 
   void _onPhoneChange() {
     _registerBloc.dispatch(
-      PhoneChange(phone: _phoneController.text),
+      !isUser
+          ? PhoneChange(phone: _phoneController.text)
+          : NameChange(name: _phoneController.text),
     );
   }
 
@@ -341,6 +382,7 @@ class _RegisterFormState extends State<RegisterForm> {
   void _onFormSubmitted() {
     _registerBloc.dispatch(
       Submitted(
+        isUser: isUser,
         email: _emailController.text,
         password: _passwordController.text,
         title: _instController.text,

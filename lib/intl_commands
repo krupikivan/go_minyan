@@ -1,9 +1,14 @@
 LANGUAGE
 
+1) Primero entrar en translation.dart y editar agregar o eliminar un nombre
+2) Correr el siguiente comando:
 flutter pub pub run intl_translation:extract_to_arb --output-dir=lib\l10n lib/translation.dart
 
+3) Copiar el codigo completo de intl_messages.arb y pegarlo en intl_es.arb
+4) Editar los string editados en las otras 2 de he y en
+5) Correr el siguiente comando:
 flutter pub pub run intl_translation:generate_from_arb --output-dir=lib/l10n --no-use-deferred-loading lib/l10n/intl_es.arb lib/l10n/intl_en.arb lib/l10n/intl_he.arb lib/l10n/intl_messages.arb lib/translation.dart
-
+6) Listo!!!
 
 ICON LAUNCHER
 

@@ -9,14 +9,9 @@ import 'package:go_minyan/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
-  final UserRepository userRepository;
-
-
   ///POPUP menu
   static String menu;
   static String exit;
-
-  const RegisterScreen({Key key, this.userRepository}) : super(key: key);
 
   @override
   _RegisterScreenState createState() => _RegisterScreenState();
@@ -31,20 +26,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
     bool darkmode = Provider.of<AppModel>(context).darkmode;
     return Scaffold(
       appBar: AppBar(
-        title: Text(Translations.of(context).registerTitle
-        ),
-        backgroundColor: darkmode ? Theme.Colors.primaryDarkColor : Theme.Colors.primaryColor,
+        title: Text(Translations.of(context).registerTitle),
+        backgroundColor: darkmode
+            ? Theme.Colors.primaryDarkColor
+            : Theme.Colors.primaryColor,
       ),
       body: Center(
         child: BlocProvider<RegisterBloc>(
-          builder: (context) => RegisterBloc(userRepository: widget.userRepository),
+          builder: (context) => RegisterBloc(),
           child: Container(
               child: Stack(
-                children: <Widget>[
-                  RegisterForm(darkmode: darkmode),
-                ],
-              )
-          ),
+            children: <Widget>[
+              RegisterForm(darkmode: darkmode),
+            ],
+          )),
         ),
       ),
     );

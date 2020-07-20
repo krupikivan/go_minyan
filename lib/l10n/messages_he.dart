@@ -120,7 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pushTitle" : MessageLookupByLibrary.simpleMessage("האירוע הבא"),
     "registerLoading" : MessageLookupByLibrary.simpleMessage("...נרשמת"),
     "registerSuccess" : MessageLookupByLibrary.simpleMessage("הצלחה בהרשמה"),
-    "registerTitle" : MessageLookupByLibrary.simpleMessage("רשום מניין חדש"),
+    "registerTitle" : MessageLookupByLibrary.simpleMessage("רשום חדש"),
     "remember" : MessageLookupByLibrary.simpleMessage("תזכורת"),
     "repeatPassHint" : MessageLookupByLibrary.simpleMessage("חזור על הסיסמה"),
     "restoreMsg" : MessageLookupByLibrary.simpleMessage("נתונים משוחזרים"),

@@ -285,7 +285,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "registerTitle": "Register new minyan",
+  "registerTitle": "Register",
   "@registerTitle": {
     "type": "text",
     "placeholders": {}

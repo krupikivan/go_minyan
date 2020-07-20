@@ -120,7 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pushTitle" : MessageLookupByLibrary.simpleMessage("Incoming event"),
     "registerLoading" : MessageLookupByLibrary.simpleMessage("Registering..."),
     "registerSuccess" : MessageLookupByLibrary.simpleMessage("Register success"),
-    "registerTitle" : MessageLookupByLibrary.simpleMessage("Register new minyan"),
+    "registerTitle" : MessageLookupByLibrary.simpleMessage("Register"),
     "remember" : MessageLookupByLibrary.simpleMessage("Reminder"),
     "repeatPassHint" : MessageLookupByLibrary.simpleMessage("Repeat Password"),
     "restoreMsg" : MessageLookupByLibrary.simpleMessage("Data restored."),

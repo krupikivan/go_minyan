@@ -11,14 +11,24 @@ class AppStarted extends AuthenticationEvent {
   String toString() => 'AppStarted';
 }
 
-class GuestStarted extends AuthenticationEvent {
-  @override
-  String toString() => 'GuestStarted';
-}
+// class GuestStarted extends AuthenticationEvent {
+//   @override
+//   String toString() => 'GuestStarted';
+// }
 
 class LoggedIn extends AuthenticationEvent {
   @override
   String toString() => 'LoggedIn';
+}
+
+class GoToAdminPanel extends AuthenticationEvent {
+  @override
+  String toString() => 'GoToAdminPanel';
+}
+
+class GoToRegister extends AuthenticationEvent {
+  @override
+  String toString() => 'GoToRegister';
 }
 
 class LoggedOut extends AuthenticationEvent {

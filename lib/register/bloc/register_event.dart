@@ -43,16 +43,22 @@ class NameChange extends RegisterEvent {
 }
 
 class Submitted extends RegisterEvent {
+  final bool isUser;
   final String email;
   final String password;
   final String title;
   final String contact;
 
-  Submitted({@required this.email, @required this.password, @required this.title, @required this.contact})
-      : super([email, password, title, contact]);
+  Submitted(
+      {@required this.isUser,
+      @required this.email,
+      @required this.password,
+      @required this.title,
+      @required this.contact})
+      : super([isUser, email, password, title, contact]);
 
   @override
   String toString() {
-    return 'Submitted { email: $email, password: $password, title: $title, contact: $contact }';
+    return 'Submitted { isUser: $isUser, email: $email, password: $password, title: $title, contact: $contact }';
   }
 }

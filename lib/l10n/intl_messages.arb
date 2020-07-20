@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-01-29T15:46:14.694815",
+  "@@last_modified": "2020-07-19T21:16:22.478690",
   "minianFinder": "Buscador de minian",
   "@minianFinder": {
     "type": "text",
@@ -285,7 +285,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "registerTitle": "Registrar nuevo minian",
+  "registerTitle": "Registrate",
   "@registerTitle": {
     "type": "text",
     "placeholders": {}

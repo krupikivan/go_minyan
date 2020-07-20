@@ -6,6 +6,8 @@ import 'package:go_minyan/theme_data_wrapper.dart';
 import 'package:go_minyan/user_repository.dart';
 import 'package:provider/provider.dart';
 
+import 'authentication_bloc/authentication_event.dart';
+
 ///STEP 2
 
 class AppModelWrapper extends StatelessWidget {
@@ -23,17 +25,14 @@ class AppModelWrapper extends StatelessWidget {
 //    _appModel.removeMarkerTempData();
     return MultiProvider(
       providers: [
-    ChangeNotifierProvider(create: (_) => _appModel),
+        ChangeNotifierProvider(create: (_) => _appModel),
 //    ChangeNotifierProvider<PushProvider>(create: (_) => PushProvider(null))
-    ],
+      ],
       child: BlocProvider(
-          builder: (context) => AuthenticationBloc(userRepository: userRepository)
-            ..dispatch(GuestStarted()),
-          child: ThemeDataWrapper(userRepository: userRepository),
-        ),
+        builder: (context) => AuthenticationBloc(userRepository: userRepository)
+          ..dispatch(AppStarted()),
+        child: ThemeDataWrapper(userRepository: userRepository),
+      ),
     );
   }
 }
-
-
-

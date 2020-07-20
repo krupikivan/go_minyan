@@ -4,6 +4,10 @@ import 'package:meta/meta.dart';
 import 'package:go_minyan/authentication_bloc/bloc.dart';
 import 'package:go_minyan/user_repository.dart';
 
+import 'authentication_state.dart';
+import 'authentication_state.dart';
+import 'authentication_state.dart';
+
 class AuthenticationBloc
     extends Bloc<AuthenticationEvent, AuthenticationState> {
   final UserRepository _userRepository;
@@ -17,20 +21,24 @@ class AuthenticationBloc
 
   @override
   Stream<AuthenticationState> mapEventToState(
-      AuthenticationEvent event,
-      ) async* {
+    AuthenticationEvent event,
+  ) async* {
     if (event is AppStarted) {
       yield* _mapAppStartedToState();
     } else if (event is LoggedIn) {
       yield* _mapLoggedInToState();
     } else if (event is LoggedOut) {
       yield* _mapLoggedOutToState();
-    } else if (event is GuestStarted) {
-      yield* _mapGuestInitial();
+      // } else if (event is GuestStarted) {
+      //   yield* _mapGuestInitial();
     } else if (event is IsAuthBack) {
       yield* _mapAuthBackToState();
     } else if (event is IsChangePass) {
       yield* _mapChangePassword();
+    } else if (event is GoToAdminPanel) {
+      yield* _mapGoToAdminPanel();
+    } else if (event is GoToRegister) {
+      yield* _mapGoRegisterScreen();
     } else if (event is ChangePass) {
       yield* _mapIsChangingPassword(event.newPass);
     }
@@ -50,10 +58,11 @@ class AuthenticationBloc
       yield Unauthenticated();
     }
   }
+
   ///Para que arranque en el menu y no en el login
-  Stream<AuthenticationState> _mapGuestInitial() async* {
-    yield Guest();
-  }
+  // Stream<AuthenticationState> _mapGuestInitial() async* {
+  //   yield Guest();
+  // }
 
   Stream<AuthenticationState> _mapAuthBackToState() async* {
     yield AuthBack();
@@ -64,8 +73,18 @@ class AuthenticationBloc
     yield ChangePassScreen();
   }
 
+  Stream<AuthenticationState> _mapGoRegisterScreen() async* {
+    yield Register();
+  }
+
+  Stream<AuthenticationState> _mapGoToAdminPanel() async* {
+    yield AdminPanel(
+        await _userRepository.getUser(), await _userRepository.getUserUID());
+  }
+
   Stream<AuthenticationState> _mapLoggedInToState() async* {
-    yield Authenticated(await _userRepository.getUser(), await _userRepository.getUserUID());
+    yield Authenticated(
+        await _userRepository.getUser(), await _userRepository.getUserUID());
   }
 
   Stream<AuthenticationState> _mapLoggedOutToState() async* {

@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2020-01-05T17:28:30.375966",
+  "@@last_modified": "2020-07-19T21:16:22.478690",
   "minianFinder": "Buscador de minian",
   "@minianFinder": {
     "type": "text",
@@ -10,7 +10,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "newMinyan": "Nuevo minian",
+  "newMinyan": "Nuevo Minian",
   "@newMinyan": {
     "type": "text",
     "placeholders": {}
@@ -76,10 +76,10 @@
     "placeholders": {}
   },
   "aboutGoMinyan": "Sobre Go Minyan",
-      "@aboutGoMinyan": {
-        "type": "text",
-        "placeholders": {}
-      },
+  "@aboutGoMinyan": {
+    "type": "text",
+    "placeholders": {}
+  },
   "copyright": "© 2019, GoMinyan",
   "@copyright": {
     "type": "text",
@@ -135,7 +135,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "emailSent": "Recibido, espere confirmacion por email, Gracias..",
+  "emailSent": "Recibido, espere confirmacion por email, Gracias.",
   "@emailSent": {
     "type": "text",
     "placeholders": {}
@@ -145,11 +145,11 @@
     "type": "text",
     "placeholders": {}
   },
-    "emailDuplicate": "El usuario ya esta registrado.",
-    "@emailDuplicate": {
-      "type": "text",
-      "placeholders": {}
-    },
+  "emailDuplicate": "El usuario ya esta registrado.",
+  "@emailDuplicate": {
+    "type": "text",
+    "placeholders": {}
+  },
   "mapLoading": "Cargando mapa...",
   "@mapLoading": {
     "type": "text",
@@ -285,7 +285,7 @@
     "type": "text",
     "placeholders": {}
   },
-  "registerTitle": "Registrar nuevo minian",
+  "registerTitle": "Registrate",
   "@registerTitle": {
     "type": "text",
     "placeholders": {}
@@ -390,11 +390,11 @@
     "type": "text",
     "placeholders": {}
   },
-    "errorAddress": "Especifique direccion",
-    "@errorAddress": {
-      "type": "text",
-      "placeholders": {}
-    },
+  "errorAddress": "Especifique direccion",
+  "@errorAddress": {
+    "type": "text",
+    "placeholders": {}
+  },
   "lblAddress": "Direccion: ",
   "@lblAddress": {
     "type": "text",

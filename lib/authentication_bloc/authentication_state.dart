@@ -21,15 +21,30 @@ class Authenticated extends AuthenticationState {
   String toString() => 'Authenticated { displayName: $displayName }';
 }
 
+class AdminPanel extends AuthenticationState {
+  final String displayName;
+  final String userUID;
+
+  AdminPanel(this.displayName, this.userUID) : super([displayName]);
+
+  @override
+  String toString() => 'AdminPanel { displayName: $displayName }';
+}
+
 class Unauthenticated extends AuthenticationState {
   @override
   String toString() => 'Unauthenticated';
 }
 
-class Guest extends AuthenticationState {
+class Register extends AuthenticationState {
   @override
-  String toString() => 'Guest';
+  String toString() => 'Register';
 }
+
+// class Guest extends AuthenticationState {
+//   @override
+//   String toString() => 'Guest';
+// }
 
 class AuthBack extends AuthenticationState {
   @override

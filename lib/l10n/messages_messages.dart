@@ -120,7 +120,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "pushTitle" : MessageLookupByLibrary.simpleMessage("Proximo evento"),
     "registerLoading" : MessageLookupByLibrary.simpleMessage("Registrando..."),
     "registerSuccess" : MessageLookupByLibrary.simpleMessage("Registro Exitoso"),
-    "registerTitle" : MessageLookupByLibrary.simpleMessage("Registrar nuevo minian"),
+    "registerTitle" : MessageLookupByLibrary.simpleMessage("Registrate"),
     "remember" : MessageLookupByLibrary.simpleMessage("Recordatorio"),
     "repeatPassHint" : MessageLookupByLibrary.simpleMessage("Repetir Contraseña"),
     "restoreMsg" : MessageLookupByLibrary.simpleMessage("Datos restaurados."),
