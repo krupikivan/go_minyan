@@ -49,6 +49,8 @@ class _AdminScreenState extends State<AdminScreen> {
 
   bool darkmode;
 
+  bool _needsUpdate;
+
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
@@ -69,6 +71,7 @@ class _AdminScreenState extends State<AdminScreen> {
     _titleController = TextEditingController();
     _addressController = TextEditingController();
     _contactController = TextEditingController();
+    _needsUpdate = false;
     connectivity = new Connectivity();
     suscription =
         connectivity.onConnectivityChanged.listen((ConnectivityResult result) {
@@ -78,6 +81,7 @@ class _AdminScreenState extends State<AdminScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     ///Cuando se trabaja con provider, se envian dentro de los builders,
     ///nunca dentro de init state
     //Get nusach list from firebase
@@ -185,7 +189,7 @@ class _AdminScreenState extends State<AdminScreen> {
           SizedBox(
             height: max < 400 ? 1 : 10,
           ),
-          _addressField(data),
+          _addressField(data, context),
           SizedBox(
             height: max < 400 ? 1 : 10,
           ),
@@ -237,7 +241,8 @@ class _AdminScreenState extends State<AdminScreen> {
     );
   }
 
-  Widget _addressField(UserData data) {
+  Widget _addressField(UserData data, BuildContext context) {
+      //cuando modifico la direccion que me active el boton de actualizar
     return Row(
       children: <Widget>[
         Expanded(
@@ -245,7 +250,11 @@ class _AdminScreenState extends State<AdminScreen> {
             textCapitalization: TextCapitalization.sentences,
             keyboardType: TextInputType.text,
             cursorColor: Theme.Colors.primaryColor,
+
             onChanged: (value) {
+              setState(() {
+                _needsUpdate = true;
+              });
               _userDataEditable.address = value;
             },
             controller: _addressController,
@@ -254,25 +263,21 @@ class _AdminScreenState extends State<AdminScreen> {
               focusedBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Theme.Colors.primaryColor)),
               labelStyle: TextStyle(color: Theme.Colors.primaryColor),
-//                    suffixIcon: IconButton(
-//                      onPressed: () {
-//                        FocusScope.of(context).requestFocus(new FocusNode());
-//                        _getLatLong();
-//                      }, icon: Icon(Icons.my_location, color: darkmode ? Theme.Colors.secondaryColor : Theme.Colors.primaryColor),
-//                    ),
             ),
           ),
         ),
-        IconButton(
+        _needsUpdate ?
+        ActionChip(
+          label: Text("actualizar"),
+          backgroundColor: darkmode
+                        ? Theme.Colors.primaryDarkColor
+                        : Theme.Colors.primaryColor,
+          labelStyle: TextStyle(color: Theme.Colors.secondaryColor),
           onPressed: () {
             FocusScope.of(context).requestFocus(new FocusNode());
             _getLatLong();
           },
-          icon: Icon(Icons.my_location,
-              color: darkmode
-                  ? Theme.Colors.accentColorLight
-                  : Theme.Colors.accentColorDark),
-        ),
+        ) : SizedBox(),
       ],
     );
   }
@@ -371,27 +376,6 @@ class _AdminScreenState extends State<AdminScreen> {
                       text: Translations.of(context).btnSave,
                       size: 15,
                     ),
-                  ),
-                ),
-                Flexible(
-                  flex: 1,
-//              padding: EdgeInsets.only(left: 16.0, right: 16.0),
-                  ///Restore Button
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _restoreData = true;
-                        showInSnackBar(Translations.of(context).restoreMsg);
-                      });
-                    },
-                    color: darkmode
-                        ? Theme.Colors.primaryDarkColor
-                        : Theme.Colors.primaryColor,
-                    textColor: Theme.Colors.secondaryColor,
-                    child: Text(Translations.of(context).btnRestore),
                   ),
                 ),
                 Flexible(

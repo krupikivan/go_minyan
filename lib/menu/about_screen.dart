@@ -143,8 +143,8 @@ class AboutScreen extends StatelessWidget {
                       MPButtonWidget(
                         size: MediaQuery.of(context).size,
                         darkmode: darkmode,
-                        onPressed: () => _mercadoPago(1000),
-                        text: '\$10000',
+                        onPressed: () => _mercadoPago(8000),
+                        text: '\$8000',
                       ),
                     ],
                   ),

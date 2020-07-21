@@ -44,7 +44,7 @@ class UserDataBloc {
 
   //Get userdata from firestore if our bloc is empty
   getUserDataFromFirebase(String userUID) {
-    if (appModel.userData.title != null) {
+    if (appModel.userData.title == null) {
       //FIRST TIME logged in
       _repository.userData(userUID).listen((snapshot) {
         //Creamos el doc
