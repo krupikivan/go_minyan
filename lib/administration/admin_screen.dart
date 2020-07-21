@@ -80,7 +80,6 @@ class _AdminScreenState extends State<AdminScreen> {
 
   @override
   Widget build(BuildContext context) {
-
     ///Cuando se trabaja con provider, se envian dentro de los builders,
     ///nunca dentro de init state
     //Get nusach list from firebase
@@ -127,12 +126,10 @@ class _AdminScreenState extends State<AdminScreen> {
                             valueColor: new AlwaysStoppedAnimation<Color>(
                                 Theme.Colors.primaryColor)));
                   else {
-                    if (!_initialized) {
-                      _titleController.text = snapshot.data.title;
-                      _addressController.text = snapshot.data.address;
-                      _contactController.text = snapshot.data.contact;
-                      _initialized = true;
-                    }
+                    _titleController.text = snapshot.data.title;
+                    _addressController.text = snapshot.data.address;
+                    _contactController.text = snapshot.data.contact;
+                    _initialized = true;
                     return _buildForm(snapshot.data, max);
                   }
                 }),
@@ -230,7 +227,7 @@ class _AdminScreenState extends State<AdminScreen> {
   }
 
   Widget _addressField(UserData data, BuildContext context) {
-      //cuando modifico la direccion que me active el boton de actualizar
+    //cuando modifico la direccion que me active el boton de actualizar
     return Row(
       children: <Widget>[
         Expanded(
@@ -238,7 +235,6 @@ class _AdminScreenState extends State<AdminScreen> {
             textCapitalization: TextCapitalization.sentences,
             keyboardType: TextInputType.text,
             cursorColor: Theme.Colors.primaryColor,
-
             onChanged: (value) {
               setState(() {
                 _needsUpdate = true;
@@ -254,18 +250,19 @@ class _AdminScreenState extends State<AdminScreen> {
             ),
           ),
         ),
-        _needsUpdate ?
-        ActionChip(
-          label: Text("actualizar"),
-          backgroundColor: darkmode
-                        ? Theme.Colors.primaryDarkColor
-                        : Theme.Colors.primaryColor,
-          labelStyle: TextStyle(color: Theme.Colors.secondaryColor),
-          onPressed: () {
-            FocusScope.of(context).requestFocus(new FocusNode());
-            _getLatLong();
-          },
-        ) : SizedBox(),
+        _needsUpdate
+            ? ActionChip(
+                label: Text("actualizar"),
+                backgroundColor: darkmode
+                    ? Theme.Colors.primaryDarkColor
+                    : Theme.Colors.primaryColor,
+                labelStyle: TextStyle(color: Theme.Colors.secondaryColor),
+                onPressed: () {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+                  _getLatLong();
+                },
+              )
+            : SizedBox(),
       ],
     );
   }

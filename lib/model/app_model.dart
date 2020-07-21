@@ -204,6 +204,10 @@ class AppModel with ChangeNotifier {
     instance.remove('nusachList');
     instance.remove('scheduleList');
     instance.remove('isUser');
+    _isUser = null;
+    _markersList.clear();
+    _scheduleList.clear();
+    // notifyListeners();
   }
 
   ///---------------------------FIREBASE ADMIN DATA---------------------------------
@@ -267,6 +271,7 @@ class AppModel with ChangeNotifier {
   void setIsUser(bool value) {
     _isUser = value;
     instance.setBool('isUser', _isUser);
+    print('Aca se setea a $_isUser');
     notifyListeners();
   }
 }

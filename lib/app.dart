@@ -83,6 +83,7 @@ class MyApp extends StatelessWidget {
                   }
                   if (state is Authenticated) {
                     if (appModel.isUser == null) {
+                      print('Authenticated con user=${appModel.isUser}');
                       _userRepository.assignIsUser(state.userUID, model);
                     }
                     return MenuScreen();
@@ -93,20 +94,29 @@ class MyApp extends StatelessWidget {
                   if (state is AdminPanel) {
                     if (_isAdmin(state.userUID, userAdmin.data)) {
                       return RootScreen();
-                    } else if (!appModel.isUser) {
-                      //Get data from shared preferences
-                      appModel.getNusachList();
-                      appModel.getUserData();
-                      appModel.getScheduleData();
-                      return AdminScreen(
-                          username: state.displayName, userUID: state.userUID);
                     } else {
-                      return UserScreen(
-                        username: state.displayName,
-                        userUID: state.userUID,
-                      );
+                      if (appModel.isUser == null) {
+                        return SplashScreen();
+                      } else {
+                        if (!appModel.isUser) {
+                          print('AdminPanel con user=${appModel.isUser}');
+                          //Get data from shared preferences
+                          appModel.getNusachList();
+                          appModel.getUserData();
+                          appModel.getScheduleData();
+                          return AdminScreen(
+                              username: state.displayName,
+                              userUID: state.userUID);
+                        } else {
+                          return UserScreen(
+                            username: state.displayName,
+                            userUID: state.userUID,
+                          );
+                        }
+                      }
                     }
                   }
+
                   return SplashScreen();
                 },
               ),

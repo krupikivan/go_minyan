@@ -26,7 +26,7 @@ class UserRepository {
     });
   }
 
-  assignIsUser(String uid, AppModel model) async {
+  Future assignIsUser(String uid, AppModel model) async {
     DocumentSnapshot doc = await _repo.assignIsUser(uid);
     model.setIsUser(doc.exists);
   }

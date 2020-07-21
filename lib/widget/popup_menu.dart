@@ -62,8 +62,9 @@ class _PopupMenuState extends State<PopupMenu> {
       BlocProvider.of<AuthenticationBloc>(context).dispatch(IsChangePass());
     }
     if (choice.title.data == widget.choices[2].title.data) {
-      //On logged out remove nusach from shared prefs
-      Provider.of<AppModel>(context).removeAllUserData();
+      //On logged out remove nusach from shared prefs'
+      final appModel = AppModel();
+      appModel.removeAllUserData();
       BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedOut());
     }
   }

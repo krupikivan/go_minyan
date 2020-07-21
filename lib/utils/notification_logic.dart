@@ -75,7 +75,7 @@ class NotificationLogic {
       var remind =
           await getReminderValue(); //Traigo el valor guardado de recordatorio de notificacion
       int value = int.parse(remind);
-      if (list.isEmpty) {
+      if (appModel.markersList.isEmpty || list.isEmpty) {
         newPush = null; //Si no hay tildada notificacion termina y no sigue
         return newPush;
       } else {
