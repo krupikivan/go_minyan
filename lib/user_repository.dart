@@ -1,13 +1,16 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:go_minyan/model/model.dart';
+import 'package:go_minyan/resources/firestore_provider.dart';
+import 'package:go_minyan/resources/repository.dart';
 
 class UserRepository {
   final FirebaseAuth _firebaseAuth;
-
   UserRepository({FirebaseAuth firebaseAuth})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance;
-
+  final _repo = Repository();
   Future<void> signInWithCredentials(String email, String password) {
     return _firebaseAuth.signInWithEmailAndPassword(
       email: email,
@@ -21,6 +24,11 @@ class UserRepository {
     user.then((value) {
       value.updatePassword(newPass);
     });
+  }
+
+  assignIsUser(String uid, AppModel model) async {
+    DocumentSnapshot doc = await _repo.assignIsUser(uid);
+    model.setIsUser(doc.exists);
   }
 
   Future<void> signUp(

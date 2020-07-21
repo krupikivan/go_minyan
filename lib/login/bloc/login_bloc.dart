@@ -94,7 +94,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       await _repo.isAuthenticated(email).then((data) {
         //Si es == 0  significa que no existe registros en la tabla por ende es un usuario root
         // if(data.documents.length == 0 || data.documents[0].data[FS.isAuthenticated] == true){
-        if (!data.exists) {
+        if (data.exists) {
           auth = true;
         } else {
           auth = false;

@@ -10,6 +10,7 @@ import 'package:go_minyan/register/register.dart';
 import 'package:go_minyan/login/splash_screen.dart';
 import 'package:go_minyan/style/bloc/theme_changer_bloc.dart';
 import 'package:go_minyan/translation.dart';
+import 'package:go_minyan/user/user_screen.dart';
 import 'package:go_minyan/user_repository.dart';
 import 'package:go_minyan/utils/utils.dart';
 import 'package:provider/provider.dart';
@@ -80,19 +81,30 @@ class MyApp extends StatelessWidget {
                   if (state is Unauthenticated) {
                     return LoginScreen(userRepository: _userRepository);
                   }
-                  if (state is Authenticated || state is AuthBack) {
+                  if (state is Authenticated) {
+                    if (appModel.isUser == null) {
+                      _userRepository.assignIsUser(state.userUID, model);
+                    }
+                    return MenuScreen();
+                  }
+                  if (state is AuthBack) {
                     return MenuScreen();
                   }
                   if (state is AdminPanel) {
                     if (_isAdmin(state.userUID, userAdmin.data)) {
                       return RootScreen();
-                    } else {
+                    } else if (!appModel.isUser) {
                       //Get data from shared preferences
                       appModel.getNusachList();
                       appModel.getUserData();
                       appModel.getScheduleData();
                       return AdminScreen(
                           username: state.displayName, userUID: state.userUID);
+                    } else {
+                      return UserScreen(
+                        username: state.displayName,
+                        userUID: state.userUID,
+                      );
                     }
                   }
                   return SplashScreen();
