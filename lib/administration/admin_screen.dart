@@ -44,7 +44,6 @@ class _AdminScreenState extends State<AdminScreen> {
       _contactController;
 
   bool _initialized = false;
-  bool _restoreData = false;
   UserData _userDataEditable;
 
   bool darkmode;
@@ -133,17 +132,6 @@ class _AdminScreenState extends State<AdminScreen> {
                       _addressController.text = snapshot.data.address;
                       _contactController.text = snapshot.data.contact;
                       _initialized = true;
-                    }
-                    if (_restoreData) {
-                      _titleController.text = snapshot.data.title;
-                      _addressController.text = snapshot.data.address;
-                      _contactController.text = snapshot.data.contact;
-                      UserData _restoreUser = _userDataEditable;
-                      _restoreUser.title = snapshot.data.title;
-                      _restoreUser.address = snapshot.data.address;
-                      _restoreUser.contact = snapshot.data.contact;
-                      blocUserData.changeUserData(_restoreUser);
-                      _restoreData = false;
                     }
                     return _buildForm(snapshot.data, max);
                   }
