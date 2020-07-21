@@ -13,6 +13,7 @@ import 'package:go_minyan/user_repository.dart';
 import 'package:go_minyan/authentication_bloc/bloc.dart';
 import 'package:go_minyan/login/login.dart';
 import 'package:go_minyan/utils/utils.dart';
+import 'package:go_minyan/validators.dart';
 import 'package:go_minyan/widget/widget.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +21,6 @@ enum LoginFormType { login, reset }
 
 class LoginForm extends StatefulWidget {
   final UserRepository _userRepository;
-
   final LoginFormType loginFormType;
 
   LoginForm(
@@ -40,13 +40,13 @@ class _LoginFormState extends State<LoginForm>
   final FocusNode myFocusNodeEmailLogin = FocusNode();
   final FocusNode myFocusNodePasswordLogin = FocusNode();
 
-  final TextEditingController loginEmailController = TextEditingController();
-  final TextEditingController loginPasswordController = TextEditingController();
-
   ///Internet connection
   Connectivity connectivity;
   var _connectionStatus;
   StreamSubscription<ConnectivityResult> suscription;
+
+  String _email;
+  String _password;
 
   bool _darkmode;
 
@@ -55,14 +55,6 @@ class _LoginFormState extends State<LoginForm>
   LoginBloc _loginBloc;
 
   UserRepository get _userRepository => widget._userRepository;
-
-  bool get isPopulated =>
-      loginEmailController.text.isNotEmpty &&
-      loginPasswordController.text.isNotEmpty;
-
-  bool isLoginButtonEnabled(LoginState state) {
-    return state.isFormValid && isPopulated && !state.isSubmitting;
-  }
 
   final formKey = GlobalKey<FormState>();
   void switchFormState(String state) {
@@ -82,13 +74,14 @@ class _LoginFormState extends State<LoginForm>
   void initState() {
     super.initState();
     _loginBloc = BlocProvider.of<LoginBloc>(context);
-    loginEmailController.addListener(_onEmailChanged);
-    loginPasswordController.addListener(_onPasswordChanged);
     loginFormType = LoginFormType.login;
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
+    _email = "";
+    _password = "";
 
     ///Internet connection
     connectivity = new Connectivity();
@@ -152,8 +145,9 @@ class _LoginFormState extends State<LoginForm>
         if (state.isAuthenticated) {
           _loginBloc.dispatch(
             LoginWithCredentialsPressed(
-              email: loginEmailController.text,
-              password: loginPasswordController.text,
+              //pasar lo que esta en el stateful
+              email: _email,
+              password: _password,
               isAuth: true,
             ),
           );
@@ -178,8 +172,8 @@ class _LoginFormState extends State<LoginForm>
                 children: <Widget>[
                   _buildImage(),
                   _buildAdminBar(max),
-                  _buildForm(state, max),
-                  _buildLoginButton(state, max),
+                  _buildForm(max),
+                  _buildLoginButton(max),
                   _buildLastButtons(),
                 ],
               ),
@@ -236,7 +230,7 @@ class _LoginFormState extends State<LoginForm>
     );
   }
 
-  Widget _buildForm(LoginState state, max) {
+  Widget _buildForm(max) {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: loginFormType == LoginFormType.reset
@@ -251,12 +245,12 @@ class _LoginFormState extends State<LoginForm>
             Padding(
               padding: EdgeInsets.only(bottom: 10.0, left: 25.0, right: 25.0),
               child: TextFormField(
+                onChanged: (email) => _email = email,
                 cursorColor: Theme.Colors.primaryColor,
                 focusNode: myFocusNodeEmailLogin,
-                controller: loginEmailController,
                 autocorrect: false,
-                validator: (_) {
-                  return !state.isEmailValid
+                validator: (email) {
+                  return !Validators.isValidEmail(email)
                       ? Translations.of(context).invalidMail
                       : null;
                 },
@@ -290,13 +284,13 @@ class _LoginFormState extends State<LoginForm>
                     padding: EdgeInsets.only(
                         top: 10.0, bottom: 10.0, left: 25.0, right: 25.0),
                     child: TextFormField(
+                      onChanged: (password) => _password = password,
                       cursorColor: Theme.Colors.primaryColor,
                       focusNode: myFocusNodePasswordLogin,
-                      controller: loginPasswordController,
                       obscureText: _obscureTextLogin,
                       autocorrect: false,
-                      validator: (_) {
-                        return !state.isPasswordValid
+                      validator: (password) {
+                        return !Validators.isValidPassword(password)
                             ? Translations.of(context).invalidPass
                             : null;
                       },
@@ -339,7 +333,7 @@ class _LoginFormState extends State<LoginForm>
     );
   }
 
-  Widget _buildLoginButton(LoginState state, max) {
+  Widget _buildLoginButton(max) {
     return Container(
       width: MediaQuery.of(context).size.width / 2,
       height: MediaQuery.of(context).size.height * 0.05,
@@ -369,7 +363,9 @@ class _LoginFormState extends State<LoginForm>
             ? Translations.of(context).btnLogin
             : Translations.of(context).btnRestore,
         onPressed: loginFormType == LoginFormType.login
-            ? isLoginButtonEnabled(state) ? _onFormSubmitted : null
+            ? () { 
+              print("Hasta aca llego!");
+              _onFormSubmitted();}
             : _btnResetPress,
       ),
     );
@@ -446,7 +442,7 @@ class _LoginFormState extends State<LoginForm>
   void _btnResetPress() async {
     try {
       await _userRepository
-          .sendPasswordResetEmail(loginEmailController.text)
+          .sendPasswordResetEmail(_email)
           .then((onValue) {
         Scaffold.of(context)
           ..hideCurrentSnackBar()
@@ -493,8 +489,6 @@ class _LoginFormState extends State<LoginForm>
   @override
   void dispose() {
     suscription.cancel();
-    loginEmailController.dispose();
-    loginPasswordController.dispose();
     super.dispose();
   }
 
@@ -504,23 +498,11 @@ class _LoginFormState extends State<LoginForm>
     });
   }
 
-  void _onEmailChanged() {
-    _loginBloc.dispatch(
-      EmailChanged(email: loginEmailController.text),
-    );
-  }
-
-  void _onPasswordChanged() {
-    _loginBloc.dispatch(
-      PasswordChanged(password: loginPasswordController.text),
-    );
-  }
-
   void _onFormSubmitted() {
     if (_connectionStatus == 'ConnectivityResult.none') {
       ShowToast().show(Translations().connectionError, 10);
     } else {
-      _loginBloc.dispatch(GetIsAuthenticated(email: loginEmailController.text));
+      _loginBloc.dispatch(GetIsAuthenticated(email: _email));
     }
   }
 }
