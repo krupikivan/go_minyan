@@ -74,7 +74,7 @@ class _MenuScreenState extends State<MenuScreen> {
 //    _saveDeviceToken();
 
     ///Este metodo me ejecuta el push notification cada 30 segundos
-    timer = Timer.periodic(Duration(seconds: 30), (Timer t) {
+    timer = Timer.periodic(Duration(seconds: 5), (Timer t) {
       ///Este metodo espera que getPushNotification de la clase noti termine y retorna o null o el pushData
       ///y luego cuando ya tiene ese valor entonces ahi llama setPushData y le manda o null o los datos
       ///para la notificacion funcionando en Foreground
@@ -159,7 +159,7 @@ class _MenuScreenState extends State<MenuScreen> {
   Widget build(BuildContext context) {
 //    pushData != null ? _setPushData(pushData) : null;
     ///Cargamos las shared preferences
-    noti.setPrefs(Provider.of<AppModel>(context).instance);
+    // noti.setPrefs(Provider.of<AppModel>(context).instance);
     _fillPopupData();
     return StreamBuilder<PushData>(
         stream: blocPush.readPush,

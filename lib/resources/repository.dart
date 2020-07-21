@@ -60,8 +60,8 @@ class Repository {
       _firestoreProvider.getMarkerDetails(markID);
 
   //Get data to verify push notification
-  Stream<QuerySnapshot> getPushNotification(String documentId, String day) =>
-      _firestoreProvider.getPushNotification(documentId, day);
+  // Stream<QuerySnapshot> getPushNotification(String documentId, String day) =>
+  //     _firestoreProvider.getPushNotification(documentId, day);
 
   Stream<DocumentSnapshot> getPlaceName(String documentId) =>
       _firestoreProvider.getPlaceName(documentId);

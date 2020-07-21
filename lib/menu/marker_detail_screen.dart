@@ -48,8 +48,14 @@ class _MarkerDetailScreenState extends State<MarkerDetailScreen> {
             backgroundColor: darkmode
                 ? Theme.Colors.primaryDarkColor
                 : Theme.Colors.primaryColor,
-            icon: Icon(Icons.access_time),
-            label: Text('Inscribirme')),
+            icon: Icon(
+              Icons.access_time,
+              color: Colors.white,
+            ),
+            label: Text(
+              'Inscribirme',
+              style: TextStyle(color: Colors.white),
+            )),
       );
     });
   }

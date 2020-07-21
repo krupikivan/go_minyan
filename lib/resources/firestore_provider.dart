@@ -234,15 +234,14 @@ class FirestoreProvider {
   }
 
   ///Get data to verify push notification
-  Stream<QuerySnapshot> getPushNotification(String documentId, String day) {
-    return _firestore
-        .collection(FS.markers)
-        .document(documentId)
-        .collection(FS.schedule)
-        .where(FS.name, isEqualTo: day)
-        .where('value', isLessThan: 6)
-        .snapshots();
-  }
+  // Stream<QuerySnapshot> getPushNotification(String documentId, String day) {
+  //   return _firestore
+  //       .collection(FS.markers)
+  //       .document(documentId)
+  //       .collection(FS.schedule)
+  //       .where(FS.name, isEqualTo: day)
+  //       .snapshots();
+  // }
 
   Stream<DocumentSnapshot> getPlaceName(String documentId) {
     return _firestore.collection(FS.markers).document(documentId).snapshots();
