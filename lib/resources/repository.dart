@@ -67,6 +67,9 @@ class Repository {
       _firestoreProvider.getPlaceName(documentId);
 
   Future<void> complete() => _firestoreProvider.complete();
+
+  Future<DocumentSnapshot> assignIsUser(String uid) =>
+      _firestoreProvider.assignIsUser(uid);
 }
 
 final repos = Repository();

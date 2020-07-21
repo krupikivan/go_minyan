@@ -2,10 +2,12 @@ import 'dart:async';
 import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_minyan/administration/admin_times_screen.dart';
 import 'package:go_minyan/administration/google_map_inline.dart';
 import 'package:go_minyan/administration_bloc/bloc.dart';
+import 'package:go_minyan/authentication_bloc/bloc.dart';
 import 'package:go_minyan/model/model.dart';
 import 'package:go_minyan/style/theme.dart' as Theme;
 import 'package:go_minyan/translation.dart';
@@ -86,72 +88,79 @@ class _AdminScreenState extends State<AdminScreen> {
     _userDataEditable = Provider.of<AppModel>(context).userData;
     _fillPopupData();
     darkmode = Provider.of<AppModel>(context).darkmode;
+    final blocPr = BlocProvider.of<AuthenticationBloc>(context);
     return LayoutBuilder(builder: (context, constrain) {
       var max = constrain.maxWidth;
-      return Scaffold(
-        key: _scaffoldKey,
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(Translations.of(context).adminPageTitle),
-          backgroundColor: darkmode
-              ? Theme.Colors.primaryDarkColor
-              : Theme.Colors.primaryColor,
-          actions: <Widget>[
-            PopupMenu(choices: choices, type: 'admin'),
-          ],
-        ),
-        body: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.all(max < 400 ? 5 : 16),
-          alignment: Alignment(0.0, 0.0),
-          margin: EdgeInsets.only(top: max < 400 ? 1 : 25),
-          child: StreamBuilder<UserData>(
-              stream: blocUserData.getUserData,
+      return WillPopScope(
+        onWillPop: () => null,
+        child: Scaffold(
+          key: _scaffoldKey,
+          resizeToAvoidBottomInset: false,
+          appBar: AppBar(
+            leading: IconButton(
+                icon: Icon(Icons.arrow_back),
+                onPressed: () => blocPr.dispatch(IsAuthBack())),
+            title: Text(Translations.of(context).adminPageTitle),
+            backgroundColor: darkmode
+                ? Theme.Colors.primaryDarkColor
+                : Theme.Colors.primaryColor,
+            actions: <Widget>[
+              PopupMenu(choices: choices, type: 'admin'),
+            ],
+          ),
+          body: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            padding: EdgeInsets.all(max < 400 ? 5 : 16),
+            alignment: Alignment(0.0, 0.0),
+            margin: EdgeInsets.only(top: max < 400 ? 1 : 25),
+            child: StreamBuilder<UserData>(
+                stream: blocUserData.getUserData,
 //          stream: blocUserData.userData(widget.userUID),
-              builder: (context, snapshot) {
-                if (!snapshot.hasData)
-                  return Center(
-                      child: CircularProgressIndicator(
-                          valueColor: new AlwaysStoppedAnimation<Color>(
-                              Theme.Colors.primaryColor)));
-                else {
-                  if (!_initialized) {
-                    _titleController.text = snapshot.data.title;
-                    _addressController.text = snapshot.data.address;
-                    _contactController.text = snapshot.data.contact;
-                    _initialized = true;
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData)
+                    return Center(
+                        child: CircularProgressIndicator(
+                            valueColor: new AlwaysStoppedAnimation<Color>(
+                                Theme.Colors.primaryColor)));
+                  else {
+                    if (!_initialized) {
+                      _titleController.text = snapshot.data.title;
+                      _addressController.text = snapshot.data.address;
+                      _contactController.text = snapshot.data.contact;
+                      _initialized = true;
+                    }
+                    if (_restoreData) {
+                      _titleController.text = snapshot.data.title;
+                      _addressController.text = snapshot.data.address;
+                      _contactController.text = snapshot.data.contact;
+                      UserData _restoreUser = _userDataEditable;
+                      _restoreUser.title = snapshot.data.title;
+                      _restoreUser.address = snapshot.data.address;
+                      _restoreUser.contact = snapshot.data.contact;
+                      blocUserData.changeUserData(_restoreUser);
+                      _restoreData = false;
+                    }
+                    return _buildForm(snapshot.data, max);
                   }
-                  if (_restoreData) {
-                    _titleController.text = snapshot.data.title;
-                    _addressController.text = snapshot.data.address;
-                    _contactController.text = snapshot.data.contact;
-                    UserData _restoreUser = _userDataEditable;
-                    _restoreUser.title = snapshot.data.title;
-                    _restoreUser.address = snapshot.data.address;
-                    _restoreUser.contact = snapshot.data.contact;
-                    blocUserData.changeUserData(_restoreUser);
-                    _restoreData = false;
-                  }
-                  return _buildForm(snapshot.data, max);
-                }
-              }),
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: newAccount,
-          label: TextModel(
-            text: Translations.of(context).btnEditorTimes,
-            color: Theme.Colors.secondaryColor,
-            size: max < 400 ? 12 : 15,
+                }),
           ),
-          icon: Icon(
-            Icons.add,
-            color: Theme.Colors.secondaryColor,
-            size: max < 400 ? 10 : 15,
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: newAccount,
+            label: TextModel(
+              text: Translations.of(context).btnEditorTimes,
+              color: Theme.Colors.secondaryColor,
+              size: max < 400 ? 12 : 15,
+            ),
+            icon: Icon(
+              Icons.add,
+              color: Theme.Colors.secondaryColor,
+              size: max < 400 ? 10 : 15,
+            ),
+            backgroundColor: darkmode
+                ? Theme.Colors.primaryDarkColor
+                : Theme.Colors.primaryColor,
           ),
-          backgroundColor: darkmode
-              ? Theme.Colors.primaryDarkColor
-              : Theme.Colors.primaryColor,
         ),
       );
     });

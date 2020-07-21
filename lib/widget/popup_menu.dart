@@ -21,7 +21,9 @@ class _PopupMenuState extends State<PopupMenu> {
     return PopupMenuButton<Items>(
       onSelected: widget.type == 'menu'
           ? choiceActionMenu
-          : widget.type == 'admin' ? choiceActionAdmin : choiceActionRoot,
+          : widget.type == 'user'
+              ? choiceActionUser
+              : widget.type == 'admin' ? choiceActionAdmin : choiceActionRoot,
       itemBuilder: (BuildContext context) {
         return widget.choices.map((Items choice) {
           return PopupMenuItem<Items>(
@@ -43,6 +45,21 @@ class _PopupMenuState extends State<PopupMenu> {
     if (choice.title.data == widget.choices[1].title.data) {
       Navigator.push(
           context, MaterialPageRoute(builder: (context) => SettingScreen()));
+    }
+    if (choice.title.data == widget.choices[2].title.data) {
+      //On logged out remove nusach from shared prefs
+      Provider.of<AppModel>(context).removeAllUserData();
+      BlocProvider.of<AuthenticationBloc>(context).dispatch(LoggedOut());
+    }
+  }
+
+  void choiceActionUser(Items choice) {
+    if (choice.title.data == widget.choices[0].title.data) {
+      BlocProvider.of<AuthenticationBloc>(context).dispatch(IsAuthBack());
+    }
+    if (choice.title.data == widget.choices[1].title.data) {
+      //Cambiar contraseña
+      BlocProvider.of<AuthenticationBloc>(context).dispatch(IsChangePass());
     }
     if (choice.title.data == widget.choices[2].title.data) {
       //On logged out remove nusach from shared prefs

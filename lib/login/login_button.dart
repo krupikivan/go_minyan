@@ -14,12 +14,15 @@ class LoginButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
-        highlightColor: Colors.transparent,
-        splashColor: Theme.Colors.secondaryColor,
-        //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
-        child: TextModel(text: text, size: 18, color: Colors.white,
-        ),
-        onPressed: _onPressed,
+      highlightColor: Colors.transparent,
+      splashColor: Theme.Colors.secondaryColor,
+      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(5.0))),
+      child: TextModel(
+        text: text,
+        size: 18,
+        color: Colors.white,
+      ),
+      onPressed: _onPressed,
     );
   }
 }

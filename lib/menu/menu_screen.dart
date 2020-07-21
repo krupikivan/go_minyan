@@ -43,7 +43,6 @@ class _MenuScreenState extends State<MenuScreen> {
   @override
   void initState() {
     super.initState();
-
     //COnfigura el mensaje de la push notification DE Firebase
     _messaging.configure(
       onMessage: (Map<String, dynamic> message) async {
@@ -180,58 +179,57 @@ class _MenuScreenState extends State<MenuScreen> {
                   fit: BoxFit.fill,
                 ),
               ),
-              child: Scaffold(
-                backgroundColor: Colors.transparent,
-                appBar: PreferredSize(
-                  preferredSize: Size.fromHeight(100), // here th
-                  child: AppBar(
-                    backgroundColor: Colors.transparent,
-                    elevation: 0.0,
-                    centerTitle: true,
-                    actions: <Widget>[
-                      PopupMenu(choices: choices, type: 'menu'),
-                    ],
+              child: WillPopScope(
+                onWillPop: () => null,
+                child: Scaffold(
+                  backgroundColor: Colors.transparent,
+                  appBar: PreferredSize(
+                    preferredSize: Size.fromHeight(100), // here th
+                    child: AppBar(
+                      backgroundColor: Colors.transparent,
+                      elevation: 0.0,
+                      centerTitle: true,
+                      actions: <Widget>[
+                        PopupMenu(choices: choices, type: 'menu'),
+                      ],
+                    ),
                   ),
-                ),
-                body: Center(
-                  child: Image.asset(
-                    Images.logoImg,
-                    color: Theme.Colors.secondaryColor,
-                    height: 300,
-                    width: 300,
+                  body: Center(
+                    child: Image.asset(
+                      Images.logoImg,
+                      color: Theme.Colors.secondaryColor,
+                      height: 300,
+                      width: 300,
+                    ),
                   ),
+                  bottomNavigationBar: BottomNavigationBar(
+                      type: BottomNavigationBarType.fixed,
+                      onTap: onTabTapped,
+                      currentIndex: _currentIndex,
+                      backgroundColor: Colors.transparent,
+                      selectedItemColor: Theme.Colors.secondaryColor,
+                      unselectedItemColor: Theme.Colors.secondaryColor,
+                      selectedLabelStyle: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: Theme.Fonts.primaryFont,
+                          color: Theme.Colors.primaryColor),
+                      unselectedLabelStyle: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: Theme.Fonts.primaryFont,
+                          color: Theme.Colors.primaryColor),
+                      items: [
+                        BottomNavigationBarItem(
+                          icon: new Icon(Icons.home),
+                          title: Text(Translations.of(context).minianTitle),
+                        ),
+                        BottomNavigationBarItem(
+                          icon: new Icon(Icons.info),
+                          title: Text(Translations.of(context).about),
+                        ),
+                      ]),
                 ),
-                bottomNavigationBar: BottomNavigationBar(
-                    type: BottomNavigationBarType.fixed,
-                    onTap: onTabTapped,
-                    currentIndex: _currentIndex,
-                    backgroundColor: Colors.transparent,
-                    selectedItemColor: Theme.Colors.secondaryColor,
-                    unselectedItemColor: Theme.Colors.secondaryColor,
-                    selectedLabelStyle: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: Theme.Fonts.primaryFont,
-                        color: Theme.Colors.primaryColor),
-                    unselectedLabelStyle: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: Theme.Fonts.primaryFont,
-                        color: Theme.Colors.primaryColor),
-                    items: [
-                      BottomNavigationBarItem(
-                        icon: new Icon(Icons.home),
-                        title: Text(Translations.of(context).minianTitle),
-                      ),
-                      BottomNavigationBarItem(
-                        icon: new Icon(Icons.add),
-                        title: Text(Translations.of(context).newMinyan),
-                      ),
-                      BottomNavigationBarItem(
-                        icon: new Icon(Icons.info),
-                        title: Text(Translations.of(context).about),
-                      ),
-                    ]),
               ),
             ),
           );

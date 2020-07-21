@@ -14,12 +14,16 @@ class AppModel with ChangeNotifier {
 
   AppModel._internal();
 
+  initPrefs() async {
+    this.instance = await SharedPreferences.getInstance();
+  }
+
   ///Inicializar los valores del SHARED PREFS
-  void initializeValues() async {
-    instance = await SharedPreferences.getInstance();
+  initializeValues() async {
     _language = instance.getString('language') ?? 'es';
     _reminder = instance.getString('reminder') ?? '10';
     _darkmode = instance.getBool('darkmode') ?? false;
+    _isUser = instance.getBool('isUser');
     _appLocale = Locale(_language);
     notifyListeners();
   }
@@ -199,6 +203,7 @@ class AppModel with ChangeNotifier {
     instance.remove('documentId');
     instance.remove('nusachList');
     instance.remove('scheduleList');
+    instance.remove('isUser');
   }
 
   ///---------------------------FIREBASE ADMIN DATA---------------------------------
@@ -254,4 +259,14 @@ class AppModel with ChangeNotifier {
   }
 
   ///---------------------------update-data---------------------------------
+  ///
+
+  bool _isUser;
+  bool get isUser => _isUser;
+
+  void setIsUser(bool value) {
+    _isUser = value;
+    instance.setBool('isUser', _isUser);
+    notifyListeners();
+  }
 }

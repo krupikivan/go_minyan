@@ -113,6 +113,10 @@ class FirestoreProvider {
     return _firestore.collection('emails').document(email).get();
   }
 
+  Future<DocumentSnapshot> assignIsUser(String uid) {
+    return _firestore.collection('users').document(uid).get();
+  }
+
   Future<QuerySnapshot> userExist(String email) {
     return _firestore
         .collection(FS.markers)
